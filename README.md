@@ -5,11 +5,11 @@ O sistema a ser implementado será um sistema de gerenciamento loja de instrumen
 O funcionário poderá gerenciar  produtos, clientes, vendas. 
 O gerente poderá fazer as mesmas ações do funcionário e também gerar relatórios.
 
-##Linguagens:
+## Linguagens:
 - HTML;
 - CSS;
 - PHP.
 
-##Banco de Dados:
+## Banco de Dados:
 - MySQL.
 
