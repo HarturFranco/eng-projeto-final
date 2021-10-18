@@ -17,9 +17,9 @@ O gerente poderá fazer as mesmas ações do funcionário e também gerar relat�
 - Apache
 
 ## Configuração de ambiente:
-- Instalar 
-    - <a href="https://www.docker.com/">🔗 Docker</a>
-    - <a href="https://docs.docker.com/compose/install/">🔗 Docker-compose</a>
+- Instalar na maquina
+    - <a href="https://www.docker.com/"Docker</a>
+    - <a href="https://docs.docker.com/compose/install/"docker-compose</a>
 - Para rodar o projeto
   - Faça o clone em seu ambiente local
   - Execute o comando `docker-compose up` no diretorio raiz do projeto
