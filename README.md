@@ -14,6 +14,7 @@ O gerente poderá fazer as mesmas ações do funcionário e também gerar relat�
 - MySQL.
 
 ## Servidor:
+- Docker
 - Apache
 
 ## Configuração de ambiente:
