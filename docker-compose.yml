@@ -11,9 +11,8 @@ services:
 
   db:
     image: mysql:5.7
-    restart: always
     volumes:
-      - /var/lib/mysql
+      - ./db/schema.sql:/docker-entrypoint-initdb.d/1.sql
     environment:
       MYSQL_ROOT_PASSWORD: 123
       MYSQL_DATABASE: toca_dos_instrumentos
