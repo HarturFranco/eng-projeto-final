@@ -16,7 +16,7 @@ services:
       - /var/lib/mysql
     environment:
       MYSQL_ROOT_PASSWORD: 123
-      MYSQL_DATABASE: toca_dos_instrumentos_
+      MYSQL_DATABASE: toca_dos_instrumentos
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
