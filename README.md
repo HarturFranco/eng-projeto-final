@@ -13,3 +13,32 @@ O gerente poderá fazer as mesmas ações do funcionário e também gerar relat�
 ## Banco de Dados:
 - MySQL.
 
+## Servidor:
+- Docker
+- Apache
+
+## Configuração de ambiente:
+- Instalar na maquina
+    - <a href="https://www.docker.com/">Docker</a>
+    - <a href="https://docs.docker.com/compose/install/">docker-compose</a>
+- Para rodar o projeto
+  - Faça o clone em seu ambiente local
+  - Execute o comando `docker-compose up` no diretorio raiz do projeto
+  - Acesse o <a href="http://localhost/">localhost</a>
+
+## Commits e Branches
+- Regras de commit
+  - ``feat:`` Uma nova feature
+ 
+  - ``fix:`` Correções de bugs
+    
+  - ``docs:`` Alteração na documentção
+    
+  - ``refactor:`` Refatorações que não são feature, nem melhoria
+    
+    
+- Regras de uso de branch
+  - Todas features são commitadas em develop. Quando aprovadas, é criado um Pull Request para master e feito uma nova release
+    
+    
+    

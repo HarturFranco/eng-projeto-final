@@ -1,0 +1,2 @@
+#Ignorar modificaçõoes no arquivo de criação do banco de dados
+*.sql
