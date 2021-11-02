@@ -1,5 +1,2 @@
-#Docker
-Dockerfile
-docker-compose.yml
-
-.env
+#Ignorar modificaçõoes no arquivo de criação do banco de dados
+*.sql
