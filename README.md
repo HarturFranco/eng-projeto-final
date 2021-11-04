@@ -39,6 +39,9 @@ O gerente poderá fazer as mesmas ações do funcionário e também gerar relat�
     
 - Regras de uso de branch
   - Todas features são commitadas em develop. Quando aprovadas, é criado um Pull Request para master
+
+- Pull Request
+  -  Todos Pull Requests devem ser linkados com uma issue antes de ser aprovados. 
     
     
     
