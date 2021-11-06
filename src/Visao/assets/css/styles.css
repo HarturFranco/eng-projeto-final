@@ -1,0 +1,91 @@
+/*==================== VARIAVEIS ====================*/
+:root {
+  --color-title: #f0f4f8;
+  --color-text: #f0f4f8;
+  --color-background: #243b53;
+  --color-background-container: #627d98;
+
+  --body-font: "Alegreya Sans", sans-serif;
+}
+
+/*==================== BASE ====================*/
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  width: 100%;
+  display: flex;
+  font-family: var(--body-font);
+  color: var(--text-text);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+  color: var(--color-title);
+}
+
+ul,
+li {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+/*==================== MENU ====================*/
+.menu {
+  width: 180px;
+  min-width: 180px;
+  max-width: 180px;
+  height: 100vh;
+  background-color: var(--color-background);
+
+  padding: 1rem;
+}
+
+.menu_list {
+  display: flex;
+  flex-direction: column;
+}
+.menu_list-link {
+  padding: 0.5rem;
+
+  color: var(--color-text);
+}
+
+/*==================== CONTAINER ====================*/
+.container {
+  display: flex;
+  flex-direction: column;
+
+  width: 100%;
+  min-height: 100vh;
+  background-color: var(--color-background-container);
+}
+
+/*==================== TABELA ====================*/
+table {
+  width: 100%;
+}
+
+td,
+th {
+  border: 1px solid #a020f0;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #d9e2ec;
+}
