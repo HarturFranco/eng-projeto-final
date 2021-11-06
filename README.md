@@ -17,7 +17,7 @@ O gerente poderá fazer as mesmas ações do funcionário e também gerar relat�
 ## Servidor:
 - Docker 20.10.7
 - Docker-Compose 2.0
-- Apache 2.0
+- Apache 2.4.43
 
 ## Configuração de ambiente:
 - Instalar na maquina
