@@ -1,7 +1,9 @@
 <?php
+
 include_once '../../Percistencia/Connection.php';
 include_once '../../Modelo/Funcionario.php';
 include_once '../../Percistencia/FuncionarioDAO.php';
+
 $codigo = $_POST['fCodigo'];
 $email = $_POST['fEmail'];
 $nome = $_POST['fNome'];

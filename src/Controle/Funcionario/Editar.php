@@ -1,6 +1,6 @@
 <?php
-include_once '../../Percistencia/Connection.php';
-include_once '../../Percistencia/FuncionarioDAO.php';
+include_once 'Percistencia/Connection.php';
+include_once 'Percistencia/FuncionarioDAO.php';
 
 
 class Editar
@@ -36,7 +36,7 @@ class Editar
                 </form>';
         } else {
             // se nao existe cria alerta com erro
-            echo "<script>alert('Erro: Funcionario não existe!')</script>";
+            echo "'Erro: Funcionario não existe!";
         }
     }
 }

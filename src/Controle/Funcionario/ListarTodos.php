@@ -1,7 +1,7 @@
 <?php
 
-include_once '../../Percistencia/Connection.php';
-include_once '../../Percistencia/FuncionarioDAO.php';
+include_once 'Percistencia/Connection.php';
+include_once 'Percistencia/FuncionarioDAO.php';
 
 class ListarTodos
 {
@@ -45,6 +45,8 @@ class ListarTodos
             }
             echo "      
                         </table>";
+        }else {
+            echo "Nenhum funcionario encontrado";
         }
     }
 }
