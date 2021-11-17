@@ -152,16 +152,60 @@ a {
   background-color: var(--color-background-container);
 }
 
+/*==================== INDEX ====================*/
+.index h1{
+  margin-bottom: 3rem;
+}
+
+.index div div {
+  display: flex;
+  justify-content: space-between;
+
+  margin-bottom: 2rem;
+}
+
+.index form {
+  display: flex;
+  justify-content: space-between;
+
+  margin-bottom: 2rem;
+}
+
 /*==================== TABELA ====================*/
 table {
   width: 100%;
+  max-width: 100%;
+  
+  background-color: #fff;
+  border-radius: 0.5rem;
+  border-collapse: collapse;
+  overflow: scroll;
+}
+
+table thead {
+  color: #52524E;
+}
+
+table tbody {
+  color: #81817D;
+}
+
+table thead tr th{
+  border-bottom: 1px solid var(--color-background);
 }
 
 td,
 th {
-  border: 1px solid #a020f0;
-  text-align: left;
-  padding: 8px;
+ text-align: left;
+ padding: 1rem;
+}
+
+tr:last-child td:last-child {
+  border-radius: 0 0 0.5rem 0;
+}
+
+tr:last-child td:first-child {
+  border-radius: 0 0 0 0.5rem;
 }
 
 tr:nth-child(even) {
