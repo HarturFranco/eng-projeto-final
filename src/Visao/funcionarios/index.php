@@ -13,9 +13,9 @@ $dados = $func->index();
     <div>
       <form action="">
         <input type="text">
-        <button>Filtros</button>
+        <button class="secondary">Filtros</button>
       </form>
-      <button>Adicionar</button>
+      <button class="primary">Adicionar</button>
     </div>
 
     <table>
