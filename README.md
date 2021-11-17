@@ -9,6 +9,7 @@ O gerente poderá fazer as mesmas ações do funcionário e também gerar relat�
 ## Linguagens:
 - HTML5
 - CSS3
+- JavaScript
 - PHP 7.4
 
 ## Banco de Dados:

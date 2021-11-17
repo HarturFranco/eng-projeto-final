@@ -1,7 +1,7 @@
 <?php
 
-include_once '../../Percistencia/Connection.php';
-include_once '../../Percistencia/FuncionarioDAO.php';
+include_once 'Percistencia/Connection.php';
+include_once 'Percistencia/FuncionarioDAO.php';
 
 class Buscar
 {
@@ -44,7 +44,7 @@ class Buscar
                 </table>
                 ';
         } else {
-            echo "<script>alert('Funcionario não existe')</script>";
+            echo "Funcionario não existe";
         }
     }
 }
