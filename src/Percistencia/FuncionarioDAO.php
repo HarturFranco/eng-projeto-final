@@ -26,6 +26,7 @@ class FuncionarioDAO
     function excluir($fCodigo, $conn)
     {
         $query = "DELETE FROM `Funcionario` WHERE funCodigo = " . $fCodigo; //TODO - tratar SQLInjection
+
         $res = $conn->query($query);
         return $res;
     }
@@ -47,12 +48,14 @@ class FuncionarioDAO
     function buscarPorCodigo($fCodigo, $conn)
     {
 
-        $query = "SELECT * FROM `Funcionario` WHERE `funCodigo` = " . $fCodigo;
+        try {
+            $query = "SELECT * FROM `Funcionario` WHERE `funCodigo` = " . $fCodigo;
+            $res = $conn->query($query);
 
-        $res = $conn->query($query);
-
-
-        return $res;
+            return $res->fetch();
+        } catch (Exception $e) {
+            echo $e->getMessage();
+        }
     }
 
     // Edita um funcionario um Funcionario
@@ -64,7 +67,6 @@ class FuncionarioDAO
                     `funUsername`='" . $func->getUsername() . "',
                     `funSenha`='" . $func->getSenha() . "',
                     `funIsGerente`='" . $func->getIsGerente() . "' WHERE `funCodigo` = " . $func->getCodigo();
-
 
         $res = $conn->query($query);
 

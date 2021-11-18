@@ -2,7 +2,7 @@
 <aside class="menu">
   <h1 class="menu_title">Toca dos instrumentos</h1>
   <ul class="menu_list">
-    <li class="menu_list-item" id="vendas"><a href="vendas/index">Vendas</a></li>
+    <li class="menu_list-item" id="vendas"><a href="vendas">Vendas</a></li>
     <li class="menu_list-item has-submenu" id="cadastro">
       <a href="cadastro/produto">Cadastro</a>
       <ul class="menu_list-submenu">
@@ -12,10 +12,10 @@
         <li class="submenu_item" id="categoria"><a href="cadastro/categoria">Categoria</a></li>
       </ul>
     </li>
-    <li class="menu_list-item" id="produtos"><a href="produtos/index">Produtos</a></li>
-    <li class="menu_list-item" id="categorias"><a href="categorias/index">Categorias</a></li>
-    <li class="menu_list-item" id="clientes"><a href="clientes/index">Clientes</a></li>
-    <li class="menu_list-item" id="funcionarios"><a href="funcionarios/index">Funcionários</a></li>
+    <li class="menu_list-item" id="produtos"><a href="produtos">Produtos</a></li>
+    <li class="menu_list-item" id="categorias"><a href="categorias">Categorias</a></li>
+    <li class="menu_list-item" id="clientes"><a href="clientes">Clientes</a></li>
+    <li class="menu_list-item" id="funcionarios"><a href="funcionarios">Funcionários</a></li>
     <li class="menu_list-item has-submenu" id="relatorios">
       <a href="/relatorios/mensal">Relatórios</a>
       <ul class="menu_list-submenu">

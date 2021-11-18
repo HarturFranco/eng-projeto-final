@@ -4,6 +4,7 @@
   --color-text: #f0f4f8;
   --color-background: #243b53;
   --color-background-container: #627d98;
+  --color-400: #829ab1;
 
   --body-font: "Alegreya Sans", sans-serif;
 }
@@ -23,6 +24,7 @@ body {
   width: 100%;
   display: flex;
   font-family: var(--body-font);
+  font-size: 1rem;
   color: var(--text-text);
 }
 
@@ -45,6 +47,8 @@ a {
 
 /*==================== MENU ====================*/
 .menu {
+  position: fixed;
+
   width: 180px;
   min-width: 180px;
   max-width: 180px;
@@ -143,6 +147,7 @@ a {
 
 /*==================== CONTAINER ====================*/
 .container {
+  margin-left: 180px;
   display: flex;
   flex-direction: column;
   padding: 2rem 3rem;
@@ -162,23 +167,37 @@ input {
 }
 
 input[type="text"]:focus {
-  border: 0 none;
+  border: 0.5px solid var(--color-background);
 }
 
 /*==================== BUTTON ====================*/
-button {
+button,
+.button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+
   padding: 0.5rem 2rem;
   border-radius: 0.5rem;
   border: none;
+
+  text-decoration: none;
   text-transform: uppercase;
+
   font-weight: 700;
+  font-size: 1rem;
+
+  cursor: pointer;
 }
 
-button.primary {
+button.primary,
+.button.primary {
   background-color: var(--color-background);
   color: #fff;
 }
 
+button.secondary,
 button.secondary {
   background-color: var(--color-text);
   color: var(--color-background);
@@ -210,6 +229,7 @@ button.secondary {
 
 .index div div form input {
   border-radius: 0.5rem 0 0 0.5rem;
+  width: 360px;
 }
 
 .index div div form button {
@@ -258,6 +278,82 @@ tr:nth-child(even) {
   background-color: #d9e2ec;
 }
 
-td a + a {
-  margin-left: 2rem;
+th:last-child {
+  width: 10%;
+}
+
+td:last-child {
+  display: flex;
+  gap: 1.2rem
+}
+
+button.icon {
+  background: transparent;
+  padding: 0;
+}
+
+/*==================== TABELA ====================*/
+.cadastro {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+
+  overflow: hidden;
+}
+
+.cadastro h1 {
+  margin-bottom: 3rem;
+}
+
+.cadastro div {
+  width: 100%;
+  background-color: var(--color-400);
+  border-radius: 0.5rem;
+}
+
+.cadastro form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  padding: 2rem;
+}
+
+.cadastro form button {
+  grid-column: span 2;
+  margin: 3rem auto 0;
+  width: 300px;
+}
+
+.cadastro form div {
+  width: 100%;
+  display: flex;
+  flex-flow: column;
+}
+
+.cadastro form div label {
+  width: 400px;
+  color: #202020;
+  margin-bottom: 0.5rem;
+}
+
+.cadastro form div input {
+  width: 400px;
+  margin-bottom: 1.5rem;
+}
+
+.cadastro .div-checkbox {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+}
+
+.cadastro .div-checkbox input {
+  width: auto;
+  margin: 0;
+  background-color: transparent;
+}
+
+.cadastro .div-checkbox label {
+  margin-bottom: 0;
+  margin-left: 0.5rem;
 }
