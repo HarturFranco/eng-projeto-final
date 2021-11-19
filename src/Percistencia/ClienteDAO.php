@@ -36,7 +36,7 @@ class ClienteDAO{
     }
 
     // busca um Cliente por Codigo
-    function buscarPorNome($cliCodigo, $conn){
+    function buscarPorCodigo($cliCodigo, $conn){
         try {
             $query = "SELECT * FROM `Cliente` WHERE `cliCodigo` = " . $cliCodigo;
             $res = $conn->query($query);
@@ -48,7 +48,7 @@ class ClienteDAO{
     }
 
 	// busca um Cliente pelo Nome
-    function buscarPorCodigo($cliNome, $conn){
+    function buscarPorNome($cliNome, $conn){
         try {
             $query = "SELECT * FROM `Cliente` WHERE `cliNome` = " . $cliNome;
             $res = $conn->query($query);
@@ -63,7 +63,7 @@ class ClienteDAO{
     function editar($cliente, $conn){
         $query = "UPDATE `Cliente` SET 
                     `cliNome`='" . $cliente->getNome() . "',
-                    `cliCPF`='" . $cliente->getCpf() . "' WHERE `funCodigo` = " . $cliente->getCodigo();
+                    `cliCPF`='" . $cliente->getCpf() . "' WHERE `cliCodigo` = " . $cliente->getCodigo();
         $res = $conn->query($query);
         return $res;
     }
