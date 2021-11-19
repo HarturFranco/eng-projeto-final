@@ -1,74 +1,76 @@
 <?php
 
-class FuncionarioDAO{
+class FuncionarioDAO
+{
 
-    function __construct(){}
+    function __construct()
+    {
+    }
 
     // Cadastra/Salva novo funcionario
-    function salvar($func, $conn){
+    function salvar($func, $conn)
+    {
         $query = "INSERT INTO `Funcionario`(`funNome`, `funEmail`, `funUsername`, `funSenha`, `funIsGerente`) 
                     VALUES ('" . $func->getNome() . "','" .
-                     $func->getEmail() . "','" . 
-                     $func->getUsername() . "','" . 
-                     $func->getSenha() . "','" . 
-                     $func->getIsGerente() ."')";
+            $func->getEmail() . "','" .
+            $func->getUsername() . "','" .
+            $func->getSenha() . "','" .
+            $func->getIsGerente() . "')";
 
-        
+
         $res = $conn->query($query);
         return $res;
-        
     }
 
     // Exclui
-    function excluir($fCodigo, $conn){
-        $query = "DELETE FROM `Funcionario` WHERE funCodigo = ".$fCodigo; //TODO - tratar SQLInjection
+    function excluir($fCodigo, $conn)
+    {
+        $query = "DELETE FROM `Funcionario` WHERE funCodigo = " . $fCodigo; //TODO - tratar SQLInjection
+
         $res = $conn->query($query);
         return $res;
     }
 
     // Retorna funcionarios
-    function listarTodos($conn){
+    function listarTodos($conn)
+    {
+        try {
+            $query = "SELECT * FROM Funcionario";
 
-        $query = "SELECT * FROM Funcionario";
-
-        $res = $conn->query($query);
-        return $res;
-
+            $res = $conn->query($query);
+            return $res->fetchAll();
+        } catch (Exception $e) {
+            echo $e->getMessage();
+        }
     }
-    
+
     // busca um Funcionario por Codigo
-    function buscarPorCodigo($fCodigo, $conn){
+    function buscarPorCodigo($fCodigo, $conn)
+    {
 
-        $query = "SELECT * FROM `Funcionario` WHERE `funCodigo` = " . $fCodigo;
+        try {
+            $query = "SELECT * FROM `Funcionario` WHERE `funCodigo` = " . $fCodigo;
+            $res = $conn->query($query);
 
-        $res = $conn->query($query);
-
-
-        return $res;
-
+            return $res->fetch();
+        } catch (Exception $e) {
+            echo $e->getMessage();
+        }
     }
 
     // Edita um funcionario um Funcionario
-    function editar($func, $conn){
+    function editar($func, $conn)
+    {
         $query = "UPDATE `Funcionario` SET 
-                    `funNome`='".$func->getNome()."',
-                    `funEmail`='".$func->getEmail()."',
-                    `funUsername`='".$func->getUsername()."',
-                    `funSenha`='".$func->getSenha()."',
-                    `funIsGerente`='".$func->getIsGerente()."' WHERE `funCodigo` = ". $func->getCodigo();
-
+                    `funNome`='" . $func->getNome() . "',
+                    `funEmail`='" . $func->getEmail() . "',
+                    `funUsername`='" . $func->getUsername() . "',
+                    `funSenha`='" . $func->getSenha() . "',
+                    `funIsGerente`='" . $func->getIsGerente() . "' WHERE `funCodigo` = " . $func->getCodigo();
 
         $res = $conn->query($query);
 
 
         return $res;
     }
-
-
-
 }
-
-?>
-
-
-
