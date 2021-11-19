@@ -26,7 +26,7 @@ class FuncionarioDAO{
         return $res;
     }
 
-    // Retorna funcionarios
+    // Retorna todos os funcionarios
     function listarTodos($conn){
         try {
             $query = "SELECT * FROM Funcionario";
