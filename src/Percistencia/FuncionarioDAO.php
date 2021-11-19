@@ -47,12 +47,27 @@ class FuncionarioDAO
     // busca um Funcionario por Codigo
     function buscarPorCodigo($fCodigo, $conn)
     {
-
         try {
             $query = "SELECT * FROM `Funcionario` WHERE `funCodigo` = " . $fCodigo;
             $res = $conn->query($query);
 
             return $res->fetch();
+        } catch (Exception $e) {
+            echo $e->getMessage();
+        }
+    }
+
+    // busca um Funcionario por Codigo
+    function buscarPraLogin($username, $senha, $conn)
+    {
+        try {
+            $consulta = $conn->prepare("SELECT * FROM Funcionario WHERE funUsername = :username AND funSenha = :senha");
+            $consulta->execute(['username' => $username, 'senha' => $senha]);
+
+            if ($consulta)
+                return $consulta->fetch();
+
+            return false;
         } catch (Exception $e) {
             echo $e->getMessage();
         }

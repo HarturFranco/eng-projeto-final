@@ -58,6 +58,13 @@ class FuncionarioControle
     return $res;
   }
 
+  public function buscarPraLogin($username, $senha)
+  {
+    $res = $this->fundao->buscarPraLogin($username, $senha, $this->conexao);
+
+    return $res;
+  }
+
   public function editar($dados)
   {
     $codigo = $dados['fCodigo'];

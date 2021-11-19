@@ -7,7 +7,7 @@ $funcionarioControle = new FuncionarioControle();
   <h1>Cadastrar Funcionario</h1>
 
   <div>
-    <form action="Controle/controle.php" method="POST">
+    <form action="Controle/Controle" method="POST">
       <div>
         <label for="fNome">Nome:</label>
         <input name="fNome" type="text" placeholder="Entre com o nome do funcionário">

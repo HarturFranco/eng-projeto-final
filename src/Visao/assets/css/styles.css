@@ -145,6 +145,20 @@ a {
   border-top: 5px solid var(--color-text);
 }
 
+.menu > form {
+  position: absolute;
+  bottom: 1rem;
+  left: 1rem;
+}
+
+.menu > form > button {
+  background-color: transparent;
+  padding: 0;
+  font-weight: 500;
+  text-transform: none;
+  color: #fff;
+}
+
 /*==================== CONTAINER ====================*/
 .container {
   margin-left: 180px;
@@ -159,7 +173,7 @@ a {
 
 /*==================== INPUT ====================*/
 input {
-  border: 0;
+  border: 1px solid var(--color-400);
   border-radius: 0.5rem;
   padding: 0.5rem 1rem;
 
@@ -233,7 +247,7 @@ button.secondary {
   font-size: 1.2rem;
 }
 
-.index > .not-found > a{
+.index > .not-found > a {
   width: min-content;
 }
 

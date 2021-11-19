@@ -49,7 +49,7 @@ $dados = $funcionario->index();
             <th>ID</th>
             <th>Nome</th>
             <th>Email</th>
-            <th>Login</th>
+            <th>Username</th>
             <th>Gerente</th>
             <th></th>
           </tr>
