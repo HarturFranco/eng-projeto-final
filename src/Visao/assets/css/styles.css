@@ -218,6 +218,63 @@ button.secondary {
   color: var(--color-background);
 }
 
+/*==================== LOGIN ====================*/
+.login {
+  width: 100vw;
+  height: 100vh;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  background-color: var(--color-background-container);
+}
+
+.login h1 {
+  font-weight: 700;
+  margin-top: 3rem;
+  margin-bottom: 3rem;
+}
+
+.login div {
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+
+  padding: 4rem 6rem;
+  border-radius: 1rem;
+  background-color: #243b53;
+}
+
+.login div h2 {
+  margin: 0 auto 2rem;
+}
+
+.login div form {
+  display: flex;
+  flex-direction: column;
+}
+
+.login div form label {
+  color: #fff;
+  margin-bottom: 0.5rem;
+}
+
+.login div form input {
+  width: 300px;
+  margin-bottom: 1.5rem;
+}
+
+.login div form button {
+  width: min-content;
+  
+  color: #fff;
+  background-color: var(--color-400);
+
+  margin: 1.5rem auto 0;
+  padding: 0.75rem 2.5rem;
+}
+
 /*==================== INDEX ====================*/
 .index {
   position: relative;

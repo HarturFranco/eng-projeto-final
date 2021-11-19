@@ -1,10 +1,17 @@
-<form action="Controle/Controle" method="POST">
-  <label for="fUsername">Username: </label>
-  <input name="fUsername" type="text" required>
+<div class="login">
+  <h1>Toca dos Instrumentos</h1>
 
-  <label for="fSenha">Senha: </label>
-  <input name="fSenha" type="password" required>
+  <div>
+    <h2>Login</h2>
+    <form action="Controle/Controle" method="POST">
+      <label for="fUsername">Username: </label>
+      <input name="fUsername" type="text" required>
 
-  <input type="text" name="classeAcao" value="LoginControle/login" hidden>
-  <button>Login</button>
-</form>
+      <label for="fSenha">Senha: </label>
+      <input name="fSenha" type="password" required>
+
+      <input type="text" name="classeAcao" value="LoginControle/login" hidden>
+      <button>Login</button>
+    </form>
+  </div>
+</div>

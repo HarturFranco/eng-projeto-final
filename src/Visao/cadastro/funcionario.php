@@ -10,16 +10,16 @@ $funcionarioControle = new FuncionarioControle();
     <form action="Controle/Controle" method="POST">
       <div>
         <label for="fNome">Nome:</label>
-        <input name="fNome" type="text" placeholder="Entre com o nome do funcionário">
+        <input name="fNome" type="text" maxlength="50" required placeholder="Entre com o nome do funcionário">
 
         <label for="fEmail">Email:</label>
-        <input name="fEmail" type="text" placeholder="exemplo@gmail.com">
+        <input name="fEmail" type="email" maxlength="320" required placeholder="exemplo@gmail.com">
 
         <label for="fUsername">Username:</label>
-        <input name="fUsername" type="text" placeholder="Username">
+        <input name="fUsername" type="text" maxlength="25" required placeholder="Username">
 
         <label for="fSenha">Senha:</label>
-        <input name="fSenha" type="password" placeholder="*******">
+        <input name="fSenha" type="password" maxlength="25" required placeholder="*******">
 
         <div class="div-checkbox">
           <input type="checkbox" name="fIsGerente">
