@@ -47,7 +47,7 @@ class ClienteDAO{
         }
     }
 
-	// busca um Cliente por Nome
+	// busca um Cliente pelo Nome
     function buscarPorCodigo($cliNome, $conn){
         try {
             $query = "SELECT * FROM `Cliente` WHERE `cliNome` = " . $cliNome;
