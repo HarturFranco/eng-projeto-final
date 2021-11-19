@@ -23,7 +23,10 @@
         <li class="submenu_item" id="funcionarios"><a href="relatorios/funcionarios">Funcionário</a></li>
       </ul>
     </li>
-    
-    
   </ul>
+
+  <form action="Controle/Controle" method="POST">
+    <input type="text" name="classeAcao" value="LoginControle/sair" hidden>
+    <button>Sair</button>
+  </form>
 </aside>

@@ -1,6 +1,7 @@
 <?php
 
 require_once "Controle/FuncionarioControle.php";
+require_once "Controle/LoginControle.php";
 
 class Api
 {
@@ -17,6 +18,10 @@ class Api
     $this->metodo = $_SERVER['REQUEST_METHOD'];
 
     $this->uri = $_SERVER['REQUEST_URI'];
+
+    if (!Auth::isLoggedIn()) {
+      $this->uri = "login";
+    }
   }
 
   public function execute()
@@ -39,13 +44,22 @@ class Api
     $view = $classeAcao[2];
     $id = $classeAcao[3];
 
+    $file = "";
+
     if (isset($classe) && !isset($view))
-      include "Visao/{$classe}/index.php";
+      $file = "Visao/{$classe}/index.php";
     else if (isset($classe) && isset($view)) {
       $file = "Visao/{$classe}/{$view}.php";
+    }
 
-      if (file_exists($file))
-        include $file;
+    if ($this->uri == "login")
+      include "Visao/login.php";
+    else {
+
+      include "Visao/menu.php";
+      echo '<div class="container">';
+      include $file;
+      echo "</div>";
     }
   }
 
