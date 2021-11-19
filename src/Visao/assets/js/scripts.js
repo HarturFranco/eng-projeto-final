@@ -13,3 +13,5 @@ const onLoadMenu = () => {
 }
 
 onLoadMenu()
+
+// TODO: implementar filtro de busca geral
