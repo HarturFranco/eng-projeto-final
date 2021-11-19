@@ -21,9 +21,7 @@ class LoginControle
     if ($userData) {
       Auth::login($userData);
       echo "<meta http-equiv='refresh' content='0;URL=/'>";
-    }
-
-    echo "<meta http-equiv='refresh' content='0;URL=/login?erro=1'>";
+    } else echo "<meta http-equiv='refresh' content='0;URL=/login?erro=1'>";
   }
 
   public function sair()
