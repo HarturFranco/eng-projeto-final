@@ -1,6 +1,10 @@
 <?php
-    require_once "api.php";
-    $api = new Api();
+require_once "api.php";
+require_once "Lib/Auth.php";
+
+session_start();
+
+$api = new Api();
 ?>
 
 <!DOCTYPE html>
@@ -17,17 +21,8 @@
 </head>
 
 <body>
-    <?php
-    //logado
-    if (true) {
-        include "Visao/menu.php";
-    ?>
-        <div class="container">
-            <?php $api->execute() ?>
-        </div>
-    <?php
-    } else include "Visao/login.php"
-    ?>
+
+    <?php $api->execute() ?>
 
 </body>
 <script type="text/JavaScript" src="Visao/assets/js/scripts.js"></script>
