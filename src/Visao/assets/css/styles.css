@@ -4,6 +4,7 @@
   --color-text: #f0f4f8;
   --color-background: #243b53;
   --color-background-container: #627d98;
+  --color-400: #829ab1;
 
   --body-font: "Alegreya Sans", sans-serif;
 }
@@ -20,9 +21,12 @@ html {
 }
 
 body {
+  position: relative;
+
   width: 100%;
   display: flex;
   font-family: var(--body-font);
+  font-size: 1rem;
   color: var(--text-text);
 }
 
@@ -45,47 +49,443 @@ a {
 
 /*==================== MENU ====================*/
 .menu {
+  position: fixed;
+
   width: 180px;
   min-width: 180px;
   max-width: 180px;
   height: 100vh;
   background-color: var(--color-background);
+}
 
-  padding: 1rem;
+.menu_title {
+  margin-top: 1rem;
+  margin-left: 0.5rem;
+  margin-bottom: 2rem;
 }
 
 .menu_list {
   display: flex;
   flex-direction: column;
 }
-.menu_list-link {
-  padding: 0.5rem;
+.menu_list-item {
+  padding: 1rem;
+  position: relative;
+}
 
+.menu_list-item a {
+  margin-bottom: 1rem;
   color: var(--color-text);
+}
+
+.menu_list-item.active {
+  background-color: #bcccdc;
+  font-weight: 700;
+}
+
+.menu_list-item.active a {
+  color: var(--color-background);
+}
+
+.menu_list-item.has-submenu.active {
+  background-color: transparent;
+  font-weight: 700;
+}
+
+.menu_list-item.has-submenu.active a {
+  color: var(--color-text);
+}
+
+.menu_list-submenu {
+  margin-top: 0.5rem;
+  font-weight: 500;
+  display: none;
+}
+
+.menu_list-item.active .menu_list-submenu {
+  background-color: transparent;
+  margin-top: 0.5rem;
+  display: block;
+}
+
+.menu_list-item.active.menu_list-submenu {
+  color: var(--color-text);
+  display: block;
+}
+
+.menu_list-submenu li {
+  padding: 0.5rem;
+}
+
+.menu_list-submenu .active {
+  font-weight: 700;
+}
+
+.menu_list-item.has-submenu::after {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 1.2rem;
+  right: 1rem;
+  width: 0;
+  height: 0;
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+  border-left: 5px solid var(--color-text);
+}
+
+.menu_list-item.has-submenu.active::after {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 1.2rem;
+  right: 1rem;
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 5px solid var(--color-text);
+}
+
+.menu > form {
+  position: absolute;
+  bottom: 1rem;
+  left: 1rem;
+}
+
+.menu > form > button {
+  background-color: transparent;
+  padding: 0;
+  font-weight: 500;
+  text-transform: none;
+  color: #fff;
 }
 
 /*==================== CONTAINER ====================*/
 .container {
+  margin-left: 180px;
   display: flex;
   flex-direction: column;
+  padding: 2rem 3rem;
 
   width: 100%;
   min-height: 100vh;
   background-color: var(--color-background-container);
 }
 
+/*==================== INPUT ====================*/
+input {
+  border: 1px solid var(--color-400);
+  border-radius: 0.5rem;
+  padding: 0.5rem 1rem;
+
+  color: var(background-color);
+}
+
+input[type="text"]:focus {
+  border: 0.5px solid var(--color-background);
+}
+
+/*==================== BUTTON ====================*/
+button,
+.button {
+  height: min-content;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+
+  padding: 0.5rem 2rem;
+  border-radius: 0.5rem;
+  border: none;
+
+  text-decoration: none;
+  text-transform: uppercase;
+
+  font-weight: 700;
+  font-size: 1rem;
+
+  cursor: pointer;
+}
+
+button.primary,
+.button.primary {
+  background-color: var(--color-background);
+  color: #fff;
+}
+
+button.secondary,
+button.secondary {
+  background-color: var(--color-text);
+  color: var(--color-background);
+}
+
+/*==================== MODAL ====================*/
+.overlay {
+  z-index: 1;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.modal {
+  z-index: 2;
+  position: fixed;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -40%);
+
+  width: 400px;
+  height: 600px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+
+  background-color: var(--color-background);
+
+  border-radius: 1rem;
+  padding: 2rem;
+
+  text-align: center;
+  color: #fff;
+}
+/*==================== LOGIN ====================*/
+.login {
+  width: 100vw;
+  height: 100vh;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  background-color: var(--color-background-container);
+}
+
+.login h1 {
+  font-weight: 700;
+  margin-top: 3rem;
+  margin-bottom: 3rem;
+}
+
+.login div {
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+
+  padding: 4rem 6rem;
+  border-radius: 1rem;
+  background-color: #243b53;
+}
+
+.login div h2 {
+  margin: 0 auto 2rem;
+}
+
+.login div form {
+  display: flex;
+  flex-direction: column;
+}
+
+.login div form label {
+  color: #fff;
+  margin-bottom: 0.5rem;
+}
+
+.login div form input {
+  width: 300px;
+  margin-bottom: 1.5rem;
+}
+
+.login div form button {
+  width: min-content;
+
+  color: #fff;
+  background-color: var(--color-400);
+
+  margin: 1.5rem auto 0;
+  padding: 0.75rem 2.5rem;
+}
+
+/*==================== INDEX ====================*/
+.index {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+
+  overflow: hidden;
+}
+
+.index h1 {
+  margin-bottom: 3rem;
+}
+
+.index > .not-found {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, 50%);
+
+  display: grid;
+  place-items: center;
+  gap: 1rem;
+
+  color: #fff;
+  font-size: 1.2rem;
+}
+
+.index > .not-found > a {
+  width: min-content;
+}
+
+.index > div > div {
+  display: flex;
+  justify-content: space-between;
+
+  margin-bottom: 2rem;
+}
+
+.index div div .search {
+  display: flex;
+}
+
+.index div div .search input {
+  border-radius: 0.5rem 0 0 0.5rem;
+  width: 360px;
+}
+
+.index div div .search button {
+  border-radius: 0 0.5rem 0.5rem 0;
+  border-left: 1px solid var(--color-background);
+}
+
 /*==================== TABELA ====================*/
 table {
   width: 100%;
+  max-width: 100%;
+
+  background-color: #fff;
+  border-radius: 0.5rem;
+  border-collapse: collapse;
+  overflow: scroll;
+}
+
+table thead {
+  color: #52524e;
+}
+
+table tbody {
+  color: #81817d;
+}
+
+table thead tr th {
+  border-bottom: 1px solid var(--color-background);
 }
 
 td,
 th {
-  border: 1px solid #a020f0;
   text-align: left;
-  padding: 8px;
+  padding: 1rem;
+}
+
+tr:last-child td:last-child {
+  border-radius: 0 0 0.5rem 0;
+}
+
+tr:last-child td:first-child {
+  border-radius: 0 0 0 0.5rem;
 }
 
 tr:nth-child(even) {
   background-color: #d9e2ec;
+}
+
+th:last-child {
+  width: 10%;
+}
+
+td:last-child {
+  display: flex;
+  gap: 1.2rem;
+}
+
+button.icon {
+  background: transparent;
+  padding: 0;
+}
+
+.hidden-tr {
+  display: none;
+}
+
+/*==================== CADASTRO ====================*/
+.cadastro {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+
+  overflow: hidden;
+}
+
+.cadastro h1 {
+  margin-bottom: 3rem;
+}
+
+.cadastro div {
+  width: 100%;
+  background-color: var(--color-400);
+  border-radius: 0.5rem;
+}
+
+.cadastro form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  padding: 2rem;
+}
+
+.cadastro form button {
+  grid-column: span 2;
+  margin: 3rem auto 0;
+  width: 300px;
+}
+
+.cadastro form div {
+  width: 100%;
+  display: flex;
+  flex-flow: column;
+}
+
+.cadastro form div label {
+  width: 400px;
+  color: #202020;
+  margin-bottom: 0.5rem;
+}
+
+.cadastro form div input {
+  width: 400px;
+  margin-bottom: 1.5rem;
+}
+
+.cadastro .div-checkbox {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+}
+
+.cadastro .div-checkbox input {
+  width: auto;
+  margin: 0;
+  background-color: transparent;
+}
+
+.cadastro .div-checkbox label {
+  margin-bottom: 0;
+  margin-left: 0.5rem;
 }
