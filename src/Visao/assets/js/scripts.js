@@ -20,7 +20,38 @@ const onLoadMenu = () => {
 
 onLoadMenu()
 
-// TODO: implementar filtro de busca geral
+
+// ===================== INPUT FILTER ======================
+const filterInput = document.querySelector('input[name=search]')
+
+const filter = () => {
+  const lines = document.querySelectorAll('tr')
+
+  const filters = filterInput.value.toLowerCase().trim().split(' ')
+
+  lines.forEach((line, i) => {
+    if (!i) return
+
+    let hasFilter = false
+
+    filters
+      .forEach(str => {
+        const lineToString = line.getAttribute('string').toLowerCase()
+        if (lineToString.indexOf(str) >= 0)
+          hasFilter = true
+      })
+
+    if (hasFilter)
+      line.classList.remove('hidden-tr')
+    else
+      line.classList.add('hidden-tr')
+  })
+
+}
+filterInput?.addEventListener('keypress', (e) => {
+  if(e.key === 'Enter')
+    filter()
+})
 
 
 // ===================== MODAL DE ERRO ======================
@@ -35,7 +66,7 @@ const openModal = (mensagem, uri) => {
   title.innerHTML = mensagem.split('.')[0]
 
   const detail = document.createElement('p')
-  detail.innerHTML = mensagem.split('.')[1]
+  detail.innerHTML = mensagem.split('.')[1] ? mensagem.split('.')[1] : ''
 
   const button = document.createElement('button')
   button.innerHTML = 'Fechar'
