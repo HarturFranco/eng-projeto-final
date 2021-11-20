@@ -2,6 +2,7 @@
 
 include_once 'Controle/FuncionarioControle.php';
 include_once 'Lib/Auth.php';
+include_once 'Lib/Util.php';
 
 class LoginControle
 {
@@ -20,13 +21,14 @@ class LoginControle
 
     if ($userData) {
       Auth::login($userData);
-      echo "<meta http-equiv='refresh' content='0;URL=/'>";
-    } else echo "<meta http-equiv='refresh' content='0;URL=/login?erro=1'>";
+      Util::redirect('/');
+    } else Util::redirect('login', 'logar. Username ou senha incorretos');
+    
   }
 
   public function sair()
   {
     Auth::signOut();
-    echo "<meta http-equiv='refresh' content='0;URL=/'>";
+    Util::redirect('/');
   }
 }

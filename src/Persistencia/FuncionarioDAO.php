@@ -6,16 +6,24 @@ class FuncionarioDAO{
     }
 
     // Cadastra/Salva novo funcionario
-    function salvar($func, $conn){
-        $query = "INSERT INTO `Funcionario`(`funNome`, `funEmail`, `funUsername`, `funSenha`, `funIsGerente`) 
+    function salvar($func, $conn)
+    {
+        try {
+            $query = "INSERT INTO `Funcionario`(`funNome`, `funEmail`, `funUsername`, `funSenha`, `funIsGerente`) 
                     VALUES ('" . $func->getNome() . "','" .
-            $func->getEmail() . "','" .
-            $func->getUsername() . "','" .
-            $func->getSenha() . "','" .
-            $func->getIsGerente() . "')";
+                $func->getEmail() . "','" .
+                $func->getUsername() . "','" .
+                $func->getSenha() . "','" .
+                $func->getIsGerente() . "')";
 
-        $res = $conn->query($query);
-        return $res;
+
+            $res = $conn->query($query);
+            if ($res)
+                return $res;
+            return false;
+        } catch (Exception $e) {
+            echo $e->getMessage();
+        }
     }
 
     // Exclui
@@ -50,20 +58,7 @@ class FuncionarioDAO{
         }
     }
 
-
-	// busca um Funcionario por Nome
-    function buscarPorNome($funNome, $conn){
-        try {
-            $query = "SELECT * FROM `Funcionario` WHERE `funNome` = " . $funNome;
-            $res = $conn->query($query);
-
-            return $res->fetchAll();
-		} catch (Exception $e) {
-            echo $e->getMessage();
-        }
-	}
-
-    // busca um Funcionario por Codigo
+    // busca um Funcionario por username e senha
     function buscarPraLogin($username, $senha, $conn)
     {
         try {

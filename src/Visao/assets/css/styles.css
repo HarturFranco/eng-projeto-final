@@ -21,6 +21,8 @@ html {
 }
 
 body {
+  position: relative;
+
   width: 100%;
   display: flex;
   font-family: var(--body-font);
@@ -216,6 +218,97 @@ button.secondary,
 button.secondary {
   background-color: var(--color-text);
   color: var(--color-background);
+}
+
+/*==================== MODAL ====================*/
+.overlay {
+  z-index: 1;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.modal {
+  z-index: 2;
+  position: fixed;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -40%);
+
+  width: 400px;
+  height: 600px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+
+  background-color: var(--color-background);
+
+  border-radius: 1rem;
+  padding: 2rem;
+
+  text-align: center;
+  color: #fff;
+}
+/*==================== LOGIN ====================*/
+.login {
+  width: 100vw;
+  height: 100vh;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  background-color: var(--color-background-container);
+}
+
+.login h1 {
+  font-weight: 700;
+  margin-top: 3rem;
+  margin-bottom: 3rem;
+}
+
+.login div {
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+
+  padding: 4rem 6rem;
+  border-radius: 1rem;
+  background-color: #243b53;
+}
+
+.login div h2 {
+  margin: 0 auto 2rem;
+}
+
+.login div form {
+  display: flex;
+  flex-direction: column;
+}
+
+.login div form label {
+  color: #fff;
+  margin-bottom: 0.5rem;
+}
+
+.login div form input {
+  width: 300px;
+  margin-bottom: 1.5rem;
+}
+
+.login div form button {
+  width: min-content;
+
+  color: #fff;
+  background-color: var(--color-400);
+
+  margin: 1.5rem auto 0;
+  padding: 0.75rem 2.5rem;
 }
 
 /*==================== INDEX ====================*/

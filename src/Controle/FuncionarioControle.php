@@ -1,8 +1,9 @@
 <?php
 
-include_once 'Percistencia/Connection.php';
+include_once 'Persistencia/Connection.php';
 include_once 'Modelo/Funcionario.php';
-include_once 'Percistencia/FuncionarioDAO.php';
+include_once 'Persistencia/FuncionarioDAO.php';
+include_once 'Lib/Util.php';
 
 class FuncionarioControle
 {
@@ -43,12 +44,10 @@ class FuncionarioControle
     $res = $this->fundao->salvar($fun, $this->conexao);
 
     if ($res == TRUE) {
-      echo "<script>alert('Funcionario Cadastrado no Banco de Dados!')</script>";
+      Util::redirect('funcionarios');
     } else {
-      echo "<script>alert('Erro ao Cadastrar Funcionário no Banco de Dados: " . $this->conexao->error . "')</script>";
+      Util::redirect('cadastro/funcionario', 'cadstrar funcionário');
     }
-
-    echo "<meta http-equiv='refresh' content='0;URL=/funcionarios'>";
   }
 
   public function buscar($id)
@@ -85,26 +84,25 @@ class FuncionarioControle
     $res = $this->fundao->editar($fun, $this->conexao);
 
     if ($res == TRUE) {
-      echo "<script>alert('Funcionario Editado no Banco de Dados!')</script>";
+      Util::redirect('funcionarios');
     } else {
-      echo "<script>alert('Erro ao Editar Editado no Banco de Dados: " . $this->conexao->error . "')</script>";
+      Util::redirect('funcionarios', 'editar funcionário');
     }
-
-    echo "<meta http-equiv='refresh' content='0;URL=/funcionarios'>";
   }
 
   public function excluir($dados)
   {
-    $codigo = $dados['fCodigo'];
+    try {
+      $codigo = $dados['fCodigo'];
 
-    $res = $this->fundao->excluir($codigo, $this->conexao);
+      $res = $this->fundao->excluir($codigo, $this->conexao);
 
-    if ($res == false) {
-      echo "<script>alert('Excluido com sucesso!')</script>";
-    } else {
-      echo "<script>alert('Não foi possivel excluir:" . $this->conexao->error . "')</script>";
+      if (!$res)
+        Util::redirect('funcionarios');
+      else
+        Util::redirect('funcionarios', 'deletar funcionário');
+    } catch (Exception $e) {
+      Util::redirect('funcionarios', 'deletar funcionário');
     }
-
-    echo "<meta http-equiv='refresh' content='0;URL=/funcionarios'>";
   }
 }
