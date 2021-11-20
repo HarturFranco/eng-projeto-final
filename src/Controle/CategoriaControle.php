@@ -59,9 +59,9 @@ class CategoriaControle
     $res = $this->catDao->editar($cat, $this->conexao);
 
     if ($res == TRUE) {
-      // Util::redirect('categorias');
+      Util::redirect('categorias');
     } else {
-      // Util::redirect('categorias', 'editar categoria');
+      Util::redirect('categorias', 'editar categoria');
     }
   }
 

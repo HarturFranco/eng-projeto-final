@@ -48,8 +48,7 @@ $dados = $categoria->index();
           <tr>
             <th>ID</th>
             <th>Nome</th>
-            <th>Desctrição</th>
-            
+            <th>Descrição</th>
             <th></th>
           </tr>
         </thead>

@@ -5,7 +5,7 @@ include_once 'Modelo/Venda.php';
 include_once 'Persistencia/VendaDAO.php';
 include_once 'Lib/Util.php';
 
-class ClienteControle{
+class VendaControle{
   private $conexao;
   private $clidao;
 
