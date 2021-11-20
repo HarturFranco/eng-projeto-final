@@ -493,6 +493,11 @@ button.icon {
   flex-flow: column;
 }
 
+.cadastro form div h3 {
+  color: #202020;
+  margin-bottom: 1rem;
+}
+
 .cadastro form div label {
   color: #202020;
   margin-bottom: 0.5rem;
@@ -531,4 +536,113 @@ button.icon {
 
 .cadastro .div-preco_quantidade input {
   width: 150px;
+}
+
+/*==================== CADASTRO/EDITAR (VENDA) ====================*/
+.cadastro .venda {
+  display: flex;
+  flex-direction: column;
+}
+
+.cadastro .venda>div:nth-child(2) {
+  border-top: 1px solid var(--color-background);
+  padding-top: 2rem;
+}
+
+.cadastro .venda>div {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+}
+
+.cadastro .venda>div>div {
+  display: flex;
+}
+
+.cadastro .venda .insert-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.cadastro .venda .select-item {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+  gap: 1rem;
+}
+
+.cadastro .venda .insert-item>button {
+  width: max-content;
+  margin: 0;
+  margin-left: auto;
+}
+
+.cadastro .venda .prodtucts-selected {
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+
+  margin: 0 auto;
+}
+
+.cadastro .venda .prodtucts-selected div {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 4fr 2fr;
+  padding: 0.2rem 0.5rem;
+}
+
+.cadastro .venda .prodtucts-selected div div{
+  background-color: transparent;
+}
+
+.cadastro .venda .prodtucts-selected .label {
+  background-color: var(--color-background);
+  color: #fff;
+
+  border-radius: 0.5rem 0.5rem 0 0;  
+}
+
+.cadastro .venda .prodtucts-selected .product {
+  background-color: var(--color-background-container);
+  color: #fff;
+
+  border-radius: 0 0 0.5rem 0.5rem; 
+}
+
+.cadastro .control {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  width: 100%;
+  gap: 1rem;
+}
+
+.cadastro .control > button{
+  width: 210px;
+  margin: 0;
+}
+
+.cadastro .control .price {
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+
+  text-align: center;
+}
+
+.cadastro .control .price div {
+  padding: 0.2rem 0.5rem;
+}
+.cadastro .control .price .label{
+  background-color: var(--color-background);
+  color: #fff;
+  border-radius: 0.5rem 0.5rem 0 0;
+}
+
+.cadastro .control .price .value{
+  background-color: var(--color-background-container);
+  color: #fff;
+  border-radius: 0 0 0.5rem 0.5rem;
 }
