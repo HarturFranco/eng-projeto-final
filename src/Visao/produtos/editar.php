@@ -22,7 +22,7 @@ include_once 'Lib/Util.php';
           <option value="">None</option>
         </select>
 
-        <label for="pDescricao">Username:</label>
+        <label for="pDescricao">Descrição:</label>
         <textarea value="<?php echo '' ?>" maxlength="500" name="pDescricao" type="text" placeholder="Descrição do produto" cols="0" rows="6"></textarea>
 
       </div>
@@ -39,7 +39,7 @@ include_once 'Lib/Util.php';
           </div>
         </div>
       </div>
-      <input type="text" name="fCodigo" value="<?php echo $funcionario["funCodigo"] ?>" hidden>
+      <input type="text" name="pCodigo" value="<?php echo '' ?>" hidden>
       <input type="text" name="classeAcao" value="ProdutoControle/editar" hidden>
       <button class="primary">Editar</button>
     </form>
