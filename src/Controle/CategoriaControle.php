@@ -53,9 +53,7 @@ class CategoriaControle
     $descricao = $dados['cDescricao'];
     var_dump($descricao);
     $cat = new Categoria($nome, $descricao, $codigo);
-    // $cat->setDescricao($descricao);
-    var_dump($cat->getDescricao());
-    // var_dump($cat->getCodigo());
+    
     $res = $this->catDao->editar($cat, $this->conexao);
 
     if ($res == TRUE) {
