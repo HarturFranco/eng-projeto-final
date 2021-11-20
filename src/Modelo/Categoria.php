@@ -11,7 +11,8 @@ class Categoria{
 	function __construct($vnome, $vdescricao = null, $vcodigo = null){
         $this->codigo = $vcodigo;
         $this->nome = $vnome;
-        $this->$descricao = $vdescricao;
+		$this->descricao = $vdescricao;
+        
     }
 	
 	// Metodos getter do atributo Codigo

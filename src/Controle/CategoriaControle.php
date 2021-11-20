@@ -53,7 +53,7 @@ class CategoriaControle
     $descricao = $dados['cDescricao'];
     
     $cat = new Categoria($nome, $descricao, $codigo);
-
+    
     $res = $this->catDao->editar($cat, $this->conexao);
 
     if ($res == TRUE) {

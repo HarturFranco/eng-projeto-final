@@ -59,7 +59,7 @@ class CategoriaDAO{
     function editar($cat, $conn){
         $query = "UPDATE `Categoria` SET 
                     `catNome`='" . $cat->getNome() . "',
-                    `catDescricao`='" . $cat->getIsGerente() . "' WHERE `catCodigo` = " . $cat->getCodigo();
+                    `catDescricao`='" . $cat->getDescricao() . "' WHERE `catCodigo` = " . $cat->getCodigo();
 
         $res = $conn->query($query);
         return $res;
