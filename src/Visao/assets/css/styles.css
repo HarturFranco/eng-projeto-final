@@ -52,16 +52,20 @@ a {
 
 /*==================== MENU ====================*/
 .menu {
-  position: fixed;
+  position: absolute;
 
   width: 180px;
   min-width: 180px;
   max-width: 180px;
-  height: 100vh;
+  height: 100%;
+  min-height: 100vh;
   background-color: var(--color-background);
+
+  padding: 0.1rem;
 }
 
 .menu_title {
+  font-size: 1.4rem;
   margin-top: 1rem;
   margin-left: 0.5rem;
   margin-bottom: 2rem;
@@ -151,18 +155,19 @@ a {
   border-top: 5px solid var(--color-text);
 }
 
-.menu>form {
+.menu+form {
   position: absolute;
-  bottom: 1rem;
-  left: 1rem;
+  top: 1rem;
+  right: 1rem;
 }
 
-.menu>form>button {
+.menu+form>button {
   background-color: transparent;
   padding: 0;
   font-weight: 500;
   text-transform: none;
-  color: #fff;
+  text-decoration: underline;
+  color: #000;
 }
 
 /*==================== CONTAINER ====================*/
