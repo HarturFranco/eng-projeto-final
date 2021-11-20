@@ -12,7 +12,7 @@
         <label for="pNome">Nome:</label>
         <input name="pNome" type="text" maxlength="50" required placeholder="Entre com o nome da categoria">
 
-        <label for="pDescricao">Username:</label>
+        <label for="pDescricao">Descrição:</label>
         <textarea maxlength="500" name="pDescricao" type="text" placeholder="Descrição da categoria" cols="0" rows="6"></textarea>
 
       </div>

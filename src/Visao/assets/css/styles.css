@@ -202,6 +202,9 @@ select {
   padding: 0.5rem 1rem;
 
   font-size: 1rem;
+
+  -webkit-appearance: none;
+  background: #E9E9E9 url("../images/seta.svg") 95.5% 50% no-repeat;
 }
 
 /*==================== SELECT ====================*/
@@ -592,7 +595,7 @@ button.icon {
   padding: 0.2rem 0.5rem;
 }
 
-.cadastro .venda .prodtucts-selected div div{
+.cadastro .venda .prodtucts-selected div div {
   background-color: transparent;
 }
 
@@ -600,14 +603,14 @@ button.icon {
   background-color: var(--color-background);
   color: #fff;
 
-  border-radius: 0.5rem 0.5rem 0 0;  
+  border-radius: 0.5rem 0.5rem 0 0;
 }
 
 .cadastro .venda .prodtucts-selected .product {
   background-color: var(--color-background-container);
   color: #fff;
 
-  border-radius: 0 0 0.5rem 0.5rem; 
+  border-radius: 0 0 0.5rem 0.5rem;
 }
 
 .cadastro .control {
@@ -619,7 +622,7 @@ button.icon {
   gap: 1rem;
 }
 
-.cadastro .control > button{
+.cadastro .control>button {
   width: 210px;
   margin: 0;
 }
@@ -635,13 +638,14 @@ button.icon {
 .cadastro .control .price div {
   padding: 0.2rem 0.5rem;
 }
-.cadastro .control .price .label{
+
+.cadastro .control .price .label {
   background-color: var(--color-background);
   color: #fff;
   border-radius: 0.5rem 0.5rem 0 0;
 }
 
-.cadastro .control .price .value{
+.cadastro .control .price .value {
   background-color: var(--color-background-container);
   color: #fff;
   border-radius: 0 0 0.5rem 0.5rem;

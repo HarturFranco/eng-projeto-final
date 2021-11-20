@@ -13,11 +13,12 @@
         <input name="pNome" type="text" maxlength="150" required placeholder="Entre com o nome do produto">
 
         <label for="pCategoria">Categoria:</label>
-        <select name="pCategoria">
+        <select name="pCategoria" required>
+          <option value="" disabled selected>Selecione uma categoria</option>
           <option value="">None</option>
         </select>
 
-        <label for="pDescricao">Username:</label>
+        <label for="pDescricao">Descricao:</label>
         <textarea maxlength="500" name="pDescricao" type="text" placeholder="Descrição do produto" cols="0" rows="6"></textarea>
 
       </div>
@@ -25,12 +26,12 @@
         <div class="div-preco_quantidade">
           <div>
             <label for="pPreco">Preço:</label>
-            <input name="pPreco" type="text" required placeholder="R$ 0,00">
+            <input name="pPreco" type="text" required placeholder="0,00" class="price" pattern="[0-9]{1,6},[0-9]{2}">
           </div>
 
           <div>
             <label for="pQuantidade">Quantidade:</label>
-            <input name="pQuantidade" type="number" required>
+            <input name="pQuantidade" type="number" maxlength="11" required>
           </div>
         </div>
       </div>
@@ -40,3 +41,5 @@
     </form>
   </div>
 </div>
+
+<script>console.log('aqui')</script>

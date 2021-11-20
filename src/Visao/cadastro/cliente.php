@@ -13,7 +13,7 @@
         <input name="cNome" type="text" maxlength="50" required placeholder="Entre com o nome do cliente" >
 
         <label for="cCPF">CPF:</label>
-        <input name="cCPF" type="text" maxlength="11" required placeholder="000.000.000-00">
+        <input name="cCPF" type="text" maxlength="14" required placeholder="000.000.000-00" pattern="[0-9]{3}.[0-9]{3}.[0-9]{3}-[0-9]{2}">
 
       </div>
       <div></div>

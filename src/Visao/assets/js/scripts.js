@@ -49,9 +49,30 @@ const filter = () => {
 
 }
 filterInput?.addEventListener('keypress', (e) => {
-  if(e.key === 'Enter')
+  if (e.key === 'Enter')
     filter()
 })
+
+// ===================== MASKS ======================
+const maskPrice = (value) => {
+  console.log('value', value)
+  const money = parseInt(value.replace(/[\D]+/g, ''))/100
+  if (typeof money === "number")
+    return Number(money)?.toLocaleString('pt-br', {
+      style: 'currency',
+      currency: 'BRL',
+      maximumFractionDigits: 2
+    })
+  return value
+}
+
+/* const priceInputs = document.querySelectorAll('input[class=price]')
+priceInputs.forEach(input => {
+  input.addEventListener('keypress', (e) => {
+    const { value } = input
+    input.value = maskPrice(value)
+  })
+}) */
 
 
 // ===================== MODAL DE ERRO ======================
