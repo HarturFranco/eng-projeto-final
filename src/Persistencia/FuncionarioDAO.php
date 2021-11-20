@@ -1,10 +1,8 @@
 <?php
 
-class FuncionarioDAO
-{
+class FuncionarioDAO{
 
-    function __construct()
-    {
+    function __construct(){
     }
 
     // Cadastra/Salva novo funcionario
@@ -29,17 +27,15 @@ class FuncionarioDAO
     }
 
     // Exclui
-    function excluir($fCodigo, $conn)
-    {
-        $query = "DELETE FROM `Funcionario` WHERE funCodigo = " . $fCodigo; //TODO - tratar SQLInjection
+    function excluir($funCodigo, $conn){
+        $query = "DELETE FROM `Funcionario` WHERE funCodigo = " . $funCodigo; //TODO - tratar SQLInjection
 
         $res = $conn->query($query);
         return $res;
     }
 
-    // Retorna funcionarios
-    function listarTodos($conn)
-    {
+    // Retorna todos os funcionarios
+    function listarTodos($conn){
         try {
             $query = "SELECT * FROM Funcionario";
 
@@ -51,10 +47,9 @@ class FuncionarioDAO
     }
 
     // busca um Funcionario por Codigo
-    function buscarPorCodigo($fCodigo, $conn)
-    {
+    function buscarPorCodigo($funCodigo, $conn){
         try {
-            $query = "SELECT * FROM `Funcionario` WHERE `funCodigo` = " . $fCodigo;
+            $query = "SELECT * FROM `Funcionario` WHERE `funCodigo` = " . $funCodigo;
             $res = $conn->query($query);
 
             return $res->fetch();
@@ -74,14 +69,14 @@ class FuncionarioDAO
                 return $consulta->fetch();
 
             return false;
+
         } catch (Exception $e) {
             echo $e->getMessage();
         }
     }
-
+	
     // Edita um funcionario um Funcionario
-    function editar($func, $conn)
-    {
+    function editar($func, $conn){
         $query = "UPDATE `Funcionario` SET 
                     `funNome`='" . $func->getNome() . "',
                     `funEmail`='" . $func->getEmail() . "',
@@ -90,8 +85,6 @@ class FuncionarioDAO
                     `funIsGerente`='" . $func->getIsGerente() . "' WHERE `funCodigo` = " . $func->getCodigo();
 
         $res = $conn->query($query);
-
-
         return $res;
     }
 }
