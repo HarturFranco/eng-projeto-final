@@ -35,7 +35,7 @@ const openModal = (mensagem, uri) => {
   title.innerHTML = mensagem.split('.')[0]
 
   const detail = document.createElement('p')
-  detail.innerHTML = mensagem.split('.')[1]
+  detail.innerHTML = mensagem.split('.')[1] ? mensagem.split('.')[1] : ''
 
   const button = document.createElement('button')
   button.innerHTML = 'Fechar'
