@@ -21,26 +21,6 @@ class Produto{
         $this->descricao = $descricao;
         $this->categoria = $categoria;
     }
-	
-	function __construct($nome, $preco, $qtdEstoque, $dataCadastro, $descricao, $categoria){
-		$this->codigo = null;
-        $this->nome = $nome;
-        $this->preco = $preco;
-        $this->qtdEstoque = $qtdEstoque;
-        $this->dataCadastro = $dataCadastro;
-        $this->descricao = $descricao;
-        $this->categoria = $categoria;
-    }
-	
-	function __construct(){
-		$this->codigo = null;
-        $this->nome = null;
-        $this->preco = null;
-        $this->qtdEstoque = null;
-        $this->dataCadastro = null;
-        $this->descricao = null;
-        $this->categoria = null;
-    }
 
 	// Metodos getter do atributo Codigo
 	function getCodigo(){

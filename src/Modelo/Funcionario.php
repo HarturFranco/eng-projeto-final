@@ -17,8 +17,6 @@ class Funcionario{
         $this->senha = $vsenha;
         $this->isGerente = $visGerente;
     }
-   
-
 
     function getCodigo(){
         return $this->codigo;
