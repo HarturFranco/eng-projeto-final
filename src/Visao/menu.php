@@ -10,6 +10,7 @@
         <li class="submenu_item" id="cliente"><a href="cadastro/cliente">Cliente</a></li>
         <li class="submenu_item" id="funcionario"><a href="cadastro/funcionario">Funcionário</a></li>
         <li class="submenu_item" id="categoria"><a href="cadastro/categoria">Categoria</a></li>
+        <li class="submenu_item" id="venda"><a href="cadastro/venda">Venda</a></li>
       </ul>
     </li>
     <li class="menu_list-item" id="produtos"><a href="produtos">Produtos</a></li>
