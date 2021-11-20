@@ -63,7 +63,7 @@ $dados = $funcionario->index();
               <td><?php echo $fun["funNome"] ?></td>
               <td><?php echo $fun["funEmail"] ?></td>
               <td><?php echo $fun["funUsername"] ?></td>
-              <td><?php echo $fun["funIsGerente"] == true ? 'true' : 'false' ?></td>
+              <td><?php echo $fun["funIsGerente"] == true ? 'Sim' : 'Não' ?></td>
               <td>
                 <a href="funcionarios/editar/<?php echo $fun["funCodigo"]; ?>">
                   <svg width="20" height="21" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg">
