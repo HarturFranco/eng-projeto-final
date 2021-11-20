@@ -71,7 +71,7 @@ $dados = $funcionario->index();
                   </svg>
                 </a>
                 <form class="icon" action="Controle/Controle" method="POST">
-                  <input type="text" name="fCodigo" value="<?php echo $fun["funCodigo"] ?>" hidden>
+                  <input type="text" name="funCodigo" value="<?php echo $fun["funCodigo"] ?>" hidden>
                   <input type="text" name="classeAcao" value="FuncionarioControle/excluir" hidden>
                   <button class="icon">
                     <svg width="20" height="22" viewBox="0 0 20 22" fill="none" xmlns="http://www.w3.org/2000/svg">

@@ -9,21 +9,21 @@ $funcionarioControle = new FuncionarioControle();
   <div>
     <form action="Controle/Controle" method="POST">
       <div>
-        <label for="fNome">Nome:</label>
-        <input name="fNome" type="text" maxlength="50" required placeholder="Entre com o nome do funcionário">
+        <label for="funNome">Nome:</label>
+        <input name="funNome" type="text" maxlength="50" required placeholder="Entre com o nome do funcionário">
 
-        <label for="fEmail">Email:</label>
-        <input name="fEmail" type="email" maxlength="320" required placeholder="exemplo@gmail.com">
+        <label for="funEmail">Email:</label>
+        <input name="funEmail" type="email" maxlength="320" required placeholder="exemplo@gmail.com">
 
-        <label for="fUsername">Username:</label>
-        <input name="fUsername" type="text" maxlength="25" required placeholder="Username">
+        <label for="funUsername">Username:</label>
+        <input name="funUsername" type="text" maxlength="25" required placeholder="Username">
 
-        <label for="fSenha">Senha:</label>
-        <input name="fSenha" type="password" maxlength="25" required placeholder="*******">
+        <label for="funSenha">Senha:</label>
+        <input name="funSenha" type="password" maxlength="25" required placeholder="*******">
 
         <div class="div-checkbox">
-          <input type="checkbox" name="fIsGerente">
-          <label for="fIsGerente">Gerente</label>
+          <input type="checkbox" name="funIsGerente">
+          <label for="funIsGerente">Gerente</label>
         </div>
 
       </div>
