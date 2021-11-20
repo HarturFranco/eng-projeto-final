@@ -1,6 +1,7 @@
 <?php
-// include_once "Controle/FuncionarioControle.php";
-// $funcionarioControle = new FuncionarioControle();
+include_once "Controle/CategoriaControle.php";
+$categoriaControle = new CategoriaControle();
+$categorias = $categoriaControle->index();
 ?>
 
 <div class="cadastro">
@@ -15,7 +16,15 @@
         <label for="pCategoria">Categoria:</label>
         <select name="pCategoria" required>
           <option value="" disabled selected>Selecione uma categoria</option>
-          <option value="">None</option>
+        <?php
+          foreach ($categorias as $cat) {
+            var_dump($cat["catCodigo"]);
+        ?>
+          <option value="<?php echo $cat["catCodigo"] ?>"><?php echo $cat["catNome"] ?></option>
+        <?php
+          }
+        ?>
+        
         </select>
 
         <label for="pDescricao">Descricao:</label>
