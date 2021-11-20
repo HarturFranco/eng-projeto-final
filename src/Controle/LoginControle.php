@@ -21,7 +21,7 @@ class LoginControle
 
     if ($userData) {
       Auth::login($userData);
-      Util::redirect('/');
+      Util::redirect('');
     } else Util::redirect('login', 'logar. Username ou senha incorretos');
     
   }
@@ -29,6 +29,6 @@ class LoginControle
   public function sair()
   {
     Auth::signOut();
-    Util::redirect('/');
+    Util::redirect('');
   }
 }
