@@ -48,7 +48,7 @@ const filter = () => {
   })
 
 }
-filterInput.addEventListener('keypress', (e) => {
+filterInput?.addEventListener('keypress', (e) => {
   if(e.key === 'Enter')
     filter()
 })
