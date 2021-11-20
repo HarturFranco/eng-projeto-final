@@ -46,6 +46,11 @@ class Api
 
     $file = "";
 
+    if (strpos($classe, '?'))
+      $classe = explode("?", $classe)[0];
+    if (strpos($view, '?'))
+      $view = explode("?", $view)[0];
+
     if (isset($classe) && !isset($view))
       $file = "Visao/{$classe}/index.php";
     else if (isset($classe) && isset($view)) {

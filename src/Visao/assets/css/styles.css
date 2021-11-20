@@ -21,6 +21,8 @@ html {
 }
 
 body {
+  position: relative;
+
   width: 100%;
   display: flex;
   font-family: var(--body-font);
@@ -218,6 +220,37 @@ button.secondary {
   color: var(--color-background);
 }
 
+/*==================== MODAL ====================*/
+.overlay {
+  z-index: 1;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.modal {
+  z-index: 2;
+  position: fixed;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -40%);
+
+  width: 400px;
+  height: 600px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+
+  background-color: var(--color-background);
+
+  border-radius: 1rem;
+  padding: 2rem;
+}
 /*==================== LOGIN ====================*/
 .login {
   width: 100vw;
@@ -267,7 +300,7 @@ button.secondary {
 
 .login div form button {
   width: min-content;
-  
+
   color: #fff;
   background-color: var(--color-400);
 
