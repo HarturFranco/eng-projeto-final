@@ -1,6 +1,6 @@
 <?php
-// include_once "Controle/FuncionarioControle.php";
-// $funcionarioControle = new FuncionarioControle();
+include_once "Controle/CategoriaControle.php";
+$categoriaControle = new CategoriaControle();
 ?>
 
 <div class="cadastro">
@@ -12,7 +12,7 @@
         <label for="cNome">Nome:</label>
         <input name="cNome" type="text" maxlength="50" required placeholder="Entre com o nome da categoria">
 
-        <label for="cDescricao">Username:</label>
+        <label for="cDescricao">Descrição:</label>
         <textarea maxlength="500" name="cDescricao" type="text" placeholder="Descrição da categoria" cols="0" rows="6"></textarea>
 
       </div>
