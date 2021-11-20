@@ -420,6 +420,10 @@ button.icon {
   padding: 0;
 }
 
+.hidden-tr {
+  display: none;
+}
+
 /*==================== CADASTRO ====================*/
 .cadastro {
   width: 100%;

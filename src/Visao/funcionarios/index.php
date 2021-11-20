@@ -19,7 +19,7 @@ $dados = $funcionario->index();
       <div>
         <div class="search">
           <input type="text" name="search">
-          <button class="secondary">
+          <button class="secondary" onclick="filter()">
             Filtros
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M4 21V14" stroke="#102A43" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
@@ -58,7 +58,7 @@ $dados = $funcionario->index();
           <?php
           foreach ($dados as $fun) {
           ?>
-            <tr>
+            <tr string="<?php echo "{$fun["funCodigo"]} {$fun["funNome"]}" ?>">
               <td><?php echo $fun["funCodigo"] ?></td>
               <td><?php echo $fun["funNome"] ?></td>
               <td><?php echo $fun["funEmail"] ?></td>
