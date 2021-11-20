@@ -12,7 +12,7 @@ class Produto{
     private $categoria;
 
 	// Contrutores da classe Produto
-	function __construct($codigo, $nome, $preco, $qtdEstoque, $dataCadastro, $descricao, $categoria){
+	function __construct($nome, $preco, $qtdEstoque, $dataCadastro, $descricao, $categoria, $codigo = null){
         $this->codigo = $codigo;
         $this->nome = $nome;
         $this->preco = $preco;

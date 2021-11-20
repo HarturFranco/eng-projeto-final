@@ -9,7 +9,7 @@ class ItemVenda{
     private $preco;
 
 	// Contrutores da classe ItemVenda
-	function __construct($produto, $venda, $qtd, $preco){
+	function __construct($qtd, $preco, $produto = null, $venda = null){
         $this->produto = $produto;
         $this->venda = $venda;
         $this->qtd = $qtd;

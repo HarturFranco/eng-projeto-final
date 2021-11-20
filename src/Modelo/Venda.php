@@ -10,7 +10,7 @@ class Venda{
     private $status;
 
 	// Contrutores da classe Venda
-	function __construct($codigo, $precoTotal, $cliente, $funcionario, $status){
+	function __construct($precoTotal, $cliente, $funcionario, $status, $codigo = null){
         $this->codigo = $codigo;
         $this->precoTotal = $precoTotal;
         $this->cliente = $cliente;
