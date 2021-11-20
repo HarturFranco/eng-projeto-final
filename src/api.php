@@ -2,6 +2,7 @@
 
 require_once "Controle/FuncionarioControle.php";
 require_once "Controle/LoginControle.php";
+require_once "Controle/CategoriaControle.php";
 
 class Api
 {
