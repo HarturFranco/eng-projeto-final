@@ -33,7 +33,7 @@ class FuncionarioControle
     $senha = $dados['fSenha'];
     $isGerente = $dados['fIsGerente'];
 
-    if ($isGerente == "true") {
+    if ($isGerente) {
       $isGerente = 1;
     } else {
       $isGerente = 0;
@@ -97,7 +97,7 @@ class FuncionarioControle
 
       $res = $this->fundao->excluir($codigo, $this->conexao);
 
-      if (!$res)
+      if ($res)
         Util::redirect('funcionarios');
       else
         Util::redirect('funcionarios', 'deletar funcionário');
