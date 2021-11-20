@@ -19,19 +19,18 @@ class FuncionarioControle
 
   public function index()
   {
-    $funcdao = new FuncionarioDAO();
-    $res = $funcdao->listarTodos($this->conexao);
+    $res = $this->fundao->listarTodos($this->conexao);
 
     return $res;
   }
 
   public function cadastro($dados)
   {
-    $email = $dados['fEmail'];
-    $nome = $dados['fNome'];
-    $username = $dados['fUsername'];
-    $senha = $dados['fSenha'];
-    $isGerente = $dados['fIsGerente'];
+    $email = $dados['funEmail'];
+    $nome = $dados['funNome'];
+    $username = $dados['funUsername'];
+    $senha = $dados['funSenha'];
+    $isGerente = $dados['funIsGerente'];
 
     if ($isGerente) {
       $isGerente = 1;
@@ -46,15 +45,15 @@ class FuncionarioControle
     if ($res == TRUE) {
       Util::redirect('funcionarios');
     } else {
-      Util::redirect('cadastro/funcionario', 'cadstrar funcionário');
+      Util::redirect('cadastro/funcionario', 'cadastrar funcionário');
     }
   }
 
-  public function buscar($id)
-  {
-    $res = $this->fundao->buscarPorCodigo($id, $this->conexao);
-
-    return $res;
+  public function buscar($dado){
+    if(is_int($dado)){
+		return $this->fundao->buscarPorCodigo($dado, $this->conexao);
+	}
+	return $this->fundao->buscarPorNome($dado, $this->conexao);
   }
 
   public function buscarPraLogin($username, $senha)
@@ -66,12 +65,12 @@ class FuncionarioControle
 
   public function editar($dados)
   {
-    $codigo = $dados['fCodigo'];
-    $email = $dados['fEmail'];
-    $nome = $dados['fNome'];
-    $username = $dados['fUsername'];
-    $senha = $dados['fSenha'];
-    $isGerente = $dados['fIsGerente'];
+    $codigo = $dados['funCodigo'];
+    $email = $dados['funEmail'];
+    $nome = $dados['funNome'];
+    $username = $dados['funUsername'];
+    $senha = $dados['funSenha'];
+    $isGerente = $dados['funIsGerente'];
 
     if ($isGerente == "true") {
       $isGerente = 1;
@@ -93,7 +92,7 @@ class FuncionarioControle
   public function excluir($dados)
   {
     try {
-      $codigo = $dados['fCodigo'];
+      $codigo = $dados['funCodigo'];
 
       $res = $this->fundao->excluir($codigo, $this->conexao);
 

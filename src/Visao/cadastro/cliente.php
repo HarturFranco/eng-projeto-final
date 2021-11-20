@@ -1,6 +1,6 @@
 <?php
-// include_once "Controle/FuncionarioControle.php";
-// $funcionarioControle = new FuncionarioControle();
+include_once "Controle/ClienteControle.php";
+$clienteControle = new ClienteControle();
 ?>
 
 <div class="cadastro">
@@ -18,7 +18,7 @@
       </div>
       <div></div>
       <input type="text" name="pCodigo" value="<?php echo '' ?>" hidden>
-      <input type="text" name="classeAcao" value="ClienteControle/cadastrar" hidden>
+      <input type="text" name="classeAcao" value="ClienteControle/cadastro" hidden>
       <button class="primary">Cadastrar</button>
     </form>
   </div>
