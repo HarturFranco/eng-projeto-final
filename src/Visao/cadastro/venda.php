@@ -41,6 +41,12 @@ $vendaControle = new VendaControle();
             <div>Guitarra</div>
             <div>Caro</div>
           </div>
+
+          <div class="product">
+            <div>1</div>
+            <div>Guitarra</div>
+            <div>Caro</div>
+          </div>
         </div>
 
       </div>
@@ -64,7 +70,7 @@ $vendaControle = new VendaControle();
           </div>
 
           <button>Cancelar</button>
-          <button>Finalizar Venda</button>
+          <button class="primary">Finalizar Venda</button>
         </div>
       </div>
       <input type="text" name="fCodigo" value="<?php echo '' ?>" hidden>
