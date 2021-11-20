@@ -63,7 +63,7 @@ $dados = $funcionario->index();
               <td><?php echo $fun["funNome"] ?></td>
               <td><?php echo $fun["funEmail"] ?></td>
               <td><?php echo $fun["funUsername"] ?></td>
-              <td><?php echo $fun["funIsGerente"] == true ? 'true' : 'false' ?></td>
+              <td><?php echo $fun["funIsGerente"] == true ? 'Sim' : 'Não' ?></td>
               <td>
                 <a href="funcionarios/editar/<?php echo $fun["funCodigo"]; ?>">
                   <svg width="20" height="21" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -71,7 +71,7 @@ $dados = $funcionario->index();
                   </svg>
                 </a>
                 <form class="icon" action="Controle/Controle" method="POST">
-                  <input type="text" name="fCodigo" value="<?php echo $fun["funCodigo"] ?>" hidden>
+                  <input type="text" name="funCodigo" value="<?php echo $fun["funCodigo"] ?>" hidden>
                   <input type="text" name="classeAcao" value="FuncionarioControle/excluir" hidden>
                   <button class="icon">
                     <svg width="20" height="22" viewBox="0 0 20 22" fill="none" xmlns="http://www.w3.org/2000/svg">

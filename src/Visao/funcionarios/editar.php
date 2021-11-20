@@ -5,7 +5,7 @@ include_once 'Lib/Util.php';
 $id = Util::getArgumento();
 $funcionarioControle = new FuncionarioControle();
 
-$funcionario = $funcionarioControle->buscar($id);
+$funcionario = $funcionarioControle->buscar((int)$id);
 ?>
 
 <div class="cadastro">

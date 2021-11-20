@@ -8,22 +8,10 @@ class Cliente{
     private $cpf;
 
 	// Contrutores da classe Cliente
-	function __construct($codigo, $nome, $cpf){
+	function __construct($nome, $cpf, $codigo = null){
         $this->codigo = $codigo;
         $this->nome = $nome;
         $this->cpf = $cpf;
-    }
-	
-	function __construct($nome, $cpf){
-		$this->codigo = null;
-        $this->nome = $nome;
-        $this->cpf = $cpf;
-    }
-	
-	function __construct(){
-		$this->codigo = null;
-        $this->nome = null;
-        $this->cpf = null;
     }
 
 	// Metodos getter do atributo Codigo

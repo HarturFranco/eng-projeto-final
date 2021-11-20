@@ -163,6 +163,13 @@ ALTER TABLE `Venda`
 --
 -- AUTO_INCREMENT de tabela `Cliente`
 --
+ALTER TABLE `Categoria`
+  MODIFY `catCodigo` int(11) NOT NULL AUTO_INCREMENT;
+
+
+--
+-- AUTO_INCREMENT de tabela `Cliente`
+--
 ALTER TABLE `Cliente`
   MODIFY `cliCodigo` int(11) NOT NULL AUTO_INCREMENT;
 

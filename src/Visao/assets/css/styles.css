@@ -52,16 +52,20 @@ a {
 
 /*==================== MENU ====================*/
 .menu {
-  position: fixed;
+  position: absolute;
 
   width: 180px;
   min-width: 180px;
   max-width: 180px;
-  height: 100vh;
+  height: 100%;
+  min-height: 100vh;
   background-color: var(--color-background);
+
+  padding: 0.1rem;
 }
 
 .menu_title {
+  font-size: 1.4rem;
   margin-top: 1rem;
   margin-left: 0.5rem;
   margin-bottom: 2rem;
@@ -151,18 +155,19 @@ a {
   border-top: 5px solid var(--color-text);
 }
 
-.menu>form {
+.menu+form {
   position: absolute;
-  bottom: 1rem;
-  left: 1rem;
+  top: 1rem;
+  right: 1rem;
 }
 
-.menu>form>button {
+.menu+form>button {
   background-color: transparent;
   padding: 0;
   font-weight: 500;
   text-transform: none;
-  color: #fff;
+  text-decoration: underline;
+  color: #000;
 }
 
 /*==================== CONTAINER ====================*/
@@ -202,6 +207,9 @@ select {
   padding: 0.5rem 1rem;
 
   font-size: 1rem;
+
+  -webkit-appearance: none;
+  background: #E9E9E9 url("../images/seta.svg") 95.5% 50% no-repeat;
 }
 
 /*==================== SELECT ====================*/
@@ -468,7 +476,7 @@ button.icon {
   margin-bottom: 3rem;
 }
 
-.cadastro div {
+.cadastro>div {
   width: 100%;
   background-color: var(--color-400);
   border-radius: 0.5rem;
@@ -491,6 +499,11 @@ button.icon {
   width: 100%;
   display: flex;
   flex-flow: column;
+}
+
+.cadastro form div h3 {
+  color: #202020;
+  margin-bottom: 1rem;
 }
 
 .cadastro form div label {
@@ -531,4 +544,110 @@ button.icon {
 
 .cadastro .div-preco_quantidade input {
   width: 150px;
+}
+
+/*==================== CADASTRO/EDITAR (VENDA) ====================*/
+.cadastro .venda {
+  display: flex;
+  flex-direction: column;
+}
+
+.cadastro .venda>div:nth-child(2) {
+  border-top: 1px solid var(--color-background);
+  padding-top: 2rem;
+}
+
+.cadastro .venda>div {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+}
+
+.cadastro .venda>div>div {
+  display: flex;
+}
+
+.cadastro .venda .insert-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.cadastro .venda .select-item {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+  gap: 1rem;
+}
+
+.cadastro .venda .insert-item>button {
+  width: max-content;
+  margin: 0;
+  margin-left: auto;
+}
+
+.cadastro .venda .prodtucts-selected {
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+
+  margin: 0 auto;
+
+  border-radius: 0.5rem;
+}
+
+.cadastro .venda .prodtucts-selected div {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 4fr 2fr;
+  padding: 0.2rem 0.5rem;
+}
+
+.cadastro .venda .prodtucts-selected div div {
+  background-color: transparent;
+}
+
+.cadastro .venda .prodtucts-selected .label {
+  background-color: var(--color-background);
+  color: #fff;
+}
+
+.cadastro .venda .prodtucts-selected .product {
+  background-color: var(--color-background-container);
+  color: #fff;
+}
+
+.cadastro .control {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  width: 100%;
+  gap: 1rem;
+}
+
+.cadastro .control>button {
+  width: 210px;
+  margin: 0;
+}
+
+.cadastro .control .price {
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+
+  text-align: center;
+}
+
+.cadastro .control .price div {
+  padding: 0.2rem 0.5rem;
+}
+
+.cadastro .control .price .label {
+  background-color: var(--color-background);
+  color: #fff;
+}
+
+.cadastro .control .price .value {
+  background-color: var(--color-background-container);
+  color: #fff;
 }

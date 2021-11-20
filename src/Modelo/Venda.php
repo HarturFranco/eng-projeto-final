@@ -10,28 +10,12 @@ class Venda{
     private $status;
 
 	// Contrutores da classe Venda
-	function __construct($codigo, $precoTotal, $cliente, $funcionario, $status){
+	function __construct($precoTotal, $cliente, $funcionario, $status, $codigo = null){
         $this->codigo = $codigo;
         $this->precoTotal = $precoTotal;
         $this->cliente = $cliente;
         $this->funcionario = $funcionario;
         $this->status = $status;
-    }
-	
-	function __construct($precoTotal, $cliente, $funcionario, $status){
-		$this->codigo = null;
-        $this->precoTotal = $precoTotal;
-        $this->cliente = $cliente;
-        $this->funcionario = $funcionario;
-        $this->status = $status;
-    }
-	
-	function __construct(){
-		$this->codigo = null;
-        $this->precoTotal = null;
-        $this->cliente = null;
-        $this->funcionario = null;
-        $this->status = null;
     }
 
 	// Metodos getter do atributo Codigo
