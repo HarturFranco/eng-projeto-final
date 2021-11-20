@@ -13,18 +13,6 @@ class Cliente{
         $this->nome = $nome;
         $this->cpf = $cpf;
     }
-	
-	function __construct($nome, $cpf){
-		$this->codigo = null;
-        $this->nome = $nome;
-        $this->cpf = $cpf;
-    }
-	
-	function __construct(){
-		$this->codigo = null;
-        $this->nome = null;
-        $this->cpf = null;
-    }
 
 	// Metodos getter do atributo Codigo
 	function getCodigo(){
