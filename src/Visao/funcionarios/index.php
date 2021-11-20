@@ -1,8 +1,8 @@
 <?php
 include_once 'Controle/FuncionarioControle.php';
 
-$funcionario = new FuncionarioControle();
-$dados = $funcionario->index();
+$funcionarioControle = new FuncionarioControle();
+$dados = $funcionarioControle->index();
 ?>
 
 <div class="index">

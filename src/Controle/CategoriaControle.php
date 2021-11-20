@@ -13,6 +13,7 @@ class CategoriaControle
   public function __construct()
   {
     $conexao = new Connection();
+
     $this->conexao = $conexao->getConnection();
     $this->catDao = new CategoriaDAO();
   }
@@ -20,7 +21,20 @@ class CategoriaControle
   public function index()
   {
     $res = $this->catDao->listarTodos($this->conexao);
-    return $res;
+
+    $categorias = array();
+
+    foreach ($res as $cat) {
+      $categoria = new Categoria(
+        $cat['catNome'],
+        $cat['catDescricao'],
+        $cat['catCodigo']
+      );
+
+      array_push($categorias, $categoria);
+    }
+
+    return $categorias;
   }
 
   public function cadastrar($dados)
@@ -42,9 +56,10 @@ class CategoriaControle
   public function buscar($id)
   {
     $res = $this->catDao->buscarPorCodigo($id, $this->conexao);
+    
     $categoria = new Categoria($res['catNome'], $res['catDescricao'], $res['catCodigo']);
+    
     return $categoria;
-    // return $res;
   }
 
   public function editar($dados)
@@ -54,7 +69,7 @@ class CategoriaControle
     $descricao = $dados['cDescricao'];
     var_dump($descricao);
     $cat = new Categoria($nome, $descricao, $codigo);
-    
+
     $res = $this->catDao->editar($cat, $this->conexao);
 
     if ($res == TRUE) {

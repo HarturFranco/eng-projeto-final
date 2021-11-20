@@ -5,38 +5,45 @@ include_once 'Modelo/Cliente.php';
 include_once 'Persistencia/ClienteDAO.php';
 include_once 'Lib/Util.php';
 
-class ClienteControle{
+class ClienteControle
+{
   private $conexao;
   private $clidao;
 
-  public function __construct(){
+  public function __construct()
+  {
     $conexao = new Connection();
     $this->conexao = $conexao->getConnection();
     $this->clidao = new ClienteDAO();
   }
 
-	private function limpaCPF($valor){
-		$valor = trim($valor);
-		$valor = str_replace(".", "", $valor);
-		$valor = str_replace("-", "", $valor);
-		return $valor;
-	}
 
-	private function arrumaCPF($valor){
-		return substr($valor,0,3).'.'.substr($valor,3,3).'.'.substr($valor,6,3).'-'.substr($valor,9,2);
-	}
 
-  public function index(){
+  public function index()
+  {
     $res = $this->clidao->listarTodos($this->conexao);
-    for($i = 0; $i < count($res); $i++){
-      $res[$i]["cliCPF"] = $this->arrumaCPF($res[$i]["cliCPF"]);
+
+    $clientes = array();
+
+    foreach ($res as $cli) {
+      $cli["cliCPF"] = Util::arrumaCPF($cli["cliCPF"]);
+
+      $cliente = new Cliente(
+        $cli['cliNome'],
+        $cli['cliCPF'],
+        $cli['cliCodigo']
+      );
+
+      array_push($clientes, $cliente);
     }
-    return $res;
+
+    return $clientes;
   }
 
-  public function cadastro($dados){
-    $nome = $dados['cNome'];
-    $cpf = $this->limpaCPF($dados['cCPF']);
+  public function cadastro($dados)
+  {
+    $nome = $dados['cliNome'];
+    $cpf = Util::limpaCPF($dados['cliCPF']);
 
     $cli = new Cliente($nome, $cpf);
     $res = $this->clidao->salvar($cli, $this->conexao);
@@ -48,21 +55,28 @@ class ClienteControle{
     }
   }
 
-  public function buscar($dado){
-	if (is_int($dado)){
-		$res = $this->clidao->buscarPorCodigo($dado, $this->conexao);
-	}else{
-		$res = $this->clidao->buscarPorNome($dado, $this->conexao);
-	}
-	$res["cliCPF"] = $this->arrumaCPF($res["cliCPF"]);
-	return $res;
+  public function buscar($dado)
+  {
+    if (is_int($dado)) {
+      $res = $this->clidao->buscarPorCodigo($dado, $this->conexao);
+    } else {
+      $res = $this->clidao->buscarPorNome($dado, $this->conexao);
+    }
+
+    $cliente = new Cliente(
+      $res['cliNome'],
+      Util::arrumaCPF($res["cliCPF"]),
+      $res['cliCodigo']
+    );
+
+    return $cliente;
   }
 
   public function editar($dados)
   {
     $codigo = $dados['cCodigo'];
     $nome = $dados['cNome'];
-    $cpf = $this->limpaCPF($dados['cCPF']);
+    $cpf = Util::limpaCPF($dados['cCPF']);
 
     $cli = new Cliente($nome, $cpf, $codigo);
 

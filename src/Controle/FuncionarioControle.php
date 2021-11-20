@@ -49,11 +49,24 @@ class FuncionarioControle
     }
   }
 
-  public function buscar($dado){
-    if(is_int($dado)){
-		return $this->fundao->buscarPorCodigo($dado, $this->conexao);
-	}
-	return $this->fundao->buscarPorNome($dado, $this->conexao);
+  public function buscar($dado)
+  {
+
+    $res = null;
+    if (is_int($dado)) {
+      $res = $this->fundao->buscarPorCodigo($dado, $this->conexao);
+    } else {
+      $res = $this->fundao->buscarPorNome($dado, $this->conexao);
+    }
+
+    return new Funcionario(
+      $res['funEmail'],
+      $res['funNome'],
+      $res['funUsername'],
+      $res['funSenha'],
+      $res['funIsGerente'],
+      $res['funCodigo']
+    );
   }
 
   public function buscarPraLogin($username, $senha)

@@ -19,7 +19,7 @@ $categorias = $categoriaControle->index();
         <?php
           foreach ($categorias as $cat) {
         ?>
-          <option value="<?php echo $cat["catCodigo"] ?>"><?php echo $cat["catNome"] ?></option>
+          <option value="<?php echo $cat->getCodigo() ?>"><?php echo $cat->getNome() ?></option>
         <?php
           }
         ?>
