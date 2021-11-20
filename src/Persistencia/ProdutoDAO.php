@@ -14,7 +14,7 @@ class ProdutoDAO{
             $produto->getDataCadastro() . "','" .
             $produto->getDescricao() . "','" .
             $produto->getCategoria()->getCodigo() . "')";
-
+        
         $res = $conn->query($query);
         return $res;
     }
@@ -44,7 +44,7 @@ class ProdutoDAO{
         try {
             $query = "SELECT * FROM `Produto` WHERE `proCodigo` = " . $proCodigo;
             $res = $conn->query($query);
-
+            
             return $res->fetch();
         } catch (Exception $e) {
             echo $e->getMessage();
@@ -66,7 +66,7 @@ class ProdutoDAO{
 	
     // Edita um Produto
     function editar($produto, $conn){
-        $query = "UPDATE `Funcionario` SET 
+        $query = "UPDATE `Produto` SET 
                     `proNome`='" . $produto->getNome() . "',
                     `proPreco`='" . $produto->getPreco() . "',
                     `proQtdEstoque`='" . $produto->getQtdEstoque() . "',

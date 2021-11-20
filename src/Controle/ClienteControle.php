@@ -28,9 +28,9 @@ class ClienteControle{
 
   public function index(){
     $res = $this->clidao->listarTodos($this->conexao);
-	for($i = 0; $i < count($res); $i++){
-		$res[$i]["cliCPF"] = $this->arrumaCPF($res[$i]["cliCPF"]);
-	}
+    for($i = 0; $i < count($res); $i++){
+      $res[$i]["cliCPF"] = $this->arrumaCPF($res[$i]["cliCPF"]);
+    }
     return $res;
   }
 

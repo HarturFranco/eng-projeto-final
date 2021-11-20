@@ -3,6 +3,7 @@
 include_once 'Persistencia/Connection.php';
 include_once 'Modelo/Produto.php';
 include_once 'Persistencia/ProdutoDAO.php';
+include_once 'Controle/CategoriaControle.php';
 include_once 'Lib/Util.php';
 
 class ProdutoControle
@@ -19,19 +20,25 @@ class ProdutoControle
 
   public function index()
   {
+    $catControle = new CategoriaControle();
+
     $res = $this->proDao->listarTodos($this->conexao);
+    for($i = 0; $i < count($res); $i++){
+      $res[$i]["Categoria_catCodigo"] = $catControle->buscar($res[$i]["Categoria_catCodigo"]);
+    }
     return $res;
   }
 
   public function cadastrar($dados)
   {
-    
-	$nome = $dados['pNome'];
-	$preco = $dados['pPreco'];
-	$qtdEstoque = $dados['pQuantidade'];
-	$dataCadastro = date("d-m-Y");
-	$descricao = $dados['pDescricao'];
-    $categoria = $dados['pCategoria'];
+    $catControle = new CategoriaControle();
+
+    $nome = $dados['pNome'];
+    $preco = str_replace(",", ".", $dados['pPreco']);
+    $qtdEstoque = $dados['pQuantidade'];
+    $dataCadastro = date("Y-m-d");
+    $descricao = $dados['pDescricao'];
+    $categoria = $catControle->buscar($dados['pCategoria']);
 
     $pro = new Produto($nome, $preco, $qtdEstoque, $dataCadastro, $descricao, $categoria);
 
@@ -53,18 +60,20 @@ class ProdutoControle
 
   public function editar($dados)
   {
+    $catControle = new CategoriaControle();
+
     $codigo = $dados['pCodigo'];
     $nome = $dados['pNome'];
-	$preco = $dados['pPreco'];
-	$qtdEstoque = $dados['pQuantidade'];
-	$dataCadastro = date("d-m-Y");
-	$descricao = $dados['pDescricao'];
-    $categoria = $dados['pCategoria'];
-    var_dump($descricao);
-    $pro = new Produto($nome, $descricao, $codigo);
+	  $preco = str_replace(",", ".", $dados['pPreco']);
+	  $qtdEstoque = $dados['pQuantidade'];
+	  $dataCadastro = date("Y-m-d");
+	  $descricao = $dados['pDescricao'];
+    $categoria = $catControle->buscar($dados['pCategoria']);
+    
+    $pro = new Produto($nome, $preco, $qtdEstoque, $dataCadastro, $descricao, $categoria, $codigo);
     
     $res = $this->proDao->editar($pro, $this->conexao);
-
+    
     if ($res == TRUE) {
       Util::redirect('produtos');
     } else {
@@ -75,14 +84,17 @@ class ProdutoControle
   public function excluir($dados)
   {
     try {
-      $codigo = $dados['cCodigo'];
+      $codigo = $dados['pCodigo'];
 
       $res = $this->proDao->excluir($codigo, $this->conexao);
 
-      if ($res)
+      if ($res){
         Util::redirect('produtos');
-      else
-        Util::redirect('produtos', 'deletar produto');
+      }
+      else{
+        Util::redirect('produtos', 'deletar 2 produto');
+      }
+        
     } catch (Exception $e) {
       Util::redirect('produtos', 'deletar produto');
     }

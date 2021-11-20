@@ -42,8 +42,9 @@ class CategoriaControle
   public function buscar($id)
   {
     $res = $this->catDao->buscarPorCodigo($id, $this->conexao);
-
-    return $res;
+    $categoria = new Categoria($res['catNome'], $res['catDescricao'], $res['catCodigo']);
+    return $categoria;
+    // return $res;
   }
 
   public function editar($dados)

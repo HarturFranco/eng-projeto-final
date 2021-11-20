@@ -18,7 +18,6 @@ $categorias = $categoriaControle->index();
           <option value="" disabled selected>Selecione uma categoria</option>
         <?php
           foreach ($categorias as $cat) {
-            var_dump($cat["catCodigo"]);
         ?>
           <option value="<?php echo $cat["catCodigo"] ?>"><?php echo $cat["catNome"] ?></option>
         <?php
