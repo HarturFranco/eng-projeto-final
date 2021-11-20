@@ -6,6 +6,9 @@
   --color-background-container: #627d98;
   --color-400: #829ab1;
 
+  --color-error: #E82A2A;
+
+
   --body-font: "Alegreya Sans", sans-serif;
 }
 
@@ -68,6 +71,7 @@ a {
   display: flex;
   flex-direction: column;
 }
+
 .menu_list-item {
   padding: 1rem;
   position: relative;
@@ -147,13 +151,13 @@ a {
   border-top: 5px solid var(--color-text);
 }
 
-.menu > form {
+.menu>form {
   position: absolute;
   bottom: 1rem;
   left: 1rem;
 }
 
-.menu > form > button {
+.menu>form>button {
   background-color: transparent;
   padding: 0;
   font-weight: 500;
@@ -175,15 +179,41 @@ a {
 
 /*==================== INPUT ====================*/
 input {
+  width: 100%;
+
   border: 1px solid var(--color-400);
   border-radius: 0.5rem;
   padding: 0.5rem 1rem;
 
   color: var(background-color);
+  font-size: 1rem;
 }
 
 input[type="text"]:focus {
   border: 0.5px solid var(--color-background);
+}
+
+/*==================== SELECT ====================*/
+select {
+  width: 100%;
+
+  border: 1px solid var(--color-400);
+  border-radius: 0.5rem;
+  padding: 0.5rem 1rem;
+
+  font-size: 1rem;
+}
+
+/*==================== SELECT ====================*/
+textarea {
+  width: 100%;
+
+  border: 1px solid var(--color-400);
+  border-radius: 0.5rem;
+  padding: 0.5rem 1rem;
+
+  font-size: 1rem;
+  font-family: inherit;
 }
 
 /*==================== BUTTON ====================*/
@@ -254,6 +284,7 @@ button.secondary {
   text-align: center;
   color: #fff;
 }
+
 /*==================== LOGIN ====================*/
 .login {
   width: 100vw;
@@ -326,7 +357,7 @@ button.secondary {
   margin-bottom: 3rem;
 }
 
-.index > .not-found {
+.index>.not-found {
   position: absolute;
   top: 40%;
   left: 50%;
@@ -340,11 +371,11 @@ button.secondary {
   font-size: 1.2rem;
 }
 
-.index > .not-found > a {
+.index>.not-found>a {
   width: min-content;
 }
 
-.index > div > div {
+.index>div>div {
   display: flex;
   justify-content: space-between;
 
@@ -424,7 +455,7 @@ button.icon {
   display: none;
 }
 
-/*==================== CADASTRO ====================*/
+/*==================== CADASTRO/EDITAR ====================*/
 .cadastro {
   width: 100%;
   display: flex;
@@ -463,13 +494,15 @@ button.icon {
 }
 
 .cadastro form div label {
-  width: 400px;
   color: #202020;
   margin-bottom: 0.5rem;
 }
 
-.cadastro form div input {
-  width: 400px;
+.cadastro form div input,
+.cadastro form div select,
+.cadastro form div textarea {
+  width: 100%;
+  max-width: 400px;
   margin-bottom: 1.5rem;
 }
 
@@ -488,4 +521,14 @@ button.icon {
 .cadastro .div-checkbox label {
   margin-bottom: 0;
   margin-left: 0.5rem;
+}
+
+.cadastro .div-preco_quantidade {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+}
+
+.cadastro .div-preco_quantidade input {
+  width: 150px;
 }
