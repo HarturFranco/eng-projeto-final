@@ -471,7 +471,7 @@ button.icon {
   margin-bottom: 3rem;
 }
 
-.cadastro div {
+.cadastro>div {
   width: 100%;
   background-color: var(--color-400);
   border-radius: 0.5rem;
@@ -586,6 +586,8 @@ button.icon {
   flex-direction: column;
 
   margin: 0 auto;
+
+  border-radius: 0.5rem;
 }
 
 .cadastro .venda .prodtucts-selected div {
@@ -602,15 +604,11 @@ button.icon {
 .cadastro .venda .prodtucts-selected .label {
   background-color: var(--color-background);
   color: #fff;
-
-  border-radius: 0.5rem 0.5rem 0 0;
 }
 
 .cadastro .venda .prodtucts-selected .product {
   background-color: var(--color-background-container);
   color: #fff;
-
-  border-radius: 0 0 0.5rem 0.5rem;
 }
 
 .cadastro .control {
@@ -642,11 +640,9 @@ button.icon {
 .cadastro .control .price .label {
   background-color: var(--color-background);
   color: #fff;
-  border-radius: 0.5rem 0.5rem 0 0;
 }
 
 .cadastro .control .price .value {
   background-color: var(--color-background-container);
   color: #fff;
-  border-radius: 0 0 0.5rem 0.5rem;
 }
