@@ -32,13 +32,17 @@ const openModal = (mensagem, uri) => {
   modal.classList.add('modal')
 
   const title = document.createElement('h2')
-  title.innerHTML = mensagem
+  title.innerHTML = mensagem.split('.')[0]
+
+  const detail = document.createElement('p')
+  detail.innerHTML = mensagem.split('.')[1]
 
   const button = document.createElement('button')
   button.innerHTML = 'Fechar'
 
 
   modal.appendChild(title)
+  modal.appendChild(detail)
   modal.appendChild(button)
 
   document.body.appendChild(overlay)

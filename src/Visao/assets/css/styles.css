@@ -250,6 +250,9 @@ button.secondary {
 
   border-radius: 1rem;
   padding: 2rem;
+
+  text-align: center;
+  color: #fff;
 }
 /*==================== LOGIN ====================*/
 .login {
