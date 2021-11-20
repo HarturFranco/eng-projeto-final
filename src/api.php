@@ -18,10 +18,6 @@ class Api
     $this->metodo = $_SERVER['REQUEST_METHOD'];
 
     $this->uri = $_SERVER['REQUEST_URI'];
-
-    if (!Auth::isLoggedIn()) {
-      $this->uri = "login";
-    }
   }
 
   public function execute()
@@ -38,28 +34,27 @@ class Api
 
   private function executeGet()
   {
-    $classeAcao = explode("/", $this->uri);
-
-    $classe = $classeAcao[1] != "" ? $classeAcao[1] : "vendas";
-    $view = $classeAcao[2];
-    $id = $classeAcao[3];
-
-    $file = "";
-
-    if (strpos($classe, '?'))
-      $classe = explode("?", $classe)[0];
-    if (strpos($view, '?'))
-      $view = explode("?", $view)[0];
-
-    if (isset($classe) && !isset($view))
-      $file = "Visao/{$classe}/index.php";
-    else if (isset($classe) && isset($view)) {
-      $file = "Visao/{$classe}/{$view}.php";
-    }
-
-    if ($this->uri == "login")
+    if (!Auth::isLoggedIn()) {
       include "Visao/login.php";
-    else {
+    } else {
+      $classeAcao = explode("/", $this->uri);
+
+      $classe = $classeAcao[1] != "" ? $classeAcao[1] : "vendas";
+      $view = $classeAcao[2];
+      $id = $classeAcao[3];
+
+      $file = "";
+
+      if (strpos($classe, '?'))
+        $classe = explode("?", $classe)[0];
+      if (strpos($view, '?'))
+        $view = explode("?", $view)[0];
+
+      if (isset($classe) && !isset($view))
+        $file = "Visao/{$classe}/index.php";
+      else if (isset($classe) && isset($view)) {
+        $file = "Visao/{$classe}/{$view}.php";
+      }
 
       include "Visao/menu.php";
       echo '<div class="container">';
