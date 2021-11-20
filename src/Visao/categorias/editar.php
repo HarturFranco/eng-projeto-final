@@ -18,7 +18,7 @@ $categoria = $categoriaControle->buscar($id);
         <input name="cNome" type="text" maxlength="50" required placeholder="Entre com o nome da categoria" value="<?php echo $categoria["catNome"] ?>">
 
         <label for="cDescricao">Descrição:</label>
-        <textarea value="<?php echo $categoria["catDescricao"] ?>" maxlength="500" name="cDescricao" type="text" placeholder="Descrição da categoria" cols="0" rows="6"></textarea>
+        <textarea maxlength="500" name="cDescricao" type="text" placeholder="Descrição da categoria" cols="0" rows="6"><?php echo $categoria["catDescricao"] ?></textarea>
 
       </div>
       <div></div>

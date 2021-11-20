@@ -1,6 +1,6 @@
 <?php
-// include_once "Controle/FuncionarioControle.php";
-// $funcionarioControle = new FuncionarioControle();
+include_once "Controle/VendaControle.php";
+$vendaControle = new VendaControle();
 ?>
 
 <div class="cadastro">
