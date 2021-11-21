@@ -44,22 +44,25 @@ class CategoriaControle
 
     $cat = new Categoria($nome, $descricao);
 
-    $res = $this->catDao->salvar($cat, $this->conexao);
+    try {
+      $this->catDao->salvar($cat, $this->conexao);
 
-    if ($res == TRUE) {
-      Util::redirect('categorias');
-    } else {
-      Util::redirect('cadastro/categoria', 'cadastrar categoria');
+      Util::redirect('categorias', 'Sucesso. Sucesso ao cadastrar categoria');
+    } catch (Exception $e) {
+      Util::redirect('cadastro/categoria', 'Erro ao cadastrar. Erro ao cadastrar categoria no banco de dados');
     }
   }
 
   public function buscar($id)
   {
-    $res = $this->catDao->buscarPorCodigo($id, $this->conexao);
-    
-    $categoria = new Categoria($res['catNome'], $res['catDescricao'], $res['catCodigo']);
-    
-    return $categoria;
+    try {
+      $res = $this->catDao->buscarPorCodigo($id, $this->conexao);
+      if ($res)
+        return new Categoria($res['catNome'], $res['catDescricao'], $res['catCodigo']);
+      throw new Exception('Funcionario nao encotrado. Verifique se o funcionario existe');
+    } catch (Exception $e) {
+      Util::redirect('categorias', 'Categoria nao encotrada. Verifique se a categoria esta cadastrada');
+    }
   }
 
   public function editar($dados)
@@ -71,12 +74,6 @@ class CategoriaControle
     $cat = new Categoria($nome, $descricao, $codigo);
 
     $res = $this->catDao->editar($cat, $this->conexao);
-
-    if ($res == TRUE) {
-      Util::redirect('categorias');
-    } else {
-      Util::redirect('categorias', 'editar categoria');
-    }
   }
 
   public function excluir($dados)
@@ -84,14 +81,11 @@ class CategoriaControle
     try {
       $codigo = $dados['cCodigo'];
 
-      $res = $this->catDao->excluir($codigo, $this->conexao);
+      $this->catDao->excluir($codigo, $this->conexao);
 
-      if ($res)
-        Util::redirect('categorias');
-      else
-        Util::redirect('categorias', 'deletar categoria');
+      Util::redirect('categorias', 'Sucesso. Categoria excluida com sucesso');
     } catch (Exception $e) {
-      Util::redirect('categorias', 'deletar categoria');
+      Util::redirect('categorias', 'Erro ao excluir categoria. ' . $e->getMessage());
     }
   }
 }

@@ -17,7 +17,8 @@ class CategoriaDAO{
             $res = $conn->query($query);
             if ($res)
                 return $res;
-            return false;
+            
+            throw new Exception('Erro ao cadastrar categoria');
         } catch (Exception $e) {
             echo $e->getMessage();
         }
@@ -25,10 +26,22 @@ class CategoriaDAO{
 
     // Exclui
     function excluir($catCodigo, $conn){
-        $query = "DELETE FROM `Categoria` WHERE catCodigo = " . $catCodigo; //TODO - tratar SQLInjection
+        try {
+            $consulta = $this->buscarPorCodigo($catCodigo, $conn);
 
-        $res = $conn->query($query);
-        return $res;
+            if($consulta){
+                $query = "DELETE FROM `Categoria` WHERE catCodigo = " . $catCodigo; //TODO - tratar SQLInjection
+
+                $conn->query($query);
+            }else {
+                throw new Exception('Categoria não existe no banco de dados');
+            }       
+            
+        } catch (PDOException $e) {
+            throw new Exception('Erro ao conectar ao banco de dados.');
+        } catch (Exception $e) {
+            throw new Exception($e->getMessage());
+        }
     }
 
     // Retorna todos as Categorias
@@ -46,22 +59,38 @@ class CategoriaDAO{
     // busca uma Categorias por Codigo
     function buscarPorCodigo($catCodigo, $conn){
         try {
-            $query = "SELECT * FROM `Categoria` WHERE `catCodigo` = " . $catCodigo;
-            $res = $conn->query($query);
+            $consulta = $conn->prepare("SELECT * FROM Categoria WHERE catCodigo = :codigo");
+            $consulta->execute(['codigo' => $catCodigo]);
 
-            return $res->fetch();
-        } catch (Exception $e) {
-            echo $e->getMessage();
+            return $consulta->fetch();
+        } catch (PDOException $e) {
+            throw new Exception('Erro ao conectar ao banco de dados.');
+        } catch (Exception $e){
+            throw new Exception('Erro ao buscar categoria.');
         }
     }
 
     // Edita uma Categoria
     function editar($cat, $conn){
-        $query = "UPDATE `Categoria` SET 
+        try {
+            $consulta = $this->buscarPorCodigo($cat->getCodigo(), $conn);
+
+            if($consulta){
+                $query = "UPDATE `Categoria` SET 
                     `catNome`='" . $cat->getNome() . "',
                     `catDescricao`='" . $cat->getDescricao() . "' WHERE `catCodigo` = " . $cat->getCodigo();
 
-        $res = $conn->query($query);
-        return $res;
+                $res = $conn->query($query);
+                
+                return $res;
+            }else {
+                throw new Exception('Categoria não existe no banco de dados');
+            }       
+            
+        } catch (PDOException $e) {
+            throw new Exception('Erro ao conectar ao banco de dados.');
+        } catch (Exception $e) {
+            throw new Exception($e->getMessage());
+        }
     }
 }

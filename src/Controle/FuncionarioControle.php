@@ -71,21 +71,28 @@ class FuncionarioControle
   public function buscar($dado)
   {
 
-    $res = null;
-    if (is_int($dado)) {
-      $res = $this->fundao->buscarPorCodigo($dado, $this->conexao);
-    } else {
-      $res = $this->fundao->buscarPorNome($dado, $this->conexao);
-    }
+    try {
+      $res = null;
+      if (is_int($dado)) {
+        $res = $this->fundao->buscarPorCodigo($dado, $this->conexao);
+      } else {
+        $res = $this->fundao->buscarPorNome($dado, $this->conexao);
+      }
 
-    return new Funcionario(
-      $res['funEmail'],
-      $res['funNome'],
-      $res['funUsername'],
-      $res['funSenha'],
-      $res['funIsGerente'],
-      $res['funCodigo']
-    );
+      if($res){
+        return new Funcionario(
+          $res['funEmail'],
+          $res['funNome'],
+          $res['funUsername'],
+          $res['funSenha'],
+          $res['funIsGerente'],
+          $res['funCodigo']
+        );
+      }
+      throw new Exception('Funcionario nao encotrado. Verifique se o funcionario existe');
+    }catch(Exception $e){
+      Util::redirect('funcionarios', 'Funcionario nao encotrado. Verifique se o funcionario esta cadastrado');
+    }
   }
 
   public function buscarPraLogin($username, $senha)
@@ -130,7 +137,6 @@ class FuncionarioControle
 
       Util::redirect('funcionarios', 'Sucesso. Funcionario excluido com sucesso');
     } catch (Exception $e) {
-      echo 'erro';
       Util::redirect('funcionarios', 'Erro ao excluir funcionario. ' . $e->getMessage());
     }
   }

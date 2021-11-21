@@ -23,20 +23,18 @@ class FuncionarioDAO
 
             $res = $conn->query($query);
 
-            var_dump($res);
             if ($res)
                 return $res;
             
             throw new Exception('Erro ao cadastrar funcionario');
         } catch (Exception $e) {
-            echo $e->getMessage();
+            throw new Exception($e->getMessage());
         }
     }
 
     // Exclui
     function excluir($funCodigo, $conn)
     {
-        
         try {
             if($funCodigo == Auth::getCodigo())
                 throw new Exception('Funcionario esta logado.');
@@ -79,6 +77,8 @@ class FuncionarioDAO
             return $consulta->fetch();
         } catch (PDOException $e) {
             throw new Exception('Erro ao conectar ao banco de dados.');
+        } catch (Exception $e){
+            throw new Exception('Erro ao buscar funcionario.');
         }
     }
 
