@@ -7,14 +7,22 @@ class VendaDAO{
 
     // Cadastra/Salva novo venda
     function salvar($venda, $conn){
-        $query = "INSERT INTO `Venda`(`venPrecoTotal`, `Funcionario_funCodigo`, `Cliente_cliCodigo`, `venStatus`) 
-                    VALUES ('" . $venda->getPrecoTotal() . "','" .
-					$venda->getFuncionario()->getCodigo() . "','" .
-					$venda->getCliente()->getCodigo() . "','" .
-            $venda->getStatus() . "')";
+        try{
+            $query = "INSERT INTO `Venda`(`venPrecoTotal`, `Funcionario_funCodigo`, `Cliente_cliCodigo`, `venStatus`) 
+                VALUES ('" . $venda->getPrecoTotal() . "','" .
+                $venda->getFuncionario()->getCodigo() . "','" .
+                $venda->getCliente()->getCodigo() . "','" .
+                $venda->getStatus() . "')";
 
-        $res = $conn->query($query);
-        return $res;
+            $res = $conn->query($query);
+
+            if ($res)
+                    return $res;
+                
+            throw new Exception('Erro ao cadastrar venda no banco de dados');
+        } catch (Exception $e) {
+            throw new Exception($e->getMessage());
+        }
     }
 
     // Exclui venda
@@ -44,20 +52,11 @@ class VendaDAO{
             $res = $conn->query($query);
 
             return $res->fetch();
-        } catch (Exception $e) {
-            echo $e->getMessage();
+        } catch (PDOException $e) {
+            throw new Exception('Erro ao conectar ao banco de dados.');
+        } catch (Exception $e){
+            throw new Exception('Erro ao buscar venda.');
         }
-    }
-
-	
-    // Edita um Venda
-    function editar($venda, $conn){
-        $query = "UPDATE `Venda` SET 
-                    `venPrecoTotal`='" . $venda->getPrecoTotal() . "',
-                    `Funcionario_funCodigo`='" . $venda->getFuncionario()->getCodigo() . "',
-                    `Cliente_cliCodigo`='" . $venda->getCliente()->getCodigo() . "',
-                    `venStatus`='" . $venda->getStatus() . "' WHERE `venCodigo` = " . $venda->getCodigo();
-        $res = $conn->query($query);
-        return $res;
+        
     }
 }

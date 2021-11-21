@@ -7,14 +7,21 @@ class ItemVendaDAO{
 
     // Cadastra/Salva novo itemVenda
     function salvar($itemVenda, $conn){
-        $query = "INSERT INTO `ItemVenda`(`itvProCodigo`, `itvVenCodigo`, `itvQtd`, `itvPreco`) 
-                    VALUES ('" . $itemVenda->getProduto()->getCodigo() . "','" .
-					$itemVenda->getVenda()->getCodigo() . "','" .
-					$itemVenda->getQtd() . "','" .
-            $itemVenda->getPreco() . "')";
+        try{
+            $query = "INSERT INTO `ItemVenda`(`itvProCodigo`, `itvVenCodigo`, `itvQtd`, `itvPreco`) 
+                        VALUES ('" . $itemVenda->getProduto() . "','" .
+                        $itemVenda->getVenda() . "','" .
+                        $itemVenda->getQtd() . "','" .
+                        $itemVenda->getPreco() . "')";
 
-        $res = $conn->query($query);
-        return $res;
+            $res = $conn->query($query);
+            if ($res)
+                return $res;
+                    
+            throw new Exception('Erro ao cadastrar itemVenda no banco de dados');
+        } catch (Exception $e) {
+            throw new Exception($e->getMessage());
+        }
     }
 
     // Exclui itemVenda por coidgo Venda
