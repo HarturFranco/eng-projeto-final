@@ -3,7 +3,7 @@
 require_once "Controle/FuncionarioControle.php";
 require_once "Controle/ClienteControle.php";
 require_once "Controle/CategoriaControle.php";
-// require_once "Controle/VendaControle.php";
+require_once "Controle/VendaControle.php";
 require_once "Controle/ProdutoControle.php";
 // require_once "Controle/ItemVendaControle.php";
 require_once "Controle/LoginControle.php";

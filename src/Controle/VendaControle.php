@@ -49,7 +49,10 @@ class VendaControle{
   }
 
   public function cadastro($dados){
-    $nome = $dados['cNome'];
+    $cliente = $dados['vCliente'];
+    $cliente = $dados['vFuncionario'];
+    $carrinho = $dados['vProdutos'];
+    /* $nome = $dados['cNome'];
     $cpf = $dados['cCPF'];
 
     $cli = new Cliente($nome, $cpf);
@@ -60,7 +63,7 @@ class VendaControle{
       Util::redirect('clientes');
     } else {
       Util::redirect('cadastro/cliente', 'cadastrar cliente');
-    }
+    } */
   }
 
   public function buscar($dado){

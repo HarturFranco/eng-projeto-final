@@ -101,7 +101,10 @@ const openModal = (mensagem, uri) => {
   document.body.appendChild(modal)
 
   const closeModal = () => {
-    window.location.href = uri
+    if(uri) window.location.href = uri
+
+    document.body.removeChild(overlay)
+    document.body.removeChild(modal)
   }
 
   button.addEventListener('click', closeModal)
@@ -138,7 +141,7 @@ const adicionarProduto = () => {
     const qtdEstoque = Number(produtoSelecionado.getAttribute('qtd'))
     const produto = { codigo, nome, valor, qtdEstoque }
 
-    const inputProdutos = document.querySelector('input[name=venProdutos]')
+    const inputProdutos = document.querySelector('input[name=vProdutos]')
 
     if(
       quantidadeSelecionada !== '' && 
@@ -151,6 +154,7 @@ const adicionarProduto = () => {
         <div class="product">
           <div>${quantidadeSelecionada}</div>
           <div>${produto.nome}</div>
+          <div>${Number(produto.valor).toLocaleString('pt-br',{style: 'currency', currency: 'BRL'})}</div>
           <div>${Number(produto.valor * quantidadeSelecionada).toLocaleString('pt-br',{style: 'currency', currency: 'BRL'})}</div>
         </div>
       `
@@ -158,7 +162,12 @@ const adicionarProduto = () => {
       produtoSelecionado.setAttribute('qtd', qtdEstoque - quantidadeSelecionada)
 
       // coloca no 'carrinho'
-      let carrinho = JSON.parse(inputProdutos.value)
+      let carrinho
+
+      if(inputProdutos.value)
+        carrinho = JSON.parse(inputProdutos.value)
+      else
+        carrinho = []
 
       //item no carrinho, apenas edita
       if(carrinho.find(item => item.proCodigo === produto.codigo)){
@@ -188,11 +197,24 @@ const adicionarProduto = () => {
       }, 0)
 
       totalDiv.innerHTML = total.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'})
+    } else {
+      openModal('Quantidade indisponivel no estoque')
     }
   }
 
 }
 
-const inputProdutos = document.querySelector('input[name=venProdutos]')
-const buttonAddVenda = document.getElementById('button-adicionar_venda');
+
+const buttonAddVenda = document.getElementById('button-adicionar_venda')
 buttonAddVenda?.addEventListener('click', adicionarProduto)
+
+// ===================== SUBMIT DE VENDA ======================
+
+const submitVenda = document.querySelector('.submit_venda')
+
+submitVenda?.addEventListener('click', () => {
+  const inputProdutos = document.querySelector('input[name=vProdutos]')
+  if(inputProdutos.value === ''){
+    openModal('Selecione ao menos um produto')
+  }
+})
