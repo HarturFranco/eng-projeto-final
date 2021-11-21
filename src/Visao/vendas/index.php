@@ -11,8 +11,8 @@ $vendas = $vendaControle->index();
   <?php if (count($vendas) == 0) { ?>
     <div class="not-found">
       Nenhuma venda realizada...
-      <a href="cadastro/funcionario" class="button primary">
-        Cadatrar venda
+      <a href="cadastro/venda" class="button primary">
+        Cadatrar
       </a>
     </div>
   <?php } else { ?>
