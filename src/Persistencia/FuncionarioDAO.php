@@ -1,8 +1,10 @@
 <?php
 
-class FuncionarioDAO{
+class FuncionarioDAO
+{
 
-    function __construct(){
+    function __construct()
+    {
     }
 
     // Cadastra/Salva novo funcionario
@@ -27,7 +29,8 @@ class FuncionarioDAO{
     }
 
     // Exclui
-    function excluir($funCodigo, $conn){
+    function excluir($funCodigo, $conn)
+    {
         $query = "DELETE FROM `Funcionario` WHERE funCodigo = " . $funCodigo; //TODO - tratar SQLInjection
 
         $res = $conn->query($query);
@@ -35,7 +38,8 @@ class FuncionarioDAO{
     }
 
     // Retorna todos os funcionarios
-    function listarTodos($conn){
+    function listarTodos($conn)
+    {
         try {
             $query = "SELECT * FROM Funcionario";
 
@@ -47,7 +51,8 @@ class FuncionarioDAO{
     }
 
     // busca um Funcionario por Codigo
-    function buscarPorCodigo($funCodigo, $conn){
+    function buscarPorCodigo($funCodigo, $conn)
+    {
         try {
             $query = "SELECT * FROM `Funcionario` WHERE `funCodigo` = " . $funCodigo;
             $res = $conn->query($query);
@@ -58,8 +63,9 @@ class FuncionarioDAO{
         }
     }
 
-	// busca um Funcionario por Nome
-    function buscarPorNome($funNome, $conn){
+    // busca um Funcionario por Nome
+    function buscarPorNome($funNome, $conn)
+    {
         try {
             $query = "SELECT * FROM `Funcionario` WHERE `funNome` = " . $funNome;
             $res = $conn->query($query);
@@ -74,21 +80,31 @@ class FuncionarioDAO{
     function buscarPraLogin($username, $senha, $conn)
     {
         try {
-			$consulta = $conn->prepare("SELECT * FROM Funcionario WHERE funUsername = :username AND funSenha = :senha");
-            $consulta->execute(['username' => $username, 'senha' => $senha]);
+            $consulta = $conn->prepare("SELECT * FROM Funcionario WHERE funUsername = :username");
+            $consulta->execute(['username' => $username]);
 
-            if ($consulta)
-                return $consulta->fetch();
+            if ($consulta->fetch()) {
+                $consulta = $conn->prepare("SELECT * FROM Funcionario WHERE funUsername = :username AND funSenha = :senha");
+                $consulta->execute(['username' => $username, 'senha' => $senha]);
 
-            return false;
+                if ($consulta)
+                    return $consulta->fetch();
+                else
+                    return false;
+            }
 
+            throw new Exception('Usuario nao cadastrado');
+
+        } catch (PDOException $e) {
+            throw new Exception('Erro ao conectar ao banco de dados.');
         } catch (Exception $e) {
-            echo $e->getMessage();
+            throw new Exception($e->getMessage());
         }
     }
-	
+
     // Edita um funcionario um Funcionario
-    function editar($func, $conn){
+    function editar($func, $conn)
+    {
         $query = "UPDATE `Funcionario` SET 
                     `funNome`='" . $func->getNome() . "',
                     `funEmail`='" . $func->getEmail() . "',
