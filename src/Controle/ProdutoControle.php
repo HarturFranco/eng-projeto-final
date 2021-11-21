@@ -106,6 +106,11 @@ class ProdutoControle
     }
   }
 
+  public function venderProduto($produto, $quantidadeVendida)
+  {
+    $this->proDao->venderProduto($produto, (int)$quantidadeVendida, $this->conexao);
+  }
+
   public function excluir($dados)
   {
     try {

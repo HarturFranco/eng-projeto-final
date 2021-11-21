@@ -72,7 +72,6 @@ class FuncionarioControle
 
   public function buscar($dado)
   {
-
     try {
       $res = null;
       if (is_int($dado)) {

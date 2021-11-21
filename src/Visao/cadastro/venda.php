@@ -112,6 +112,7 @@ $funcionarios = $funcionarioControle->index();
       </div>
       
       <input type="text" name="vProdutos" required hidden>
+      <input type="text" name="vValor" hidden>
       <input type="text" name="classeAcao" value="VendaControle/cadastro" hidden>
 
     </form>

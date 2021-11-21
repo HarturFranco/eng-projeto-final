@@ -142,6 +142,7 @@ const adicionarProduto = () => {
     const produto = { codigo, nome, valor, qtdEstoque }
 
     const inputProdutos = document.querySelector('input[name=vProdutos]')
+    const inputPreco = document.querySelector('input[name=vValor]')
 
     if(
       quantidadeSelecionada !== '' && 
@@ -197,6 +198,7 @@ const adicionarProduto = () => {
       }, 0)
 
       totalDiv.innerHTML = total.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'})
+      inputPreco.value = total
     } else {
       openModal('Quantidade indisponivel no estoque')
     }
