@@ -22,7 +22,22 @@ class FuncionarioControle
     try {
       $res = $this->fundao->listarTodos($this->conexao);
 
-      return $res;
+      $funcionarios = array();
+
+      foreach($res as $fun){
+        $funcionario = new Funcionario(
+          $fun['funEmail'],
+          $fun['funNome'],
+          $fun['funUsername'],
+          $fun['funSenha'],
+          $fun['funIsGerente'],
+          $fun['funCodigo']
+        );
+
+        array_push($funcionarios, $funcionario);
+      }
+
+      return $funcionarios;
     } catch (Exception $e) {
       Util::redirect('funcionario', 'Erro ao buscar funcionarios. '.$e->getMessage());
     }
