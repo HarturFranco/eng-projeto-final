@@ -59,7 +59,7 @@ class CategoriaControle
       $res = $this->catDao->buscarPorCodigo($id, $this->conexao);
       if ($res)
         return new Categoria($res['catNome'], $res['catDescricao'], $res['catCodigo']);
-      throw new Exception('Funcionario nao encotrado. Verifique se o funcionario existe');
+      throw new Exception('Categoria nao encotrado. Verifique se a categoria existe');
     } catch (Exception $e) {
       Util::redirect('categorias', 'Categoria nao encotrada. Verifique se a categoria esta cadastrada');
     }
