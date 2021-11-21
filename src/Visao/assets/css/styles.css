@@ -616,6 +616,10 @@ button.icon {
   color: #fff;
 }
 
+.cadastro .venda .prodtucts-selected .product div {
+  display: flex;
+}
+
 .cadastro .control {
   display: flex;
   flex-direction: column;
