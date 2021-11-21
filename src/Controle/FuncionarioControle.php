@@ -19,9 +19,13 @@ class FuncionarioControle
 
   public function index()
   {
-    $res = $this->fundao->listarTodos($this->conexao);
+    try {
+      $res = $this->fundao->listarTodos($this->conexao);
 
-    return $res;
+      return $res;
+    } catch (Exception $e) {
+      Util::redirect('funcionario', 'Erro ao buscar funcionarios. '.$e->getMessage());
+    }
   }
 
   public function cadastro($dados)
@@ -40,12 +44,12 @@ class FuncionarioControle
 
     $fun = new Funcionario($email, $nome, $username, $senha, $isGerente);
 
-    $res = $this->fundao->salvar($fun, $this->conexao);
+    try {
+      $this->fundao->salvar($fun, $this->conexao);
 
-    if ($res == TRUE) {
-      Util::redirect('funcionarios');
-    } else {
-      Util::redirect('cadastro/funcionario', 'cadastrar funcionário');
+      Util::redirect('funcionarios', 'Sucesso. Sucesso ao cadastrar funcionario');
+    } catch (Exception $e) {
+      Util::redirect('cadastro/funcionario', 'Erro ao cadastrar. Erro ao cadastrar funcionario no banco de dados');
     }
   }
 
@@ -78,27 +82,27 @@ class FuncionarioControle
 
   public function editar($dados)
   {
-    $codigo = $dados['funCodigo'];
-    $email = $dados['funEmail'];
-    $nome = $dados['funNome'];
-    $username = $dados['funUsername'];
-    $senha = $dados['funSenha'];
-    $isGerente = $dados['funIsGerente'];
+    try {
+      $codigo = $dados['funCodigo'];
+      $email = $dados['funEmail'];
+      $nome = $dados['funNome'];
+      $username = $dados['funUsername'];
+      $senha = $dados['funSenha'];
+      $isGerente = $dados['funIsGerente'];
 
-    if ($isGerente == "true") {
-      $isGerente = 1;
-    } else {
-      $isGerente = 0;
-    }
+      if ($isGerente == "true") {
+        $isGerente = 1;
+      } else {
+        $isGerente = 0;
+      }
 
-    $fun = new Funcionario($email, $nome, $username, $senha, $isGerente, $codigo);
+      $fun = new Funcionario($email, $nome, $username, $senha, $isGerente, $codigo);
 
-    $res = $this->fundao->editar($fun, $this->conexao);
+      $this->fundao->editar($fun, $this->conexao);
 
-    if ($res == TRUE) {
-      Util::redirect('funcionarios');
-    } else {
-      Util::redirect('funcionarios', 'editar funcionário');
+      Util::redirect('funcionarios', 'Sucesso. Funcionario editado com sucesso');
+    } catch (Exception $e) {
+      Util::redirect('funcionarios', 'Erro ao editar. ' . $e->getMessage());
     }
   }
 
@@ -107,14 +111,12 @@ class FuncionarioControle
     try {
       $codigo = $dados['funCodigo'];
 
-      $res = $this->fundao->excluir($codigo, $this->conexao);
+      $this->fundao->excluir($codigo, $this->conexao);
 
-      if ($res)
-        Util::redirect('funcionarios');
-      else
-        Util::redirect('funcionarios', 'deletar funcionário');
+      Util::redirect('funcionarios', 'Sucesso. Funcionario excluido com sucesso');
     } catch (Exception $e) {
-      Util::redirect('funcionarios', 'deletar funcionário');
+      echo 'erro';
+      Util::redirect('funcionarios', 'Erro ao excluir funcionario. ' . $e->getMessage());
     }
   }
 }

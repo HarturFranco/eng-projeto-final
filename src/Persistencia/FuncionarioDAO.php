@@ -20,9 +20,12 @@ class FuncionarioDAO
 
 
             $res = $conn->query($query);
+
+            var_dump($res);
             if ($res)
                 return $res;
-            return false;
+            
+            throw new Exception('Erro ao cadastrar funcionario');
         } catch (Exception $e) {
             echo $e->getMessage();
         }
@@ -31,10 +34,22 @@ class FuncionarioDAO
     // Exclui
     function excluir($funCodigo, $conn)
     {
-        $query = "DELETE FROM `Funcionario` WHERE funCodigo = " . $funCodigo; //TODO - tratar SQLInjection
+        
+        try {
+            $consulta = $this->buscarPorCodigo($funCodigo, $conn);
 
-        $res = $conn->query($query);
-        return $res;
+            if($consulta){
+                $query = "DELETE FROM `Funcionario` WHERE funCodigo = " . $funCodigo;
+                $conn->query($query);
+            }else {
+                throw new Exception('Funcionario não existe no banco de dados');
+            }       
+            
+        } catch (PDOException $e) {
+            throw new Exception('Erro ao conectar ao banco de dados.');
+        } catch (Exception $e) {
+            throw new Exception($e->getMessage());
+        }
     }
 
     // Retorna todos os funcionarios
@@ -54,12 +69,12 @@ class FuncionarioDAO
     function buscarPorCodigo($funCodigo, $conn)
     {
         try {
-            $query = "SELECT * FROM `Funcionario` WHERE `funCodigo` = " . $funCodigo;
-            $res = $conn->query($query);
+            $consulta = $conn->prepare("SELECT * FROM Funcionario WHERE funCodigo = :codigo");
+            $consulta->execute(['codigo' => $funCodigo]);
 
-            return $res->fetch();
-        } catch (Exception $e) {
-            echo $e->getMessage();
+            return $consulta->fetch();
+        } catch (PDOException $e) {
+            throw new Exception('Erro ao conectar ao banco de dados.');
         }
     }
 
@@ -91,10 +106,8 @@ class FuncionarioDAO
                     return $consulta->fetch();
                 else
                     return false;
-            }
-
-            throw new Exception('Usuario nao cadastrado');
-
+            } else 
+                throw new Exception('Usuario nao cadastrado');
         } catch (PDOException $e) {
             throw new Exception('Erro ao conectar ao banco de dados.');
         } catch (Exception $e) {
@@ -105,14 +118,30 @@ class FuncionarioDAO
     // Edita um funcionario um Funcionario
     function editar($func, $conn)
     {
-        $query = "UPDATE `Funcionario` SET 
+        try {
+            $consulta = $this->buscarPorCodigo($func->getCodigo(), $conn);
+
+            if($consulta){
+                $query = "UPDATE `Funcionario` SET 
                     `funNome`='" . $func->getNome() . "',
                     `funEmail`='" . $func->getEmail() . "',
                     `funUsername`='" . $func->getUsername() . "',
                     `funSenha`='" . $func->getSenha() . "',
                     `funIsGerente`='" . $func->getIsGerente() . "' WHERE `funCodigo` = " . $func->getCodigo();
 
-        $res = $conn->query($query);
-        return $res;
+            
+            
+                $res = $conn->query($query);
+                
+                return $res;
+            }else {
+                throw new Exception('Funcionario não existe no banco de dados');
+            }       
+            
+        } catch (PDOException $e) {
+            throw new Exception('Erro ao conectar ao banco de dados.');
+        } catch (Exception $e) {
+            throw new Exception($e->getMessage());
+        }
     }
 }

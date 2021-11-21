@@ -114,7 +114,7 @@ const hasError = () => {
   const hasError = erro?.indexOf('erro=')
   if (hasError !== undefined && hasError !== -1) {
     const mensagem = erro.split('=')[1]
-    openModal(`Erro ao ${mensagem}`, uri)
+    openModal(mensagem, uri)
   }
 }
 
