@@ -26,7 +26,7 @@ class FuncionarioDAO
             if ($res)
                 return $res;
             
-            throw new Exception('Erro ao cadastrar funcionario');
+            throw new Exception('Erro ao cadastrar funcionario no banco de dados');
         } catch (Exception $e) {
             throw new Exception($e->getMessage());
         }

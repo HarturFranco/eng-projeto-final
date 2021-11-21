@@ -64,7 +64,7 @@ class FuncionarioControle
 
       Util::redirect('funcionarios', 'Sucesso. Sucesso ao cadastrar funcionario');
     } catch (Exception $e) {
-      Util::redirect('cadastro/funcionario', 'Erro ao cadastrar. Erro ao cadastrar funcionario no banco de dados');
+      Util::redirect('cadastro/funcionario', 'Erro ao cadastrar. '.$e->getMessage());
     }
   }
 

@@ -49,7 +49,7 @@ class CategoriaControle
 
       Util::redirect('categorias', 'Sucesso. Sucesso ao cadastrar categoria');
     } catch (Exception $e) {
-      Util::redirect('cadastro/categoria', 'Erro ao cadastrar. Erro ao cadastrar categoria no banco de dados');
+      Util::redirect('cadastro/categoria', 'Erro ao cadastrar. '.$e->getMessage());
     }
   }
 

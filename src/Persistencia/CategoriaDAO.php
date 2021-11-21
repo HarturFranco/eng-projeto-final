@@ -18,7 +18,7 @@ class CategoriaDAO{
             if ($res)
                 return $res;
             
-            throw new Exception('Erro ao cadastrar categoria');
+            throw new Exception('Erro ao cadastrar categoria no banco de dados');
         } catch (Exception $e) {
             echo $e->getMessage();
         }
