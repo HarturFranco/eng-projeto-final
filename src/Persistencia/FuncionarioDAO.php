@@ -1,5 +1,7 @@
 <?php
 
+require_once('Lib/Auth.php');
+
 class FuncionarioDAO
 {
 
@@ -36,6 +38,8 @@ class FuncionarioDAO
     {
         
         try {
+            if($funCodigo == Auth::getCodigo())
+                throw new Exception('Funcionario esta logado.');
             $consulta = $this->buscarPorCodigo($funCodigo, $conn);
 
             if($consulta){
