@@ -58,7 +58,7 @@ $categorias = $categoriaControle->index();
                     <input type="text" name="cCodigo" value="<?php echo $cat->getCodigo() ?>" hidden>
                     <input type="text" name="classeAcao" value="CategoriaControle/excluir" hidden>
                     <button class="icon">
-                    <img src="Visao/assets/images/deletar.svg" alt="delete">
+                      <img src="Visao/assets/images/deletar.svg" alt="delete">
                     </button>
                   </form>
                 <?php } ?>

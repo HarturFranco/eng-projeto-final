@@ -1,8 +1,10 @@
 <?php
 
 include_once 'Persistencia/Connection.php';
-include_once 'Modelo/Cliente.php';
 include_once 'Persistencia/ClienteDAO.php';
+
+include_once 'Modelo/Cliente.php';
+
 include_once 'Lib/Util.php';
 
 class ClienteControle
@@ -59,6 +61,7 @@ class ClienteControle
   public function buscar($dado)
   {
     try {
+      $res = null;
       if (is_int($dado)) {
         $res = $this->clidao->buscarPorCodigo($dado, $this->conexao);
       } else {
@@ -72,9 +75,9 @@ class ClienteControle
           $res['cliCodigo']
         );
       }
-      throw new Exception('Cliente nao encotrado. Verifique se o cliente existe');
+      throw new Exception('Cliente nao encontrado. Verifique se o cliente existe');
     }catch(Exception $e){
-      Util::redirect('clientes', 'Cliente nao encotrado. Verifique se o cliente esta cadastrado');
+      //Util::redirect('clientes', 'Cliente nao encotrado. Verifique se o cliente esta cadastrado');
     }
   }
 

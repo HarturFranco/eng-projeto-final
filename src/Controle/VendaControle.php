@@ -1,8 +1,15 @@
 <?php
 
 include_once 'Persistencia/Connection.php';
-include_once 'Modelo/Venda.php';
 include_once 'Persistencia/VendaDAO.php';
+
+include_once 'Controle/ClienteControle.php';
+include_once 'Controle/FuncionarioControle.php';
+
+include_once 'Modelo/Venda.php';
+include_once 'Modelo/Cliente.php';
+include_once 'Modelo/Funcionario.php';
+
 include_once 'Lib/Util.php';
 
 class VendaControle{
@@ -17,7 +24,28 @@ class VendaControle{
 
   public function index(){
     $res = $this->vendao->listarTodos($this->conexao);
-    return $res;
+    $vendas = array();
+
+    foreach ($res as $ven) {
+      $cliente = new ClienteControle();
+      $cliente = $cliente->buscar((int)$ven['Cliente_cliCodigo']);
+      
+      
+      $funcionario = new FuncionarioControle();
+      $funcionario = $funcionario->buscar((int)$ven['Funcionario_funCodigo']);
+
+      $venda = new Venda(
+        $ven['venPrecoTotal'],
+        $cliente,
+        $funcionario,
+        false,
+        $ven['venCodigo']
+      );
+
+      array_push($vendas, $venda);
+    }
+
+    return $vendas;
   }
 
   public function cadastro($dados){

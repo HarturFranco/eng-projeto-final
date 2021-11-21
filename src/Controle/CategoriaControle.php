@@ -1,8 +1,10 @@
 <?php
 
 include_once 'Persistencia/Connection.php';
-include_once 'Modelo/Categoria.php';
 include_once 'Persistencia/CategoriaDAO.php';
+
+include_once 'Modelo/Categoria.php';
+
 include_once 'Lib/Util.php';
 
 class CategoriaControle

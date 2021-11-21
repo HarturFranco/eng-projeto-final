@@ -1,6 +1,7 @@
 <?php
 
 include_once 'Controle/FuncionarioControle.php';
+
 include_once 'Lib/Auth.php';
 include_once 'Lib/Util.php';
 

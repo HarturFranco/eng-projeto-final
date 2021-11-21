@@ -1,9 +1,12 @@
 <?php
 
 include_once 'Persistencia/Connection.php';
-include_once 'Modelo/Produto.php';
 include_once 'Persistencia/ProdutoDAO.php';
+
+include_once 'Modelo/Produto.php';
+
 include_once 'Controle/CategoriaControle.php';
+
 include_once 'Lib/Util.php';
 
 class ProdutoControle

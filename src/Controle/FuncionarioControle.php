@@ -1,8 +1,10 @@
 <?php
 
 include_once 'Persistencia/Connection.php';
-include_once 'Modelo/Funcionario.php';
 include_once 'Persistencia/FuncionarioDAO.php';
+
+include_once 'Modelo/Funcionario.php';
+
 include_once 'Lib/Util.php';
 
 class FuncionarioControle
