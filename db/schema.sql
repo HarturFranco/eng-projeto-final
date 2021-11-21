@@ -199,7 +199,7 @@ ALTER TABLE `Venda`
 -- Limitadores para a tabela `ItemVenda`
 --
 ALTER TABLE `ItemVenda`
-  ADD CONSTRAINT `fk_Produto_has_Venda_Produto1` FOREIGN KEY (`itvProCodigo`) REFERENCES `Produto` (`proCodigo`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_Produto_has_Venda_Produto1` FOREIGN KEY (`itvProCodigo`) REFERENCES `Produto` (`proCodigo`) ON DELETE CASCADE ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_Produto_has_Venda_Venda1` FOREIGN KEY (`itvVenCodigo`) REFERENCES `Venda` (`venCodigo`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
