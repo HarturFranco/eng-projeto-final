@@ -27,10 +27,21 @@ class VendaDAO{
 
     // Exclui venda
     function excluir($venCodigo, $conn){
-        $query = "DELETE FROM `Venda` WHERE venCodigo = " . $venCodigo; //TODO - tratar SQLInjection
+        try {
+            $consulta = $this->buscarPorCodigo($venCodigo, $conn);
 
-        $res = $conn->query($query);
-        return $res;
+            if($consulta){
+                $query = "DELETE FROM `Venda` WHERE venCodigo = " . $venCodigo; //TODO - tratar SQLInjection
+                $conn->query($query);
+            }else {
+                throw new Exception('Venda não existe no banco de dados');
+            }       
+            
+        } catch (PDOException $e) {
+            throw new Exception('Erro ao conectar ao banco de dados.');
+        } catch (Exception $e) {
+            throw new Exception($e->getMessage());
+        }
     }
 
     // Retorna todas as vendas

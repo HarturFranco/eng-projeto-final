@@ -19,12 +19,14 @@ class VendaControle
 {
   private $conexao;
   private $vendao;
+  private $itemVendaDao;
 
   public function __construct()
   {
     $conexao = new Connection();
     $this->conexao = $conexao->getConnection();
     $this->vendao = new VendaDAO();
+    $this->itemVendaDao = new ItemVendaDAO();
   }
 
   public function index()
@@ -77,7 +79,7 @@ class VendaControle
       $idVenda = $this->conexao->lastInsertId();
 
       $carrinho = json_decode($carrinho, true);
-      $itemVendaDao = new ItemVendaDAO();
+
       $produtoControle = new ProdutoControle();
 
       foreach ($carrinho as $item) {
@@ -91,7 +93,7 @@ class VendaControle
         $produto = $produtoControle->buscar((int)$itemVenda->getProduto());
         $produtoControle->venderProduto($produto, $itemVenda->getQtd());
 
-        $itemVendaDao->salvar($itemVenda, $this->conexao);
+        $this->itemVendaDao->salvar($itemVenda, $this->conexao);
       }
 
       Util::redirect('vendas', 'Sucesso. Sucesso ao cadastrar venda');
@@ -123,20 +125,31 @@ class VendaControle
     }
   }
 
+  public function buscarItemsVenda($codigo){
+    return $this->itemVendaDao->listarTodosPorVenda($codigo, $this->conexao);
+  }
+
 
   public function excluir($dados)
   {
     try {
-      $codigo = $dados['cliCodigo'];
+      $codigo = $dados['venCodigo'];
 
-      $res = $this->clidao->excluir($codigo, $this->conexao);
+      $itensVenda = $this->buscarItemsVenda($codigo);
 
-      if ($res)
-        Util::redirect('clientes');
-      else
-        Util::redirect('clientes', 'deletar cliente');
+      $produtoControle = new ProdutoControle();
+
+      foreach($itensVenda as $item) {
+        $produto = $produtoControle->buscar((int)$item->getProduto());
+        $produtoControle->venderProduto($produto, $item->getQtd(), 'devolucao');
+      }
+
+      $this->itemVendaDao->excluirPorVenda($codigo, $this->conexao);
+      $this->vendao->excluir($codigo, $this->conexao);
+
+      Util::redirect('vendas', 'Sucesso. Venda excluida com sucesso');
     } catch (Exception $e) {
-      Util::redirect('clientes', 'deletar cliente');
+      Util::redirect('vendas', 'Erro ao excluir venda. ' . $e->getMessage());
     }
   }
 }

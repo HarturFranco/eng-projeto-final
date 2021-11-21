@@ -8,7 +8,7 @@
       <input name="fUsername" type="text" required>
 
       <label for="fSenha">Senha: </label>
-      <input name="fSenha" type="password" required>
+      <input name="fSenha" type="password" minlength="8" required>
 
       <input type="text" name="classeAcao" value="LoginControle/login" hidden>
       <button>Login</button>

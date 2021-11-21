@@ -26,4 +26,8 @@ class Util
 	public static function arrumaCPF($valor){
 		return substr($valor,0,3).'.'.substr($valor,3,3).'.'.substr($valor,6,3).'-'.substr($valor,9,2);
 	}
+
+  public static function formatReal($valor){
+    return 'R$' . number_format($valor, 2, ',', '.');
+  }
 }

@@ -33,13 +33,13 @@ class ItemVendaDAO{
     }
 	
 	// Exclui itemVenda por codigo de Protudo e Venda
-    function excluirPorAmbos($itvProCodigo, $itvVenCodigo, $conn){
+    /* function excluirPorAmbos($itvProCodigo, $itvVenCodigo, $conn){
         $query = "DELETE FROM `ItemVenda` WHERE itvProCodigo = " . $itvProCodigo . 
 					" and itvVenCodigo = " . $itvVenCodigo; //TODO - tratar SQLInjection
 
         $res = $conn->query($query);
         return $res;
-    }
+    } */
 
     // Retorna todos os itemVenda de uma venda
     function listarTodosPorVenda($itvVenCodigo, $conn){
@@ -47,14 +47,29 @@ class ItemVendaDAO{
             $query = "SELECT * FROM ItemVenda WHERE itvVenCodigo = " . $itvVenCodigo;
 
             $res = $conn->query($query);
-            return $res->fetchAll();
+            $res = $res->fetchAll();
+
+            $itensVenda = array();
+
+            foreach($res as $item){
+                $itemVenda = new ItemVenda(
+                    $item['itvQtd'],
+                    $item['itvPreco'],
+                    $item['itvProCodigo'],
+                    $item['itvVenCodigo']
+                );
+
+                array_push($itensVenda, $itemVenda);
+            }
+
+            return $itensVenda;
         } catch (Exception $e) {
             echo $e->getMessage();
         }
     }
 
 	// Retorna todos os itemVenda de um produto
-    function listarTodosPorProduto($itvProCodigo, $conn){
+    /* function listarTodosPorProduto($itvProCodigo, $conn){
         try {
             $query = "SELECT * FROM ItemVenda WHERE itvProCodigo = " . $itvProCodigo;
 
@@ -63,10 +78,10 @@ class ItemVendaDAO{
         } catch (Exception $e) {
             echo $e->getMessage();
         }
-    }
+    } */
 
     // busca uma ItemVenda por codigo de Protudo e Venda
-    function buscarPorCodigoAmbos($itvProCodigo, $itvVenCodigo, $conn){
+    /* function buscarPorCodigoAmbos($itvProCodigo, $itvVenCodigo, $conn){
         try {
             $query = "SELECT * FROM `ItemVenda` WHERE itvProCodigo = " . $itvProCodigo . 
 					" and itvVenCodigo = " . $itvVenCodigo; //TODO - tratar SQLInjection
@@ -76,6 +91,6 @@ class ItemVendaDAO{
         } catch (Exception $e) {
             echo $e->getMessage();
         }
-    }
+    } */
 
 }

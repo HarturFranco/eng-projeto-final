@@ -118,33 +118,37 @@ class ProdutoDAO
         }
     }
 
-    public function venderProduto($produto, $quantidadeVendida, $conn){
-        if((int)($quantidadeVendida)){
-        try{
-            $consulta = $this->buscarPorCodigo($produto->getCodigo(), $conn);
-            
-            if($consulta){
-            $novaQuantidade = $produto->getQtdEstoque() - $quantidadeVendida;
+    public function venderProduto($produto, $quantidadeVendida, $conn, $tipo)
+    {
+        if ((int)($quantidadeVendida)) {
+            try {
+                $consulta = $this->buscarPorCodigo($produto->getCodigo(), $conn);
 
-            $query = "UPDATE `Produto` SET 
+                if ($consulta) {
+                    $novaQuantidade = 0;
+                    if ($tipo === 'devolucao')
+                        $novaQuantidade = $produto->getQtdEstoque() + $quantidadeVendida;
+                    else
+                        $novaQuantidade = $produto->getQtdEstoque() - $quantidadeVendida;
+
+                    $query = "UPDATE `Produto` SET 
                 `proNome`='" . $produto->getNome() . "',
                 `proPreco`='" . $produto->getPreco() . "',
-                `proQtdEstoque`='" . $novaQuantidade. "',
+                `proQtdEstoque`='" . $novaQuantidade . "',
                 `proDataCadastro`='" . $produto->getDataCadastro() . "',
                 `proDescricao`='" . $produto->getDescricao() . "',
                 `Categoria_catCodigo`='" . $produto->getCategoria()->getCodigo() . "' WHERE `proCodigo` = " . $produto->getCodigo();
-                
-                $res = $conn->query($query);
 
-                return $res;
-            } else 
-                throw new Exception('Produto não existe no banco de dados');
-            
-        } catch (PDOException $e) {
-            throw new Exception('Erro ao conectar ao banco de dados.');
-        } catch (Exception $e) {
-            throw new Exception($e->getMessage());
-        }
+                    $res = $conn->query($query);
+
+                    return $res;
+                } else
+                    throw new Exception('Produto não existe no banco de dados');
+            } catch (PDOException $e) {
+                throw new Exception('Erro ao conectar ao banco de dados.');
+            } catch (Exception $e) {
+                throw new Exception($e->getMessage());
+            }
         }
     }
 }
