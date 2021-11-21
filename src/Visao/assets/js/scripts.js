@@ -56,7 +56,7 @@ filterInput?.addEventListener('keypress', (e) => {
 // ===================== MASKS ======================
 const maskPrice = (value) => {
   console.log('value', value)
-  const money = parseInt(value.replace(/[\D]+/g, ''))/100
+  const money = parseInt(value.replace(/[\D]+/g, '')) / 100
   if (typeof money === "number")
     return Number(money)?.toLocaleString('pt-br', {
       style: 'currency',
@@ -119,3 +119,80 @@ const hasError = () => {
 }
 
 hasError()
+
+// ===================== CADASTRO DE VENDA ======================
+const adicionarProduto = () => {
+  const selectProduto = document.querySelector('select[name=pProduto]')
+  const { selectedIndex } = selectProduto
+
+  const produtoSelecionado = selectProduto.options[selectedIndex]
+
+  const produtoValido = produtoSelecionado.disabled === false && produtoSelecionado
+
+
+  if (produtoValido) {
+    const quantidadeSelecionada = Number(document.querySelector('input[name=pQtd]').value)
+    const codigo = Number(produtoSelecionado.value)
+    const nome = produtoSelecionado.text
+    const valor = Number(produtoSelecionado.getAttribute('preco'))
+    const qtdEstoque = Number(produtoSelecionado.getAttribute('qtd'))
+    const produto = { codigo, nome, valor, qtdEstoque }
+
+    const inputProdutos = document.querySelector('input[name=venProdutos]')
+
+    if(
+      quantidadeSelecionada !== '' && 
+      quantidadeSelecionada <= produto.qtdEstoque &&
+      quantidadeSelecionada > 0
+      ){
+      // adiciona produto no HTML
+      const div = document.querySelector('.prodtucts-selected')
+      div.innerHTML += `
+        <div class="product">
+          <div>${quantidadeSelecionada}</div>
+          <div>${produto.nome}</div>
+          <div>${Number(produto.valor * quantidadeSelecionada).toLocaleString('pt-br',{style: 'currency', currency: 'BRL'})}</div>
+        </div>
+      `
+      // diminui quantidade do estoque no HTML
+      produtoSelecionado.setAttribute('qtd', qtdEstoque - quantidadeSelecionada)
+
+      // coloca no 'carrinho'
+      let carrinho = JSON.parse(inputProdutos.value)
+
+      //item no carrinho, apenas edita
+      if(carrinho.find(item => item.proCodigo === produto.codigo)){
+        carrinho = carrinho.map(item => {
+          if(item.proCodigo === produto.codigo){
+            return {
+              ...item,
+              proQuantidade: Number(item.proQuantidade) + Number(quantidadeSelecionada)
+            }
+          }
+          return item
+        })
+      }else {
+        carrinho = [...carrinho, {
+          proCodigo: produto.codigo,
+          proQuantidade: quantidadeSelecionada,
+          proValor: produto.valor
+        }]
+      }
+
+      inputProdutos.value = JSON.stringify(carrinho)
+
+      const totalDiv = document.querySelector('.value_total')
+      
+      const total = carrinho.reduce((acc, item) => {
+        return (item.proQuantidade * item.proValor) + acc
+      }, 0)
+
+      totalDiv.innerHTML = total.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'})
+    }
+  }
+
+}
+
+const inputProdutos = document.querySelector('input[name=venProdutos]')
+const buttonAddVenda = document.getElementById('button-adicionar_venda');
+buttonAddVenda?.addEventListener('click', adicionarProduto)
