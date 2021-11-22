@@ -59,7 +59,7 @@ class ProdutoDAO
             $res = $conn->query($query);
             return $res->fetchAll();
         } catch (Exception $e) {
-            echo $e->getMessage();
+            throw new $e->getMessage();
         }
     }
 
@@ -72,7 +72,7 @@ class ProdutoDAO
 
             return $res->fetch();
         } catch (Exception $e) {
-            echo $e->getMessage();
+            throw new $e->getMessage();
         }
     }
 
@@ -86,7 +86,7 @@ class ProdutoDAO
 
             return $res->fetchAll();
         } catch (Exception $e) {
-            echo $e->getMessage();
+            throw new $e->getMessage();
         }
     }
 

@@ -63,7 +63,7 @@ class FuncionarioDAO
             $res = $conn->query($query);
             return $res->fetchAll();
         } catch (Exception $e) {
-            echo $e->getMessage();
+            throw new $e->getMessage();
         }
     }
 
@@ -91,7 +91,7 @@ class FuncionarioDAO
 
             return $res->fetchAll();
         } catch (Exception $e) {
-            echo $e->getMessage();
+            throw new $e->getMessage();
         }
     }
 

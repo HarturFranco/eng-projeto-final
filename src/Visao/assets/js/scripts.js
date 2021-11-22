@@ -200,7 +200,7 @@ const adicionarProduto = () => {
       totalDiv.innerHTML = total.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'})
       inputPreco.value = total
     } else {
-      openModal('Quantidade indisponivel no estoque')
+      openModal('Quantidade indisponivel no estoque. Quantidade disponivel ' + produto.qtdEstoque)
     }
   }
 

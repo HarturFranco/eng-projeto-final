@@ -31,15 +31,7 @@ class ItemVendaDAO{
         $res = $conn->query($query);
         return $res;
     }
-	
-	// Exclui itemVenda por codigo de Protudo e Venda
-    /* function excluirPorAmbos($itvProCodigo, $itvVenCodigo, $conn){
-        $query = "DELETE FROM `ItemVenda` WHERE itvProCodigo = " . $itvProCodigo . 
-					" and itvVenCodigo = " . $itvVenCodigo; //TODO - tratar SQLInjection
 
-        $res = $conn->query($query);
-        return $res;
-    } */
 
     // Retorna todos os itemVenda de uma venda
     function listarTodosPorVenda($itvVenCodigo, $conn){
@@ -64,33 +56,7 @@ class ItemVendaDAO{
 
             return $itensVenda;
         } catch (Exception $e) {
-            echo $e->getMessage();
+            throw new $e->getMessage();
         }
     }
-
-	// Retorna todos os itemVenda de um produto
-    /* function listarTodosPorProduto($itvProCodigo, $conn){
-        try {
-            $query = "SELECT * FROM ItemVenda WHERE itvProCodigo = " . $itvProCodigo;
-
-            $res = $conn->query($query);
-            return $res->fetchAll();
-        } catch (Exception $e) {
-            echo $e->getMessage();
-        }
-    } */
-
-    // busca uma ItemVenda por codigo de Protudo e Venda
-    /* function buscarPorCodigoAmbos($itvProCodigo, $itvVenCodigo, $conn){
-        try {
-            $query = "SELECT * FROM `ItemVenda` WHERE itvProCodigo = " . $itvProCodigo . 
-					" and itvVenCodigo = " . $itvVenCodigo; //TODO - tratar SQLInjection
-            $res = $conn->query($query);
-
-            return $res->fetch();
-        } catch (Exception $e) {
-            echo $e->getMessage();
-        }
-    } */
-
 }

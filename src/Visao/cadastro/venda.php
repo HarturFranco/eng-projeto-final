@@ -31,6 +31,7 @@ $funcionarios = $funcionarioControle->index();
                 <option value="" disabled selected>Selecione um produto</option>
                 <?php
                 foreach ($produtos as $pro) {
+                  if($pro->getQtdEstoque() > 0) {
                 ?>
                   <option 
                     value="<?php echo $pro->getCodigo() ?>" 
@@ -39,6 +40,7 @@ $funcionarios = $funcionarioControle->index();
                       <?php echo $pro->getNome() ?>
                     </option>
                 <?php
+                  }
                 }
                 ?>
 
