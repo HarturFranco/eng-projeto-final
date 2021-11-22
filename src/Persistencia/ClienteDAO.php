@@ -40,7 +40,8 @@ class ClienteDAO
             if ($consulta) {
                 $query = "DELETE FROM `Cliente` WHERE cliCodigo = " . $cliCodigo; //TODO - tratar SQLInjection
 
-                $conn->query($query);
+                if(! $conn->query($query))
+                    throw new Exception('Cliente possui vendas cadastradas');
             } else {
                 throw new Exception('Cliente não existe no banco de dados');
             }

@@ -26,7 +26,7 @@ class FuncionarioControle
 
       $funcionarios = array();
 
-      foreach($res as $fun){
+      foreach ($res as $fun) {
         $funcionario = new Funcionario(
           $fun['funEmail'],
           $fun['funNome'],
@@ -41,7 +41,7 @@ class FuncionarioControle
 
       return $funcionarios;
     } catch (Exception $e) {
-      Util::redirect('funcionario', 'Erro ao buscar funcionarios. '.$e->getMessage());
+      Util::redirect('funcionario', 'Erro ao buscar funcionarios. ' . $e->getMessage());
     }
   }
 
@@ -66,7 +66,7 @@ class FuncionarioControle
 
       Util::redirect('funcionarios', 'Sucesso. Sucesso ao cadastrar funcionario');
     } catch (Exception $e) {
-      Util::redirect('cadastro/funcionario', 'Erro ao cadastrar. '.$e->getMessage());
+      Util::redirect('cadastro/funcionario', 'Erro ao cadastrar. ' . $e->getMessage());
     }
   }
 
@@ -80,7 +80,7 @@ class FuncionarioControle
         $res = $this->fundao->buscarPorNome($dado, $this->conexao);
       }
 
-      if($res){
+      if ($res) {
         return new Funcionario(
           $res['funEmail'],
           $res['funNome'],
@@ -91,7 +91,7 @@ class FuncionarioControle
         );
       }
       throw new Exception('Funcionario nao encotrado. Verifique se o funcionario existe');
-    }catch(Exception $e){
+    } catch (Exception $e) {
       Util::redirect('funcionarios', 'Funcionario nao encotrado. Verifique se o funcionario esta cadastrado');
     }
   }
