@@ -113,7 +113,7 @@ class FuncionarioControle
       $senha = $dados['funSenha'];
       $isGerente = $dados['funIsGerente'];
 
-      if ($isGerente == "true") {
+      if ($isGerente) {
         $isGerente = 1;
       } else {
         $isGerente = 0;

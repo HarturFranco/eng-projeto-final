@@ -51,7 +51,7 @@ class CategoriaControle
 
       Util::redirect('categorias', 'Sucesso. Sucesso ao cadastrar categoria');
     } catch (Exception $e) {
-      Util::redirect('cadastro/categoria', 'Erro ao cadastrar. '.$e->getMessage());
+      Util::redirect('cadastro/categoria', 'Erro ao cadastrar. ' . $e->getMessage());
     }
   }
 
@@ -69,13 +69,19 @@ class CategoriaControle
 
   public function editar($dados)
   {
-    $codigo = $dados['cCodigo'];
-    $nome = $dados['cNome'];
-    $descricao = $dados['cDescricao'];
-    var_dump($descricao);
-    $cat = new Categoria($nome, $descricao, $codigo);
+    try {
+      $codigo = $dados['cCodigo'];
+      $nome = $dados['cNome'];
+      $descricao = $dados['cDescricao'];
 
-    $res = $this->catDao->editar($cat, $this->conexao);
+      $cat = new Categoria($nome, $descricao, $codigo);
+
+      $this->catDao->editar($cat, $this->conexao);
+      
+      Util::redirect('categorias', 'Sucesso. Categoria editado com sucesso');
+    } catch (Exception $e) {
+      Util::redirect('categorias', 'Erro ao editar. ' . $e->getMessage());
+    }
   }
 
   public function excluir($dados)
