@@ -7,7 +7,6 @@ $funcionarioControle = new FuncionarioControle();
 
 $funcionario = $funcionarioControle->buscar((int)$id);
 
-
 ?>
 
 <div class="cadastro">
@@ -53,10 +52,14 @@ $funcionario = $funcionarioControle->buscar((int)$id);
                     placeholder="*******">
 
                 <div class="div-checkbox">
-                    <input checked="<?php echo $funcionario->getIsGerente() ?>" type="checkbox" name="funIsGerente">
+                <?php if($funcionario->getIsGerente() == 1){ ?> 
+                    <input checked type="checkbox" name="funIsGerente">
+                <?php } else { ?>
+                    <input type="checkbox" name="funIsGerente">
+                <?php } ?>
                     <label for="funIsGerente">Gerente</label>
                 </div>
-
+                
             </div>
             <div></div>
             <input type="text" name="funCodigo" value="<?php echo $funcionario->getCodigo() ?>" hidden>

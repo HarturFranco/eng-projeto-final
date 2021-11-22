@@ -22,9 +22,8 @@
     <?php if (Auth::isGerente()) { ?>
       <li class="menu_list-item" id="funcionarios"><a href="funcionarios">Funcionários</a></li>
       <li class="menu_list-item has-submenu" id="relatorios">
-        <a href="/relatorios/mensal">Relatórios</a>
+        <a href="/relatorios/funcionarios">Relatórios</a>
         <ul class="menu_list-submenu">
-          <li class="submenu_item" id="mensal"><a href="relatorios/mensal">Mensal</a></li>
           <li class="submenu_item" id="funcionarios"><a href="relatorios/funcionarios">Funcionário</a></li>
         </ul>
       </li>

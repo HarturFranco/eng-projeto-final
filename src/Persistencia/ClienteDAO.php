@@ -60,7 +60,7 @@ class ClienteDAO
             $res = $conn->query($query);
             return $res->fetchAll();
         } catch (Exception $e) {
-            echo $e->getMessage();
+            throw new $e->getMessage();
         }
     }
 
@@ -73,7 +73,7 @@ class ClienteDAO
 
             return $res->fetch();
         } catch (Exception $e) {
-            echo $e->getMessage();
+            throw new $e->getMessage();
         }
     }
 
@@ -86,7 +86,7 @@ class ClienteDAO
 
             return $res->fetchAll();
         } catch (Exception $e) {
-            echo $e->getMessage();
+            throw new $e->getMessage();
         }
     }
 

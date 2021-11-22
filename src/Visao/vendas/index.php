@@ -52,13 +52,13 @@ $vendas = $vendaControle->index();
               <td><?php echo $ven->getFuncionario()->getNome() ?></td>
               <td><?php echo $ven->getPrecoTotal() ?></td>
               <td>
-                <a href="funcionarios/editar/<?php echo $ven->getCodigo() ?>">
+                <a href="vendas/editar/<?php echo $ven->getCodigo() ?>">
                   <img src="Visao/assets/images/editar.svg" alt="edit">
                 </a>
                 <?php if (Auth::isGerente()) { ?>
                 <form class="icon" action="Controle/Controle" method="POST">
-                  <input type="text" name="fCodigo" value="<?php echo $ven->getCodigo() ?>" hidden>
-                  <input type="text" name="classeAcao" value="FuncionarioControle/excluir" hidden>
+                  <input type="text" name="venCodigo" value="<?php echo $ven->getCodigo() ?>" hidden>
+                  <input type="text" name="classeAcao" value="VendaControle/excluir" hidden>
                   <button class="icon">
                     <img src="Visao/assets/images/deletar.svg" alt="delete">
                   </button>
