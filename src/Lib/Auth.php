@@ -15,6 +15,11 @@ class Auth
     return false;
   }
 
+  public static function getCodigo(){
+    if(Auth::isLoggedIn())
+      return $_SESSION['user']->isGerente;
+  }
+
   public static function login($userData)
   {
     $user = new \stdClass();

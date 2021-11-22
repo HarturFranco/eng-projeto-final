@@ -19,7 +19,7 @@ $categorias = $categoriaControle->index();
         <?php
           foreach ($categorias as $cat) {
         ?>
-          <option value="<?php echo $cat["catCodigo"] ?>"><?php echo $cat["catNome"] ?></option>
+          <option value="<?php echo $cat->getCodigo() ?>"><?php echo $cat->getNome() ?></option>
         <?php
           }
         ?>
@@ -43,7 +43,6 @@ $categorias = $categoriaControle->index();
           </div>
         </div>
       </div>
-      <input type="text" name="fCodigo" value="<?php echo '' ?>" hidden>
       <input type="text" name="classeAcao" value="ProdutoControle/cadastrar" hidden>
       <button class="primary">Cadastrar</button>
     </form>

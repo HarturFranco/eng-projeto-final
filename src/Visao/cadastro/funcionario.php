@@ -19,7 +19,7 @@ $funcionarioControle = new FuncionarioControle();
         <input name="funUsername" type="text" maxlength="25" required placeholder="Username">
 
         <label for="funSenha">Senha:</label>
-        <input name="funSenha" type="password" maxlength="25" required placeholder="*******">
+        <input name="funSenha" type="password" minlength="8" maxlength="25" required placeholder="*******">
 
         <div class="div-checkbox">
           <input type="checkbox" name="funIsGerente">

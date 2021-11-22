@@ -1,9 +1,12 @@
 <?php
 
 include_once 'Persistencia/Connection.php';
-include_once 'Modelo/Produto.php';
 include_once 'Persistencia/ProdutoDAO.php';
+
+include_once 'Modelo/Produto.php';
+
 include_once 'Controle/CategoriaControle.php';
+
 include_once 'Lib/Util.php';
 
 class ProdutoControle
@@ -21,12 +24,25 @@ class ProdutoControle
   public function index()
   {
     $catControle = new CategoriaControle();
-
     $res = $this->proDao->listarTodos($this->conexao);
-    for($i = 0; $i < count($res); $i++){
-      $res[$i]["Categoria_catCodigo"] = $catControle->buscar($res[$i]["Categoria_catCodigo"]);
+
+    $produtos = array();
+
+    foreach ($res as $pro) {
+      $produto = new Produto(
+        $pro['proNome'],
+        $pro['proPreco'],
+        $pro['proQtdEstoque'],
+        $pro['proDataCadastro'],
+        $pro['proDescricao'],
+        $catControle->buscar($pro["Categoria_catCodigo"]),
+        $pro['proCodigo']
+      );
+
+      array_push($produtos, $produto);
     }
-    return $res;
+
+    return $produtos;
   }
 
   public function cadastrar($dados)
@@ -41,13 +57,12 @@ class ProdutoControle
     $categoria = $catControle->buscar($dados['pCategoria']);
 
     $pro = new Produto($nome, $preco, $qtdEstoque, $dataCadastro, $descricao, $categoria);
+    try {
+      $this->proDao->salvar($pro, $this->conexao);
 
-    $res = $this->proDao->salvar($pro, $this->conexao);
-
-    if ($res == TRUE) {
-      Util::redirect('produtos');
-    } else {
-      Util::redirect('cadastro/produto', 'cadastrar produto');
+      Util::redirect('produtos', 'Sucesso. Sucesso ao cadastrar novo produto');
+    } catch (Exception $e) {
+      Util::redirect('cadastro/produto', 'Erro ao cadastrar. ' . $e->getMessage());
     }
   }
 
@@ -55,30 +70,45 @@ class ProdutoControle
   {
     $res = $this->proDao->buscarPorCodigo($id, $this->conexao);
 
-    return $res;
+    $catControle = new CategoriaControle();
+
+    return new Produto(
+      $res['proNome'],
+      $res['proPreco'],
+      $res['proQtdEstoque'],
+      $res['proDataCadastro'],
+      $res['proDescricao'],
+      $catControle->buscar($res["Categoria_catCodigo"]),
+      $res['proCodigo']
+    );
   }
 
   public function editar($dados)
   {
-    $catControle = new CategoriaControle();
+    try {
+      $catControle = new CategoriaControle();
 
-    $codigo = $dados['pCodigo'];
-    $nome = $dados['pNome'];
-	  $preco = str_replace(",", ".", $dados['pPreco']);
-	  $qtdEstoque = $dados['pQuantidade'];
-	  $dataCadastro = date("Y-m-d");
-	  $descricao = $dados['pDescricao'];
-    $categoria = $catControle->buscar($dados['pCategoria']);
-    
-    $pro = new Produto($nome, $preco, $qtdEstoque, $dataCadastro, $descricao, $categoria, $codigo);
-    
-    $res = $this->proDao->editar($pro, $this->conexao);
-    
-    if ($res == TRUE) {
-      Util::redirect('produtos');
-    } else {
-      Util::redirect('produtos', 'editar produto');
+      $codigo = $dados['pCodigo'];
+      $nome = $dados['pNome'];
+      $preco = str_replace(",", ".", $dados['pPreco']);
+      $qtdEstoque = $dados['pQuantidade'];
+      $dataCadastro = date("Y-m-d");
+      $descricao = $dados['pDescricao'];
+      $categoria = $catControle->buscar($dados['pCategoria']);
+
+      $pro = new Produto($nome, $preco, $qtdEstoque, $dataCadastro, $descricao, $categoria, $codigo);
+
+      $this->proDao->editar($pro, $this->conexao);
+
+      Util::redirect('produtos', 'Sucesso. Produto editado com sucesso');
+    } catch (Exception $e) {
+      Util::redirect('produtos', 'Erro ao editar. ' . $e->getMessage());
     }
+  }
+
+  public function venderProduto($produto, $quantidadeVendida, $tipo = 'venda')
+  {
+    $this->proDao->venderProduto($produto, (int)$quantidadeVendida, $this->conexao, $tipo);
   }
 
   public function excluir($dados)
@@ -86,17 +116,11 @@ class ProdutoControle
     try {
       $codigo = $dados['pCodigo'];
 
-      $res = $this->proDao->excluir($codigo, $this->conexao);
+      $this->proDao->excluir($codigo, $this->conexao);
 
-      if ($res){
-        Util::redirect('produtos');
-      }
-      else{
-        Util::redirect('produtos', 'deletar 2 produto');
-      }
-        
+      Util::redirect('produtos', 'Sucesso. Produto excluido com sucesso');
     } catch (Exception $e) {
-      Util::redirect('produtos', 'deletar produto');
+      Util::redirect('produtos', 'Erro ao excluir produto. ' . $e->getMessage());
     }
   }
 }

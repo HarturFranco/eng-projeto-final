@@ -1,8 +1,10 @@
 <?php
 
 include_once 'Persistencia/Connection.php';
-include_once 'Modelo/Categoria.php';
 include_once 'Persistencia/CategoriaDAO.php';
+
+include_once 'Modelo/Categoria.php';
+
 include_once 'Lib/Util.php';
 
 class CategoriaControle
@@ -13,6 +15,7 @@ class CategoriaControle
   public function __construct()
   {
     $conexao = new Connection();
+
     $this->conexao = $conexao->getConnection();
     $this->catDao = new CategoriaDAO();
   }
@@ -20,7 +23,20 @@ class CategoriaControle
   public function index()
   {
     $res = $this->catDao->listarTodos($this->conexao);
-    return $res;
+
+    $categorias = array();
+
+    foreach ($res as $cat) {
+      $categoria = new Categoria(
+        $cat['catNome'],
+        $cat['catDescricao'],
+        $cat['catCodigo']
+      );
+
+      array_push($categorias, $categoria);
+    }
+
+    return $categorias;
   }
 
   public function cadastrar($dados)
@@ -30,37 +46,41 @@ class CategoriaControle
 
     $cat = new Categoria($nome, $descricao);
 
-    $res = $this->catDao->salvar($cat, $this->conexao);
+    try {
+      $this->catDao->salvar($cat, $this->conexao);
 
-    if ($res == TRUE) {
-      Util::redirect('categorias');
-    } else {
-      Util::redirect('cadastro/categoria', 'cadastrar categoria');
+      Util::redirect('categorias', 'Sucesso. Sucesso ao cadastrar categoria');
+    } catch (Exception $e) {
+      Util::redirect('cadastro/categoria', 'Erro ao cadastrar. ' . $e->getMessage());
     }
   }
 
   public function buscar($id)
   {
-    $res = $this->catDao->buscarPorCodigo($id, $this->conexao);
-    $categoria = new Categoria($res['catNome'], $res['catDescricao'], $res['catCodigo']);
-    return $categoria;
-    // return $res;
+    try {
+      $res = $this->catDao->buscarPorCodigo($id, $this->conexao);
+      if ($res)
+        return new Categoria($res['catNome'], $res['catDescricao'], $res['catCodigo']);
+      throw new Exception('Categoria nao encotrado. Verifique se a categoria existe');
+    } catch (Exception $e) {
+      Util::redirect('categorias', 'Categoria nao encotrada. Verifique se a categoria esta cadastrada');
+    }
   }
 
   public function editar($dados)
   {
-    $codigo = $dados['cCodigo'];
-    $nome = $dados['cNome'];
-    $descricao = $dados['cDescricao'];
-    var_dump($descricao);
-    $cat = new Categoria($nome, $descricao, $codigo);
-    
-    $res = $this->catDao->editar($cat, $this->conexao);
+    try {
+      $codigo = $dados['cCodigo'];
+      $nome = $dados['cNome'];
+      $descricao = $dados['cDescricao'];
 
-    if ($res == TRUE) {
-      Util::redirect('categorias');
-    } else {
-      Util::redirect('categorias', 'editar categoria');
+      $cat = new Categoria($nome, $descricao, $codigo);
+
+      $this->catDao->editar($cat, $this->conexao);
+      
+      Util::redirect('categorias', 'Sucesso. Categoria editado com sucesso');
+    } catch (Exception $e) {
+      Util::redirect('categorias', 'Erro ao editar. ' . $e->getMessage());
     }
   }
 
@@ -69,14 +89,11 @@ class CategoriaControle
     try {
       $codigo = $dados['cCodigo'];
 
-      $res = $this->catDao->excluir($codigo, $this->conexao);
+      $this->catDao->excluir($codigo, $this->conexao);
 
-      if ($res)
-        Util::redirect('categorias');
-      else
-        Util::redirect('categorias', 'deletar categoria');
+      Util::redirect('categorias', 'Sucesso. Categoria excluida com sucesso');
     } catch (Exception $e) {
-      Util::redirect('categorias', 'deletar categoria');
+      Util::redirect('categorias', 'Erro ao excluir categoria. ' . $e->getMessage());
     }
   }
 }

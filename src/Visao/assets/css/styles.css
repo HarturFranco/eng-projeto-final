@@ -277,7 +277,7 @@ button.secondary {
   transform: translate(-50%, -40%);
 
   width: 400px;
-  height: 600px;
+  height: 400px;
 
   display: flex;
   flex-direction: column;
@@ -598,7 +598,7 @@ button.icon {
 .cadastro .venda .prodtucts-selected div {
   width: 100%;
   display: grid;
-  grid-template-columns: 1fr 4fr 2fr;
+  grid-template-columns: 1fr 4fr 2fr 2fr;
   padding: 0.2rem 0.5rem;
 }
 
@@ -616,6 +616,10 @@ button.icon {
   color: #fff;
 }
 
+.cadastro .venda .prodtucts-selected .product div {
+  display: flex;
+}
+
 .cadastro .control {
   display: flex;
   flex-direction: column;
@@ -625,7 +629,8 @@ button.icon {
   gap: 1rem;
 }
 
-.cadastro .control>button {
+.cadastro .control>button,
+.cadastro .control>.button {
   width: 210px;
   margin: 0;
 }

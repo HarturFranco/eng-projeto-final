@@ -1,77 +1,100 @@
 <?php
 
 include_once 'Persistencia/Connection.php';
-include_once 'Modelo/Cliente.php';
 include_once 'Persistencia/ClienteDAO.php';
+
+include_once 'Modelo/Cliente.php';
+
 include_once 'Lib/Util.php';
 
-class ClienteControle{
+class ClienteControle
+{
   private $conexao;
   private $clidao;
 
-  public function __construct(){
+  public function __construct()
+  {
     $conexao = new Connection();
     $this->conexao = $conexao->getConnection();
     $this->clidao = new ClienteDAO();
   }
 
-	private function limpaCPF($valor){
-		$valor = trim($valor);
-		$valor = str_replace(".", "", $valor);
-		$valor = str_replace("-", "", $valor);
-		return $valor;
-	}
 
-	private function arrumaCPF($valor){
-		return substr($valor,0,3).'.'.substr($valor,3,3).'.'.substr($valor,6,3).'-'.substr($valor,9,2);
-	}
 
-  public function index(){
+  public function index()
+  {
     $res = $this->clidao->listarTodos($this->conexao);
-    for($i = 0; $i < count($res); $i++){
-      $res[$i]["cliCPF"] = $this->arrumaCPF($res[$i]["cliCPF"]);
+
+    $clientes = array();
+
+    foreach ($res as $cli) {
+      $cli["cliCPF"] = Util::arrumaCPF($cli["cliCPF"]);
+
+      $cliente = new Cliente(
+        $cli['cliNome'],
+        $cli['cliCPF'],
+        $cli['cliCodigo']
+      );
+
+      array_push($clientes, $cliente);
     }
-    return $res;
+
+    return $clientes;
   }
 
-  public function cadastro($dados){
-    $nome = $dados['cNome'];
-    $cpf = $this->limpaCPF($dados['cCPF']);
+  public function cadastro($dados)
+  {
+    $nome = $dados['cliNome'];
+    $cpf = Util::limpaCPF($dados['cliCPF']);
 
     $cli = new Cliente($nome, $cpf);
-    $res = $this->clidao->salvar($cli, $this->conexao);
 
-    if ($res == TRUE) {
-      Util::redirect('clientes');
-    } else {
-      Util::redirect('cadastro/cliente', 'cadastrar cliente');
+    try {
+      $this->clidao->salvar($cli, $this->conexao);
+
+      Util::redirect('clientes', 'Sucesso. Sucesso ao cadastrar cliente');
+    } catch (Exception $e) {
+      Util::redirect('cadastro/cliente', 'Erro ao cadastrar. ' . $e->getMessage());
     }
   }
 
-  public function buscar($dado){
-	if (is_int($dado)){
-		$res = $this->clidao->buscarPorCodigo($dado, $this->conexao);
-	}else{
-		$res = $this->clidao->buscarPorNome($dado, $this->conexao);
-	}
-	$res["cliCPF"] = $this->arrumaCPF($res["cliCPF"]);
-	return $res;
+  public function buscar($dado)
+  {
+    try {
+      $res = null;
+      if (is_int($dado)) {
+        $res = $this->clidao->buscarPorCodigo($dado, $this->conexao);
+      } else {
+        $res = $this->clidao->buscarPorNome($dado, $this->conexao);
+      }
+
+      if($res){
+        return new Cliente(
+          $res['cliNome'],
+          Util::arrumaCPF($res["cliCPF"]),
+          $res['cliCodigo']
+        );
+      }
+      throw new Exception('Cliente nao encontrado. Verifique se o cliente existe');
+    }catch(Exception $e){
+      //Util::redirect('clientes', 'Cliente nao encotrado. Verifique se o cliente esta cadastrado');
+    }
   }
 
   public function editar($dados)
   {
-    $codigo = $dados['cCodigo'];
-    $nome = $dados['cNome'];
-    $cpf = $this->limpaCPF($dados['cCPF']);
+    try {
+      $codigo = $dados['cCodigo'];
+      $nome = $dados['cNome'];
+      $cpf = Util::limpaCPF($dados['cCPF']);
 
-    $cli = new Cliente($nome, $cpf, $codigo);
+      $cli = new Cliente($nome, $cpf, $codigo);
 
-    $res = $this->clidao->editar($cli, $this->conexao);
+      $this->clidao->editar($cli, $this->conexao);
 
-    if ($res == TRUE) {
-      Util::redirect('clientes');
-    } else {
-      Util::redirect('cadastro/cliente', 'editar cliente');
+      Util::redirect('clientes', 'Sucesso. Cliente editado com sucesso');
+    } catch (Exception $e) {
+      Util::redirect('clientes', 'Erro ao editar. ' . $e->getMessage());
     }
   }
 
@@ -80,14 +103,11 @@ class ClienteControle{
     try {
       $codigo = $dados['cliCodigo'];
 
-      $res = $this->clidao->excluir($codigo, $this->conexao);
+      $this->clidao->excluir($codigo, $this->conexao);
 
-      if ($res)
-        Util::redirect('clientes');
-      else
-        Util::redirect('clientes', 'deletar cliente');
+      Util::redirect('clientes', 'Sucesso. Cliente excluido com sucesso');
     } catch (Exception $e) {
-      Util::redirect('clientes', 'deletar cliente');
+      Util::redirect('clientes', 'Erro ao excluir cliente. ' . $e->getMessage());
     }
   }
 }

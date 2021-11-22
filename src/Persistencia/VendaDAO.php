@@ -7,22 +7,41 @@ class VendaDAO{
 
     // Cadastra/Salva novo venda
     function salvar($venda, $conn){
-        $query = "INSERT INTO `Venda`(`venPrecoTotal`, `Funcionario_funCodigo`, `Cliente_cliCodigo`, `venStatus`) 
-                    VALUES ('" . $venda->getPrecoTotal() . "','" .
-					$venda->getFuncionario()->getCodigo() . "','" .
-					$venda->getCliente()->getCodigo() . "','" .
-            $venda->getStatus() . "')";
+        try{
+            $query = "INSERT INTO `Venda`(`venPrecoTotal`, `Funcionario_funCodigo`, `Cliente_cliCodigo`, `venStatus`) 
+                VALUES ('" . $venda->getPrecoTotal() . "','" .
+                $venda->getFuncionario()->getCodigo() . "','" .
+                $venda->getCliente()->getCodigo() . "','" .
+                $venda->getStatus() . "')";
 
-        $res = $conn->query($query);
-        return $res;
+            $res = $conn->query($query);
+
+            if ($res)
+                    return $res;
+                
+            throw new Exception('Erro ao cadastrar venda no banco de dados');
+        } catch (Exception $e) {
+            throw new Exception($e->getMessage());
+        }
     }
 
     // Exclui venda
     function excluir($venCodigo, $conn){
-        $query = "DELETE FROM `Venda` WHERE venCodigo = " . $venCodigo; //TODO - tratar SQLInjection
+        try {
+            $consulta = $this->buscarPorCodigo($venCodigo, $conn);
 
-        $res = $conn->query($query);
-        return $res;
+            if($consulta){
+                $query = "DELETE FROM `Venda` WHERE venCodigo = " . $venCodigo; //TODO - tratar SQLInjection
+                $conn->query($query);
+            }else {
+                throw new Exception('Venda não existe no banco de dados');
+            }       
+            
+        } catch (PDOException $e) {
+            throw new Exception('Erro ao conectar ao banco de dados.');
+        } catch (Exception $e) {
+            throw new Exception($e->getMessage());
+        }
     }
 
     // Retorna todas as vendas
@@ -44,20 +63,11 @@ class VendaDAO{
             $res = $conn->query($query);
 
             return $res->fetch();
-        } catch (Exception $e) {
-            echo $e->getMessage();
+        } catch (PDOException $e) {
+            throw new Exception('Erro ao conectar ao banco de dados.');
+        } catch (Exception $e){
+            throw new Exception('Erro ao buscar venda.');
         }
-    }
-
-	
-    // Edita um Venda
-    function editar($venda, $conn){
-        $query = "UPDATE `Venda` SET 
-                    `venPrecoTotal`='" . $venda->getPrecoTotal() . "',
-                    `Funcionario_funCodigo`='" . $venda->getFuncionario()->getCodigo() . "',
-                    `Cliente_cliCodigo`='" . $venda->getCliente()->getCodigo() . "',
-                    `venStatus`='" . $venda->getStatus() . "' WHERE `venCodigo` = " . $venda->getCodigo();
-        $res = $conn->query($query);
-        return $res;
+        
     }
 }

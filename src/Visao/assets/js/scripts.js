@@ -56,7 +56,7 @@ filterInput?.addEventListener('keypress', (e) => {
 // ===================== MASKS ======================
 const maskPrice = (value) => {
   console.log('value', value)
-  const money = parseInt(value.replace(/[\D]+/g, ''))/100
+  const money = parseInt(value.replace(/[\D]+/g, '')) / 100
   if (typeof money === "number")
     return Number(money)?.toLocaleString('pt-br', {
       style: 'currency',
@@ -101,7 +101,10 @@ const openModal = (mensagem, uri) => {
   document.body.appendChild(modal)
 
   const closeModal = () => {
-    window.location.href = uri
+    if(uri) window.location.href = uri
+
+    document.body.removeChild(overlay)
+    document.body.removeChild(modal)
   }
 
   button.addEventListener('click', closeModal)
@@ -114,8 +117,106 @@ const hasError = () => {
   const hasError = erro?.indexOf('erro=')
   if (hasError !== undefined && hasError !== -1) {
     const mensagem = erro.split('=')[1]
-    openModal(`Erro ao ${mensagem}`, uri)
+    openModal(mensagem, uri)
   }
 }
 
 hasError()
+
+// ===================== CADASTRO DE VENDA ======================
+const adicionarProduto = () => {
+  const selectProduto = document.querySelector('select[name=pProduto]')
+  const { selectedIndex } = selectProduto
+
+  const produtoSelecionado = selectProduto.options[selectedIndex]
+
+  const produtoValido = produtoSelecionado.disabled === false && produtoSelecionado
+
+
+  if (produtoValido) {
+    const quantidadeSelecionada = Number(document.querySelector('input[name=pQtd]').value)
+    const codigo = Number(produtoSelecionado.value)
+    const nome = produtoSelecionado.text
+    const valor = Number(produtoSelecionado.getAttribute('preco'))
+    const qtdEstoque = Number(produtoSelecionado.getAttribute('qtd'))
+    const produto = { codigo, nome, valor, qtdEstoque }
+
+    const inputProdutos = document.querySelector('input[name=vProdutos]')
+    const inputPreco = document.querySelector('input[name=vValor]')
+
+    if(
+      quantidadeSelecionada !== '' && 
+      quantidadeSelecionada <= produto.qtdEstoque &&
+      quantidadeSelecionada > 0
+      ){
+      // adiciona produto no HTML
+      const div = document.querySelector('.prodtucts-selected')
+      div.innerHTML += `
+        <div class="product">
+          <div>${quantidadeSelecionada}</div>
+          <div>${produto.nome}</div>
+          <div>${Number(produto.valor).toLocaleString('pt-br',{style: 'currency', currency: 'BRL'})}</div>
+          <div>${Number(produto.valor * quantidadeSelecionada).toLocaleString('pt-br',{style: 'currency', currency: 'BRL'})}</div>
+        </div>
+      `
+      // diminui quantidade do estoque no HTML
+      produtoSelecionado.setAttribute('qtd', qtdEstoque - quantidadeSelecionada)
+
+      // coloca no 'carrinho'
+      let carrinho
+
+      if(inputProdutos.value)
+        carrinho = JSON.parse(inputProdutos.value)
+      else
+        carrinho = []
+
+      //item no carrinho, apenas edita
+      if(carrinho.find(item => item.proCodigo === produto.codigo)){
+        carrinho = carrinho.map(item => {
+          if(item.proCodigo === produto.codigo){
+            return {
+              ...item,
+              proQuantidade: Number(item.proQuantidade) + Number(quantidadeSelecionada)
+            }
+          }
+          return item
+        })
+      }else {
+        carrinho = [...carrinho, {
+          proCodigo: produto.codigo,
+          proQuantidade: quantidadeSelecionada,
+          proValor: produto.valor
+        }]
+      }
+
+      inputProdutos.value = JSON.stringify(carrinho)
+
+      const totalDiv = document.querySelector('.value_total')
+      
+      const total = carrinho.reduce((acc, item) => {
+        return (item.proQuantidade * item.proValor) + acc
+      }, 0)
+
+      totalDiv.innerHTML = total.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'})
+      inputPreco.value = total
+    } else {
+      openModal('Quantidade indisponivel no estoque. Quantidade disponivel ' + produto.qtdEstoque)
+    }
+  }
+
+}
+
+
+const buttonAddVenda = document.getElementById('button-adicionar_venda')
+buttonAddVenda?.addEventListener('click', adicionarProduto)
+
+// ===================== SUBMIT DE VENDA ======================
+
+const submitVenda = document.querySelector('.submit_venda')
+
+submitVenda?.addEventListener('click', () => {
+  const inputProdutos = document.querySelector('input[name=vProdutos]')
+  if(inputProdutos.value === ''){
+    openModal('Selecione ao menos um produto')
+  }
+})
