@@ -92,3 +92,18 @@ console.warn: SearchSettings: "get: No settings file exists, new profile?" (new 
 1637619185316	Marionette	INFO	Stopped listening on port 54232
 console.warn: TopSitesFeed: Failed to fetch data from Contile server: NetworkError when attempting to fetch resource.
 JavaScript error: chrome://remote/content/marionette/cert.js, line 55: NS_ERROR_NOT_AVAILABLE: Component returned failure code: 0x80040111 (NS_ERROR_NOT_AVAILABLE) [nsICertOverrideService.setDisableAllSecurityChecksAndLetAttackersInterceptMyData]
+1637625723713	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "-marionette" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofile.34u9zBMLqVK7"
+1637625731694	Marionette	INFO	Marionette enabled
+ExceptionHandler::GenerateDump cloned child 32010
+ExceptionHandler::SendContinueSignalToChild sent continue signal to child
+ExceptionHandler::WaitForContinueSignal waiting for continue signal...
+1637625786054	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "-marionette" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofile.2V4J9eecN4UD"
+1637625790981	Marionette	INFO	Marionette enabled
+ExceptionHandler::GenerateDump cloned child 32135
+ExceptionHandler::SendContinueSignalToChild sent continue signal to child
+ExceptionHandler::WaitForContinueSignal waiting for continue signal...
+1637625812518	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "-marionette" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofile.aIwSPteTcWfj"
+1637625817619	Marionette	INFO	Marionette enabled
+ExceptionHandler::GenerateDump cloned child ExceptionHandler::WaitForContinueSignal waiting for continue signal...
+32231
+ExceptionHandler::SendContinueSignalToChild sent continue signal to child
