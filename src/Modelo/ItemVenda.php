@@ -21,7 +21,7 @@ class ItemVenda{
 		return $this->produto;
 	}
 	
-	// Metodos getter e setter do atributo Venda
+	// Metodos getter atributo Venda
 	function getVenda(){
 		return $this->venda;
 	}

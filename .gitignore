@@ -1,2 +1,7 @@
-#Ignorar modificaçõoes no arquivo de criação do banco de dados
+#Banco de dados
 *.sql
+
+#composer
+/vendor
+composer.lock
+.phpunit.result.cache

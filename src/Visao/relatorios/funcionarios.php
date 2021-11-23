@@ -1,5 +1,6 @@
 <?php
 include_once('Controle/RelatorioControle.php');
+include_once('Lib/Util.php');
 
 $relatorioControle = new RelatorioControle();
 
@@ -22,10 +23,10 @@ $relatorio = $relatorioControle->funcionarios();
             Filtros
             <img src="Visao/assets/images/filtros.svg" alt="filters">
         </div>
-        <a href="#" class="button primary">
+        <button class=" primary">
           Exportar relatório
           <img src="Visao/assets/images/adicionar.svg" alt="add">
-        </a>
+        </button>
       </div>
 
       <table>
@@ -45,7 +46,7 @@ $relatorio = $relatorioControle->funcionarios();
             <tr string="<?php echo "{$dado->funcionario->getNome()} {$dado->quantidadeVEndas}" ?>">
               <td><?php echo $dado->funcionario->getNome() ?></td>
               <td><?php echo $dado->quantidadeVendas ?></td>
-              <td><?php echo $dado->totalVendas ?></td>
+              <td><?php echo Util::formatReal($dado->totalVendas) ?></td>
 
               <td></td>
             </tr>

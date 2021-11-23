@@ -1,0 +1,21 @@
+{
+    "name": "aft/eng-projeto-final",
+    "description": "Sistema de gerenciamento de loja de instumentos musicais",
+    "type": "project",
+    "autoload": {
+        "classmap": [
+          "src/Modelo/",
+          "src/Lib/"
+        ]
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^8"
+    },
+    "license": "MIT",
+    "authors": [
+      {
+        "name": "Arthur Silveira Franco",
+        "email": "arthur.franco@estudante.ufla.br"
+      }
+    ]
+}

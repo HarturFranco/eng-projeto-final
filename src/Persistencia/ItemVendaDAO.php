@@ -32,6 +32,13 @@ class ItemVendaDAO{
         return $res;
     }
 
+    // Exclui itemVenda por coidgo Venda
+    function verificaProduto($itvProCodigo, $conn){
+        $query = "SELECT * FROM `ItemVenda` WHERE itvProCodigo = " . $itvProCodigo; //TODO - tratar SQLInjection
+
+        $res = $conn->query($query);
+        return $res;
+    }
 
     // Retorna todos os itemVenda de uma venda
     function listarTodosPorVenda($itvVenCodigo, $conn){
