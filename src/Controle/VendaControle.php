@@ -103,9 +103,9 @@ class VendaControle
   }
 
   public function buscar($dado)
-  {    
+  {
     try {
-      $res = $this->vendao->buscarPorCodigo($dado, $this->conexao);      
+      $res = $this->vendao->buscarPorCodigo($dado, $this->conexao);
 
       if ($res) {
         $clienteControle = new ClienteControle();
@@ -125,7 +125,8 @@ class VendaControle
     }
   }
 
-  public function buscarItemsVenda($codigo){
+  public function buscarItemsVenda($codigo)
+  {
     return $this->itemVendaDao->listarTodosPorVenda($codigo, $this->conexao);
   }
 
@@ -139,7 +140,7 @@ class VendaControle
 
       $produtoControle = new ProdutoControle();
 
-      foreach($itensVenda as $item) {
+      foreach ($itensVenda as $item) {
         $produto = $produtoControle->buscar((int)$item->getProduto());
         $produtoControle->venderProduto($produto, $item->getQtd(), 'devolucao');
       }
@@ -150,6 +151,29 @@ class VendaControle
       Util::redirect('vendas', 'Sucesso. Venda excluida com sucesso');
     } catch (Exception $e) {
       Util::redirect('vendas', 'Erro ao excluir venda. ' . $e->getMessage());
+    }
+  }
+
+  public function editar($dados)
+  {
+    try {
+      $codigo = $dados['vCodigo'];
+      $cliCodigo = $dados['vCliente'];
+      $funCodigo = $dados['vFuncionario'];
+      $valor = str_replace(",", ".", $dados['vVenda']);
+
+      $venda = new Venda(
+        $valor,
+        $cliCodigo,
+        $funCodigo,
+        1,
+        $codigo
+      );
+      $this->vendao->editar($venda, $this->conexao);
+
+      Util::redirect('vendas', 'Sucesso. Venda editada com sucesso');
+    } catch (Exception $e) {
+      Util::redirect('vendas', 'Erro ao editar. ' . $e->getMessage());
     }
   }
 }
