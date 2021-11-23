@@ -23,10 +23,10 @@ $relatorio = $relatorioControle->funcionarios();
             Filtros
             <img src="Visao/assets/images/filtros.svg" alt="filters">
         </div>
-        <a href="#" class="button primary">
+        <button class=" primary">
           Exportar relatório
           <img src="Visao/assets/images/adicionar.svg" alt="add">
-        </a>
+        </button>
       </div>
 
       <table>
