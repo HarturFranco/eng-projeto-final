@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+  <testsuite name="tocadosinstrumentos" tests="18" assertions="18" errors="0" warnings="0" failures="0" skipped="0" time="0.037849">
+    <testsuite name="UtilTest" file="/home/arthur-franco/Documentos/UFLA-EAD/2021-1/Engenharia de Software/TP/eng-projeto-final/tests/Lib/UtilTest.php" tests="3" assertions="3" errors="0" warnings="0" failures="0" skipped="0" time="0.011214">
+      <testcase name="test_limparCPF" class="UtilTest" classname="UtilTest" file="/home/arthur-franco/Documentos/UFLA-EAD/2021-1/Engenharia de Software/TP/eng-projeto-final/tests/Lib/UtilTest.php" line="8" assertions="1" time="0.006071"/>
+      <testcase name="test_arrumarCPF" class="UtilTest" classname="UtilTest" file="/home/arthur-franco/Documentos/UFLA-EAD/2021-1/Engenharia de Software/TP/eng-projeto-final/tests/Lib/UtilTest.php" line="13" assertions="1" time="0.002504"/>
+      <testcase name="test_formatReal" class="UtilTest" classname="UtilTest" file="/home/arthur-franco/Documentos/UFLA-EAD/2021-1/Engenharia de Software/TP/eng-projeto-final/tests/Lib/UtilTest.php" line="18" assertions="1" time="0.002639"/>
+    </testsuite>
+    <testsuite name="CategoriaTest" file="/home/arthur-franco/Documentos/UFLA-EAD/2021-1/Engenharia de Software/TP/eng-projeto-final/tests/Modelo/CategoriaTest.php" tests="2" assertions="2" errors="0" warnings="0" failures="0" skipped="0" time="0.004530">
+      <testcase name="test_setNome" class="CategoriaTest" classname="CategoriaTest" file="/home/arthur-franco/Documentos/UFLA-EAD/2021-1/Engenharia de Software/TP/eng-projeto-final/tests/Modelo/CategoriaTest.php" line="15" assertions="1" time="0.002892"/>
+      <testcase name="test_setDescricao" class="CategoriaTest" classname="CategoriaTest" file="/home/arthur-franco/Documentos/UFLA-EAD/2021-1/Engenharia de Software/TP/eng-projeto-final/tests/Modelo/CategoriaTest.php" line="22" assertions="1" time="0.001638"/>
+    </testsuite>
+    <testsuite name="ClienteTest" file="/home/arthur-franco/Documentos/UFLA-EAD/2021-1/Engenharia de Software/TP/eng-projeto-final/tests/Modelo/ClienteTest.php" tests="3" assertions="3" errors="0" warnings="0" failures="0" skipped="0" time="0.005117">
+      <testcase name="test_setCodigo" class="ClienteTest" classname="ClienteTest" file="/home/arthur-franco/Documentos/UFLA-EAD/2021-1/Engenharia de Software/TP/eng-projeto-final/tests/Modelo/ClienteTest.php" line="9" assertions="1" time="0.002197"/>
+      <testcase name="test_setNome" class="ClienteTest" classname="ClienteTest" file="/home/arthur-franco/Documentos/UFLA-EAD/2021-1/Engenharia de Software/TP/eng-projeto-final/tests/Modelo/ClienteTest.php" line="16" assertions="1" time="0.001480"/>
+      <testcase name="test_setCpf" class="ClienteTest" classname="ClienteTest" file="/home/arthur-franco/Documentos/UFLA-EAD/2021-1/Engenharia de Software/TP/eng-projeto-final/tests/Modelo/ClienteTest.php" line="24" assertions="1" time="0.001440"/>
+    </testsuite>
+    <testsuite name="ItemVendaTest" file="/home/arthur-franco/Documentos/UFLA-EAD/2021-1/Engenharia de Software/TP/eng-projeto-final/tests/Modelo/ItemVendaTest.php" tests="2" assertions="2" errors="0" warnings="0" failures="0" skipped="0" time="0.003161">
+      <testcase name="test_setPreco" class="ItemVendaTest" classname="ItemVendaTest" file="/home/arthur-franco/Documentos/UFLA-EAD/2021-1/Engenharia de Software/TP/eng-projeto-final/tests/Modelo/ItemVendaTest.php" line="8" assertions="1" time="0.001705"/>
+      <testcase name="test_setQtd" class="ItemVendaTest" classname="ItemVendaTest" file="/home/arthur-franco/Documentos/UFLA-EAD/2021-1/Engenharia de Software/TP/eng-projeto-final/tests/Modelo/ItemVendaTest.php" line="14" assertions="1" time="0.001456"/>
+    </testsuite>
+    <testsuite name="ProdutoTest" file="/home/arthur-franco/Documentos/UFLA-EAD/2021-1/Engenharia de Software/TP/eng-projeto-final/tests/Modelo/ProdutoTest.php" tests="5" assertions="5" errors="0" warnings="0" failures="0" skipped="0" time="0.008583">
+      <testcase name="test_setNome" class="ProdutoTest" classname="ProdutoTest" file="/home/arthur-franco/Documentos/UFLA-EAD/2021-1/Engenharia de Software/TP/eng-projeto-final/tests/Modelo/ProdutoTest.php" line="8" assertions="1" time="0.001850"/>
+      <testcase name="test_setDescricao" class="ProdutoTest" classname="ProdutoTest" file="/home/arthur-franco/Documentos/UFLA-EAD/2021-1/Engenharia de Software/TP/eng-projeto-final/tests/Modelo/ProdutoTest.php" line="15" assertions="1" time="0.002113"/>
+      <testcase name="test_setPreco" class="ProdutoTest" classname="ProdutoTest" file="/home/arthur-franco/Documentos/UFLA-EAD/2021-1/Engenharia de Software/TP/eng-projeto-final/tests/Modelo/ProdutoTest.php" line="23" assertions="1" time="0.001627"/>
+      <testcase name="test_setQtdEstoque" class="ProdutoTest" classname="ProdutoTest" file="/home/arthur-franco/Documentos/UFLA-EAD/2021-1/Engenharia de Software/TP/eng-projeto-final/tests/Modelo/ProdutoTest.php" line="30" assertions="1" time="0.001501"/>
+      <testcase name="test_setDataCadastro" class="ProdutoTest" classname="ProdutoTest" file="/home/arthur-franco/Documentos/UFLA-EAD/2021-1/Engenharia de Software/TP/eng-projeto-final/tests/Modelo/ProdutoTest.php" line="37" assertions="1" time="0.001492"/>
+    </testsuite>
+    <testsuite name="VendaTest" file="/home/arthur-franco/Documentos/UFLA-EAD/2021-1/Engenharia de Software/TP/eng-projeto-final/tests/Modelo/VendaTest.php" tests="3" assertions="3" errors="0" warnings="0" failures="0" skipped="0" time="0.005244">
+      <testcase name="test_setFuncionario" class="VendaTest" classname="VendaTest" file="/home/arthur-franco/Documentos/UFLA-EAD/2021-1/Engenharia de Software/TP/eng-projeto-final/tests/Modelo/VendaTest.php" line="8" assertions="1" time="0.001798"/>
+      <testcase name="test_setCliente" class="VendaTest" classname="VendaTest" file="/home/arthur-franco/Documentos/UFLA-EAD/2021-1/Engenharia de Software/TP/eng-projeto-final/tests/Modelo/VendaTest.php" line="15" assertions="1" time="0.001671"/>
+      <testcase name="test_setPrecoTotal" class="VendaTest" classname="VendaTest" file="/home/arthur-franco/Documentos/UFLA-EAD/2021-1/Engenharia de Software/TP/eng-projeto-final/tests/Modelo/VendaTest.php" line="22" assertions="1" time="0.001775"/>
+    </testsuite>
+  </testsuite>
+</testsuites>
