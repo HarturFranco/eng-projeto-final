@@ -70,4 +70,31 @@ class VendaDAO{
         }
         
     }
+
+    function editar($venda, $conn)
+    {
+        try {
+            $consulta = $conn->prepare("UPDATE `Venda` SET 
+                venPrecoTotal = :precoTotal,
+                Funcionario_funCodigo = :funCodigo,
+                Cliente_cliCodigo = :cliCodigo,
+                venStatus = 1
+                WHERE venCodigo = :venCodigo
+            ");
+            
+            $consulta->execute([
+                'precoTotal' => $venda->getPrecoTotal(),
+                'funCodigo' => $venda->getFuncionario(),
+                'cliCodigo' => $venda->getCliente(),
+                'venCodigo' => $venda->getCodigo(),
+            ]);
+
+            return $consulta->fetch();
+             
+        } catch (PDOException $e) {
+            throw new Exception('Erro ao conectar ao banco de dados.');
+        } catch (Exception $e) {
+            throw new Exception($e->getMessage());
+        }
+    }
 }

@@ -2,6 +2,7 @@
 include_once "Controle/VendaControle.php";
 include_once "Controle/FuncionarioControle.php";
 include_once "Controle/ClienteControle.php";
+include_once "Controle/ProdutoControle.php";
 include_once "Lib/Util.php";
 
 
@@ -10,6 +11,7 @@ $id = Util::getArgumento();
 $vendaControle = new VendaControle();
 $funcionarioControle = new FuncionarioControle();
 $clienteControle = new ClienteControle();
+$produtoControle = new ProdutoControle();
 
 $venda = $vendaControle->buscar($id);
 $itensVenda = $vendaControle->buscarItemsVenda($id);
@@ -52,15 +54,16 @@ $funcionarios = $funcionarioControle->index();
             <div>Preço</div>
             <div>Total</div>
           </div>
-          <?php foreach($itensVenda as $item) {
-            $total = $item->getQtd() * $item->getPreco()  
+          <?php foreach ($itensVenda as $item) {
+            $total = $item->getQtd() * $item->getPreco();
+            $produto = $produtoControle->buscar((int)$item->getProduto());
           ?>
-          <div class="product">
-            <div><?php echo $item->getQtd() ?></div>
-            <div><?php echo $item->getProduto() ?></div>
-            <div><?php echo Util::formatReal($item->getPreco()) ?></div>
-            <div><?php echo Util::formatReal($total) ?></div>
-          </div>
+            <div class="product">
+              <div><?php echo $item->getQtd() ?></div>
+              <div><?php echo $produto->getNome() ?></div>
+              <div><?php echo Util::formatReal($item->getPreco()) ?></div>
+              <div><?php echo Util::formatReal($total) ?></div>
+            </div>
           <?php } ?>
         </div>
 
@@ -72,32 +75,40 @@ $funcionarios = $funcionarioControle->index();
             <option value="" disabled>Selecione um cliente</option>
             <?php
             foreach ($clientes as $cli) {
-              ?>
-              <option 
-                value="<?php echo $cli->getCodigo() ?>"
-                selected="<?php echo $cli->getCodigo() == $venda->getCliente()->getCodigo()?>">
+              if ($cli->getCodigo() == $venda->getCliente()->getCodigo()) {
+            ?>
+                <option value="<?php echo $cli->getCodigo() ?>" selected>
+                  <?php echo $cli->getNome() ?>
+                </option>
+              <?php } else { ?>
+                <option value="<?php echo $cli->getCodigo() ?>">
                   <?php echo $cli->getNome() ?>
                 </option>
             <?php
+              }
             }
             ?>
 
           </select>
 
           <label for="vFuncionario">Funcionario:</label>
-          <select name="vFuncionario"required>
+          <select name="vFuncionario" required>
             <option value="" disabled>Selecione um funcionario</option>
             <?php
-              foreach ($funcionarios as $fun) {
-              ?>
-                <option 
-                  value="<?php echo $fun->getCodigo() ?>"
-                  selected="<?php echo $fun->getCodigo() == $venda->getFuncionario()->getCodigo()?>">
-                    <?php echo $fun->getNome() ?>
-                  </option>
-              <?php
+            foreach ($funcionarios as $fun) {
+              if ($fun->getCodigo() == $venda->getFuncionario()->getCodigo()) {
+            ?>
+                <option value="<?php echo $fun->getCodigo() ?>" selected> 
+                  <?php echo $fun->getNome() ?>
+                </option>
+              <?php } else { ?>
+                <option value="<?php echo $fun->getCodigo() ?>">
+                  <?php echo $fun->getNome() ?>
+                </option>
+            <?php
               }
-              ?>
+            }
+            ?>
 
           </select>
         </div>
@@ -105,17 +116,17 @@ $funcionarios = $funcionarioControle->index();
         <div class="control">
           <div class="price">
             <div class="label">Preço</div>
-            <div class="value value_total"><?php echo $venda->getPrecoTotal()?></div>
+            <div class="value value_total"><?php echo $venda->getPrecoTotal() ?></div>
           </div>
 
           <a href="vendas" class="button primary">Cancelar</a>
-          <button type="submit" class="primary submit_venda">Finalizar Venda</button>
+          <button type="submit" class="primary submit_venda">Editar Venda</button>
         </div>
       </div>
       
-      <input type="text" name="vProdutos" required hidden>
-      <input type="text" name="vValor" hidden>
-      <input type="text" name="classeAcao" value="VendaControle/cadastro" hidden>
+      <input type="text" name="vVenda" value="<?php echo $venda->getPrecoTotal()?>" hidden>
+      <input type="text" name="vCodigo" value="<?php echo $venda->getCodigo()?>" hidden>
+      <input type="text" name="classeAcao" value="VendaControle/editar" hidden>
 
     </form>
   </div>
