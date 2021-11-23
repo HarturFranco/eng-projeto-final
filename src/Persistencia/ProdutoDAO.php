@@ -1,5 +1,7 @@
 <?php
 
+require_once 'Persistencia/ItemVendaDAO.php';
+
 class ProdutoDAO
 {
 
@@ -36,10 +38,16 @@ class ProdutoDAO
         try {
             $consulta = $this->buscarPorCodigo($proCodigo, $conn);
 
-            if ($consulta) {
-                $query = "DELETE FROM `Produto` WHERE proCodigo = " . $proCodigo; //TODO - tratar SQLInjection
+            $itemVendaDAO = new ItemVendaDAO();
 
-                $conn->query($query);
+            if ($consulta) {
+                $res = $itemVendaDAO->verificaProduto($proCodigo, $conn);
+                if (! $res) {
+                    $query = "DELETE FROM `Produto` WHERE proCodigo = " . $proCodigo;
+
+                    return $conn->query($query);
+                }
+                throw new Exception('Produto possui vendas cadastradas');
             } else {
                 throw new Exception('Produto não existe no banco de dados');
             }

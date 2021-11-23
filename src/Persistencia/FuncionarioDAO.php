@@ -42,7 +42,9 @@ class FuncionarioDAO
 
             if($consulta){
                 $query = "DELETE FROM `Funcionario` WHERE funCodigo = " . $funCodigo;
-                $conn->query($query);
+                $res = $conn->query($query);
+                if(!$res)
+                    throw new Exception('Funcionario possui vendas cadastradas');
             }else {
                 throw new Exception('Funcionario não existe no banco de dados');
             }       

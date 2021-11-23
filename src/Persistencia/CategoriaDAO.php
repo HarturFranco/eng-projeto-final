@@ -32,7 +32,8 @@ class CategoriaDAO{
             if($consulta){
                 $query = "DELETE FROM `Categoria` WHERE catCodigo = " . $catCodigo; //TODO - tratar SQLInjection
 
-                $conn->query($query);
+                if(! $conn->query($query))
+                throw new Exception('Categoria possui produtos cadastrados');    
             }else {
                 throw new Exception('Categoria não existe no banco de dados');
             }       
