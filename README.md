@@ -29,6 +29,22 @@ O gerente poderá fazer as mesmas ações do funcionário e também gerar relat�
   - Execute o comando `docker-compose up` no diretorio raiz do projeto
   - Acesse o <a href="http://localhost/">localhost</a>
 
+## Ambiente de teste:
+- Teste Unitario
+    - Instalar na maquina
+        - <a href="https://getcomposer.org/">Composer 2.1.12</a>
+        - <a href="https://phpunit.de/">phpunit ^8</a>
+    - Execute os comandos no diretorio raiz do projeto
+        - `composer install`
+        - `vendor/bin/phpunit`
+- Teste de Validação
+    - Instalar na maquina 
+        - <a href="https://www.python.org/">Python ^3</a>
+        - <a href="https://selenium-python.readthedocs.io/">Selenium 4.0.0</a>    
+        - <a href="https://pypi.org/project/beautifulsoup4/">beautifulsoup4 4.9</a> 
+    - Acesse o notebook em tests/teste/Selenium/Testes Selenium.ipynb
+    - Execute as cedulas dos testes desejados
+
 ## Commits e Branches
 - Regras de commit
   - ``feat:`` Uma nova feature
