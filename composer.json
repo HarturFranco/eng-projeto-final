@@ -5,7 +5,7 @@
     "autoload": {
         "classmap": [
           "src/Modelo/",
-          "src/Persistencia"
+          "src/Lib/"
         ]
     },
     "require-dev": {
